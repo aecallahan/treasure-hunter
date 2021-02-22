@@ -67,11 +67,8 @@ RIGHTMOST_CARD_WITH_EIGHT_CARDS],
 
 NEXT_BUTTON_POSITION = (2367, 1266)
 
-# works for ubuntu
-# filePath = os.path.join(os.sep, "mnt", "c", "Users", "Andrew Callahan", "AppData", "LocalLow", "Wizards Of The Coast", "MTGA", "Player.log")
-
 # works for windows
-filePath = os.path.join("..", "..", "AppData", "LocalLow", "Wizards Of The Coast", "MTGA", "Player.log")
+filePath = os.path.join("..", "..", "..", "AppData", "LocalLow", "Wizards Of The Coast", "MTGA", "Player.log")
 
 class GameStateObject:
     def __init__(self):
@@ -90,7 +87,7 @@ def concede():
     time.sleep(0.5)
     pyautogui.click(x=1280, y=854)
 
-def pickCardsAfterMulligan(game: GameStateObject, mullCount: int):
+def mousePickCardsAfterMulligan(mullCount: int, game: GameStateObject):
     BOTTOM_OF_LIBRARY_POS = (346, 750)
     SEVENTH_CARD_POS = (1199, 655)
     SIXTH_CARD_POS = (1240, 647)
@@ -111,16 +108,70 @@ def pickCardsAfterMulligan(game: GameStateObject, mullCount: int):
         position = positions.pop(0)
         pyautogui.moveTo(position, duration=0.5)
         pyautogui.dragTo(BOTTOM_OF_LIBRARY_POS, duration=0.5)
-        if BASIC_ISLAND in game.hand:
-            game.hand.remove(BASIC_ISLAND)
-        elif LONELY_SANDBAR in game.hand:
-            game.hand.remove(LONELY_SANDBAR)
-        elif MYSTIC_SANCTUARY in game.hand:
-            game.hand.remove(MYSTIC_SANCTUARY)
-        else:
-            game.hand.pop(0)
+        puttingOnBottom = game.hand.pop(0)
+        print(f"putting {puttingOnBottom} on bottom")
     time.sleep(0.1)
     pyautogui.click(x=1286, y=1158)
+
+def mouseMulligan(mullCount: int):
+    # Need extra delay if it's the first hand of the game
+    if mullCount == 0:
+        time.sleep(7)
+    time.sleep(1)
+    pyautogui.click(x=1055, y=1166)
+
+def mouseKeepHand(mullCount: int, game: GameStateObject):
+    # Need extra delay if it's the first hand of the game
+    if mullCount == 0:
+        time.sleep(7)
+    time.sleep(1)
+    pyautogui.click(x=1518, y=1166)
+    mousePickCardsAfterMulligan(mullCount, game)
+
+
+def decideMulligan(gameState: dict, game: GameStateObject):
+    # print(json.dumps(gameState, indent=2))
+    player = gameState["gameStateMessage"]["players"][0]
+    mulliganCount = player.get("mulliganCount", 0)
+    currentHandSize = player["maxHandSize"] - mulliganCount
+    print(f"currently mulliganing to {currentHandSize} cards")
+
+    handZone = gameState["gameStateMessage"]["zones"][0]
+    # Defensive checks because not sure first zone is always p1's hand
+    if handZone["type"] != "ZoneType_Hand":
+        print("Error: handZone was not first zone")
+    if handZone["visibility"] != "Visibility_Private":
+        print("Error: handZone was not Visibility_Private")
+    if handZone["ownerSeatId"] != 1:
+        print("Error: handZone wasn't owned by player 1")
+
+    idsOfCardsInHand = set(handZone["objectInstanceIds"])
+    playerHand = []
+    for gameObject in gameState["gameStateMessage"]["gameObjects"]:
+        if gameObject["instanceId"] in idsOfCardsInHand:
+            playerHand.append(cardIdNames[gameObject["name"]])
+
+    if TREASURE_HUNT not in playerHand:
+        mouseMulligan(mulliganCount)
+    else:
+        # Sorting alphabetically puts hand in same order as client, left to right
+        playerHand.sort()
+        game.hand = playerHand
+        print(f"keeping hand: {game.hand}")
+        mouseKeepHand(mulliganCount, game)
+
+
+def isPlayerStep(step: str, log: dict) -> bool:
+    for clientMessage in log["greToClientEvent"]["greToClientMessages"]:
+        if clientMessage.get("gameStateMessage", {}).get("turnInfo", {}).get("step") == step:
+            return True
+    return False
+
+def updateHandWithDraw(log: dict, game: GameStateObject):
+    for clientMessage in log["greToClientEvent"]["greToClientMessages"]:
+        if "gameObjects" in clientMessage["gameStateMessage"] and \
+          clientMessage["gameStateMessage"]["gameObjects"][0]["ownerSeatId"] == 1:
+            game.hand.append(cardIdNames[clientMessage["gameStateMessage"]["gameObjects"][0]["name"]])
 
 
 def playCard(position: int, game: GameStateObject):
@@ -136,54 +187,40 @@ def playCard(position: int, game: GameStateObject):
     pyautogui.dragTo(centerOfScreen, duration=0.5)
     game.hand.pop(position)
 
-
-def parseLog(jsonLog: dict, game: GameStateObject):
-    try:
-        gameState = jsonLog["greToClientEvent"]["greToClientMessages"][0]["gameStateMessage"]
-    except KeyError:
-        return
-    try:
-        playerState = gameState["players"][0]
-        maxHandSize = playerState["maxHandSize"]
-        mulliganCount = playerState.get("mulliganCount", 0)
-        currentHandSize = maxHandSize - mulliganCount
-
-        # Warning: this might skip important info?
-        if "zones" not in gameState:
-            return
-
-        if gameState["zones"][0]["ownerSeatId"] == 1:
-            idsOfCardsInHand = set(gameState["zones"][0]["objectInstanceIds"])
-
-        playerHand = []
-        for gameObject in gameState["gameObjects"]:
-            if gameObject["instanceId"] in idsOfCardsInHand:
-                playerHand.append(cardIdNames[gameObject["name"]])
-
-        # TODO: fix key error for 'pendingMessageType' when mulliganing all the way to 0
-        mulliganIsPending = playerState["pendingMessageType"] == "ClientMessageType_MulliganResp"
-        if mulliganIsPending:
-            print(f"currently mulliganing to {currentHandSize} cards")
-
-        print(f"player hand: {playerHand}")
-        print()
-        # Need extra delay if it's the first hand of the game
-        if currentHandSize == 7:
-            time.sleep(7)
-        time.sleep(1)
-        if TREASURE_HUNT not in playerHand:
-            pyautogui.click(x=1055, y=1166)
+def identifyMulliganMessage(log: dict) -> dict:
+    for clientMessage in log["greToClientEvent"]["greToClientMessages"]:
+        if clientMessage["type"] != "GREMessageType_GameStateMessage":
+            continue
         else:
-            pyautogui.click(x=1518, y=1166)
-            game.hand = playerHand
-            pickCardsAfterMulligan(game, mulliganCount)
-            time.sleep(0.5)
-            playCard(0, game)
-            # concede()
-    except KeyError:
-        print("Encountered key error")
-        # print("Current log:")
-        # print(json.dumps(jsonLog, indent=2))
+            # print("inspecting clientMessage:")
+            # print(json.dumps(clientMessage, indent=2))
+            if "gameStateMessage" in clientMessage and \
+              "players" in clientMessage["gameStateMessage"] and \
+              clientMessage["gameStateMessage"]["players"][0].get("pendingMessageType") \
+              == "ClientMessageType_MulliganResp":
+                return clientMessage
+    return None
+
+
+def takeGameAction(jsonLog: dict, game: GameStateObject):
+    if "greToClientEvent" not in jsonLog:
+        return
+
+    print("identifying if mulligan...")
+    mullMessage = identifyMulliganMessage(jsonLog)
+    if mullMessage:
+        print("identified as mulligan")
+        decideMulligan(mullMessage, game)
+    else:
+        print("identified as not mulligan")
+        # TODO: this is incorrectly saying we draw on opponent's turn
+        if isPlayerStep("Step_Draw", jsonLog):
+            print("drawing card")
+            updateHandWithDraw(jsonLog, game)
+        # TODO: doesn't identify our turn when p1 plays first (see player1_goes_first.json)
+        if isPlayerStep("Phase_Main1", jsonLog):
+            print("playing card")
+            playCard(0,  game)
 
 
 
@@ -193,7 +230,5 @@ game = GameStateObject()
 for line in tailer.follow(open(filePath)):
     if line.startswith('{ "transactionId"'):
         log = json.loads(line)
-        parseLog(log, game)
+        takeGameAction(log, game)
         # print(json.dumps(log, indent=2))
-
-
