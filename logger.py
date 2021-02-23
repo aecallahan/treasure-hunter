@@ -4,6 +4,8 @@ import json
 import pyautogui
 import time
 
+from PIL import ImageGrab
+
 BASIC_ISLAND = "Basic Island"
 LONELY_SANDBAR = "Lonely Sandbar"
 TREASURE_HUNT = "Treasure Hunt"
@@ -75,17 +77,24 @@ class GameStateObject:
         self.hand = []
         self.yard = []
         self.lands = 0
+        self.tappedLands = 0
+        self.landForTurn = False
 
 class Point:
     def __init(self, x: int, y: int):
         self.x = x
         self.y = y
 
-def concede():
+def mouseConcede():
+    print("conceding")
     pyautogui.click(x=2515, y=45)
     pyautogui.moveTo(x=1280, y=854, duration=0.5)
     time.sleep(0.5)
     pyautogui.click(x=1280, y=854)
+
+def mousePlayLonelySandbar():
+    time.sleep(0.5)
+    pyautogui.click(x=951, y=652)
 
 def mousePickCardsAfterMulligan(mullCount: int, game: GameStateObject):
     BOTTOM_OF_LIBRARY_POS = (346, 750)
@@ -109,7 +118,9 @@ def mousePickCardsAfterMulligan(mullCount: int, game: GameStateObject):
         pyautogui.moveTo(position, duration=0.5)
         pyautogui.dragTo(BOTTOM_OF_LIBRARY_POS, duration=0.5)
         puttingOnBottom = game.hand.pop(0)
+
         print(f"putting {puttingOnBottom} on bottom")
+    print(f"hand after mulligan: {game.hand}")
     time.sleep(0.1)
     pyautogui.click(x=1286, y=1158)
 
@@ -152,7 +163,10 @@ def decideMulligan(gameState: dict, game: GameStateObject):
             playerHand.append(cardIdNames[gameObject["name"]])
 
     if TREASURE_HUNT not in playerHand:
-        mouseMulligan(mulliganCount)
+        if currentHandSize == 1:
+            mouseConcede()
+        else:
+            mouseMulligan(mulliganCount)
     else:
         # Sorting alphabetically puts hand in same order as client, left to right
         playerHand.sort()
@@ -163,29 +177,42 @@ def decideMulligan(gameState: dict, game: GameStateObject):
 
 def isPlayerStep(step: str, log: dict) -> bool:
     for clientMessage in log["greToClientEvent"]["greToClientMessages"]:
-        if clientMessage.get("gameStateMessage", {}).get("turnInfo", {}).get("step") == step:
+        if clientMessage.get("gameStateMessage", {}).get("turnInfo", {}).get("step") == step \
+          and clientMessage["gameStateMessage"]["turnInfo"]["activePlayer"] == 1:
+            return True
+    return False
+
+def isPlayerPhase(phase: str, log: dict) -> bool:
+    for clientMessage in log["greToClientEvent"]["greToClientMessages"]:
+        if clientMessage.get("gameStateMessage", {}).get("turnInfo", {}).get("phase") == phase \
+          and clientMessage["gameStateMessage"]["turnInfo"]["activePlayer"] == 1:
             return True
     return False
 
 def updateHandWithDraw(log: dict, game: GameStateObject):
     for clientMessage in log["greToClientEvent"]["greToClientMessages"]:
-        if "gameObjects" in clientMessage["gameStateMessage"] and \
+        if "gameObjects" in clientMessage.get("gameStateMessage", {}) and \
           clientMessage["gameStateMessage"]["gameObjects"][0]["ownerSeatId"] == 1:
             game.hand.append(cardIdNames[clientMessage["gameStateMessage"]["gameObjects"][0]["name"]])
+            print(f"hand after draw: {game.hand}")
 
 
-def playCard(position: int, game: GameStateObject):
+def mousePlayCard(position: int, game: GameStateObject):
     # Play card at 0-indexed position, left to right
+    time.sleep(3)
     leftmostXCoordinate = COORDINATES_LIST[len(game.hand)][0][0]
     rightmostXCoordinate = COORDINATES_LIST[len(game.hand)][1][0]
-    leftBoundaryOfCard = ((rightmostXCoordinate - leftmostXCoordinate) / (len(game.hand) + 1) * position) + leftmostXCoordinate
-    rightBoundaryOfCard = ((rightmostXCoordinate - leftmostXCoordinate) / (len(game.hand) + 1) * (position) + 1) + leftmostXCoordinate
+    leftBoundaryOfCard = ((rightmostXCoordinate - leftmostXCoordinate) / len(game.hand) * position) + leftmostXCoordinate
+    rightBoundaryOfCard = ((rightmostXCoordinate - leftmostXCoordinate) / len(game.hand) * (position + 1)) + leftmostXCoordinate
     centerOfCard = (leftBoundaryOfCard + rightBoundaryOfCard) / 2
     centerOfCardPosition = (centerOfCard, 1400)
     centerOfScreen = (1280, 720)
+    # import pdb; pdb.set_trace()
     pyautogui.moveTo(centerOfCardPosition, duration=0.5)
     pyautogui.dragTo(centerOfScreen, duration=0.5)
-    game.hand.pop(position)
+    cardPlayed = game.hand.pop(position)
+    if cardPlayed == LONELY_SANDBAR:
+        mousePlayLonelySandbar()
 
 def identifyMulliganMessage(log: dict) -> dict:
     for clientMessage in log["greToClientEvent"]["greToClientMessages"]:
@@ -201,34 +228,59 @@ def identifyMulliganMessage(log: dict) -> dict:
                 return clientMessage
     return None
 
+def playIsland(game: GameStateObject):
+    if BASIC_ISLAND not in game.hand:
+        return
+    print("playing island")
+    print(f"hand before playing: {game.hand}")
+    index = game.hand.index(BASIC_ISLAND)
+    print(f"playing card at position {index}")
+    mousePlayCard(index, game)
+    game.landForTurn = True
+    game.lands += 1
+
+def playTreasureHunt(game: GameStateObject):
+    print("playing treasure hunt")
+    print(f"hand before playing: {game.hand}")
+    index = game.hand.index(TREASURE_HUNT)
+    print(f"playing card at position {index}")
+    mousePlayCard(index, game)
+    game.tappedLands += 2
+    game.yard.append(TREASURE_HUNT)
+
 
 def takeGameAction(jsonLog: dict, game: GameStateObject):
     if "greToClientEvent" not in jsonLog:
         return
-
-    print("identifying if mulligan...")
     mullMessage = identifyMulliganMessage(jsonLog)
     if mullMessage:
-        print("identified as mulligan")
         decideMulligan(mullMessage, game)
     else:
-        print("identified as not mulligan")
-        # TODO: this is incorrectly saying we draw on opponent's turn
         if isPlayerStep("Step_Draw", jsonLog):
             print("drawing card")
             updateHandWithDraw(jsonLog, game)
-        # TODO: doesn't identify our turn when p1 plays first (see player1_goes_first.json)
-        if isPlayerStep("Phase_Main1", jsonLog):
-            print("playing card")
-            playCard(0,  game)
+            game.landForTurn = False
+            game.tappedLands = 0
+        # TODO: cards are being played from wrong index
+        if isPlayerPhase("Phase_Main1", jsonLog):
+            if not game.landForTurn:
+                playIsland(game)
+            if TREASURE_HUNT in game.hand and game.lands - game.tappedLands >= 2:
+                playTreasureHunt(game)
 
 
+numberOfLogs = 0
 
-
-# import pdb; pdb.set_trace()
 game = GameStateObject()
 for line in tailer.follow(open(filePath)):
     if line.startswith('{ "transactionId"'):
+        numberOfLogs += 1
+        print(f"number of logs: {numberOfLogs}")
         log = json.loads(line)
         takeGameAction(log, game)
         # print(json.dumps(log, indent=2))
+
+#Manually run on single log
+# with open("opponent_goes_first.json") as file:
+#     data = json.load(file)
+#     takeGameAction(data, game)
