@@ -6,6 +6,8 @@ import pyautogui
 from PIL import ImageEnhance, ImageGrab
 import pytesseract
 
+from log_crawler import get_newest_log
+
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
 
 BASIC_ISLAND = "Basic Island"
@@ -127,6 +129,16 @@ def concede():
     pyautogui.click(x=1280, y=854)
     pyautogui.click(x=1280, y=854)
 
+def wait_for_mulligan_priority():
+    waiting_for_priority = True
+    while waiting_for_priority:
+        waiting_for_priority = not look_for_mulligan_button()
+
+def wait_for_main_phase_priority():
+    waiting_for_priority = True
+    while waiting_for_priority:
+        waiting_for_priority = not lookForNextButton()
+
 def playLonelySandbarSecondPrompt():
     time.sleep(0.5)
     pyautogui.click(x=951, y=652)
@@ -159,37 +171,34 @@ def mousePickCardsAfterMulligan(mullCount: int, game):
     time.sleep(0.1)
     pyautogui.click(x=1286, y=1158)
 
-def mulligan(mullCount: int):
+def mulligan():
+    wait_for_mulligan_priority()
     pyautogui.click(x=1055, y=1166)
     pyautogui.moveTo(x=286, y=1286)
 
 def keepHand(mullCount: int, game):
+    wait_for_mulligan_priority()
     pyautogui.click(x=1518, y=1166)
     mousePickCardsAfterMulligan(mullCount, game)
 
 
-def playCard(position: int, game):
+def playCard(position: int, hand_size: int):
     # Play card at 0-indexed position, left to right
 
     # Do not play card until p1 has priority
-    waitForPriority =  True
-    while waitForPriority:
-        waitForPriority = not lookForNextButton()
+    wait_for_main_phase_priority()
+    # time.sleep(4)
 
-    print(f"game.hand in mousePlayCard function: {game.hand}")
-    leftmostXCoordinate = COORDINATES_LIST[len(game.hand)][0][0]
-    rightmostXCoordinate = COORDINATES_LIST[len(game.hand)][1][0]
-    leftBoundaryOfCard = ((rightmostXCoordinate - leftmostXCoordinate) / len(game.hand) * position) + leftmostXCoordinate
-    rightBoundaryOfCard = ((rightmostXCoordinate - leftmostXCoordinate) / len(game.hand) * (position + 1)) + leftmostXCoordinate
+    leftmostXCoordinate = COORDINATES_LIST[hand_size][0][0]
+    rightmostXCoordinate = COORDINATES_LIST[hand_size][1][0]
+    leftBoundaryOfCard = ((rightmostXCoordinate - leftmostXCoordinate) / hand_size * position) + leftmostXCoordinate
+    rightBoundaryOfCard = ((rightmostXCoordinate - leftmostXCoordinate) / hand_size * (position + 1)) + leftmostXCoordinate
     centerOfCard = (leftBoundaryOfCard + rightBoundaryOfCard) / 2
     centerOfCardPosition = (centerOfCard, 1400)
     centerOfScreen = (1280, 720)
     # import pdb; pdb.set_trace()
     pyautogui.moveTo(centerOfCardPosition, duration=0.1)
     pyautogui.dragTo(centerOfScreen, duration=0.3)
-    cardPlayed = game.hand.pop(position)
-    if cardPlayed == LONELY_SANDBAR:
-        playLonelySandbarSecondPrompt()
 
 
 def lookForNextButton() -> bool:
@@ -223,3 +232,20 @@ def look_for_mulligan_button() -> bool:
     message = pytesseract.image_to_string(image)
     print(message)
     return "Mulligan" in message
+
+def move_across_hand():
+    mouse_position = (98, 1428)
+    pyautogui.moveTo(mouse_position)
+    id = 0
+    handSize =  0
+    while handSize < 5:
+        mouse_position = (mouse_position[0] + 15, mouse_position[1])
+        pyautogui.moveTo(mouse_position)
+        log = get_newest_log()
+        for line in log:
+            if "objectId" in line:
+                new_id = int(line.split('"objectId": ')[-1])
+                if new_id != id:
+                    print(f"found new id {new_id}")
+                    id = new_id
+                    handSize += 1
