@@ -2,10 +2,15 @@
 Transforms logs into corresponding mtg game data. Dispositions game_player's
 directions to take corresponding action in game client.
 '''
-import time
-
 from game_player import cardIdNames, GameStateObject
+from log_crawler import get_newest_log
 import mouse_controller
+
+BASIC_ISLAND = "Basic Island"
+LONELY_SANDBAR = "Lonely Sandbar"
+TREASURE_HUNT = "Treasure Hunt"
+MYSTIC_SANCTUARY = "Mystic Sanctuary"
+THASSAS_ORACLE = "Thassa's Oracle"
 
 def parse_log(log: dict, game: GameStateObject):
     '''Read latest log and decide what to do'''
@@ -33,19 +38,23 @@ def parse_log(log: dict, game: GameStateObject):
         print(f"entering main phase with hand {game.hand}")
         # import pdb; pdb.set_trace()
         cards_to_play = game.main_phase_actions()
-        for i, index in enumerate(cards_to_play):
-            # Janky line to get rid of once implementing new method of finding correct card
-            hand_size = len(game.hand) + len(cards_to_play) - i
-            mouse_controller.playCard(index, hand_size)
+        print(f"playing cards at indices {cards_to_play}")
+        for index in cards_to_play:
+            play_card(index)
+            if game.mystic_sanctuary_action:
+                mouse_controller.take_mystic_sanctuary_action()
+                game.mystic_sanctuary_action = False
         # TODO: maybe see if there's a way to do discard from a separate log rather than this one
-        if len(cards_to_play) > 1:
-            thirty_seconds_from_now = time.time() + 30
-            # TODO: this doesn't work if opponent has priority during turn and does something
-            while time.time() < thirty_seconds_from_now:
-                discard_number = mouse_controller.read_number_of_cards_to_discard()
-                if discard_number > 0:
-                    mouse_controller.discardToSeven(discard_number, game)
-                    return
+        if game.will_discard:
+            print("waiting for discard message...")
+            mouse_controller.wait_for_discard_message()
+            num_of_cards_to_discard = mouse_controller.read_number_of_cards_to_discard()
+            if num_of_cards_to_discard > 0:
+                mouse_controller.close_revealed_cards()
+                # mouse_controller.discardToSeven(num_of_cards_to_discard, game)
+                game.hand = discard_to_seven(num_of_cards_to_discard)
+                return
+    mouse_controller.click_submit()
 
 
 def identify_mulligan_message(log: dict) -> dict:
@@ -98,7 +107,6 @@ def is_player_phase(phase: str, log: dict, game: GameStateObject) -> bool:
             return True
     return False
 
-
 def get_drawn_card_from_log(log: dict):
     '''Checks log for card drawn and updates game state accordingly'''
     for client_message in log["greToClientEvent"]["greToClientMessages"]:
@@ -106,3 +114,53 @@ def get_drawn_card_from_log(log: dict):
           client_message["gameStateMessage"]["gameObjects"][0]["ownerSeatId"] == 1:
             return cardIdNames[client_message["gameStateMessage"]["gameObjects"][0]["name"]]
     return None
+
+def get_object_id_from_newest_log() -> int:
+    log = get_newest_log()
+    for line in log:
+        if "objectId" in line:
+            try:
+                return int(line.split('"objectId": ')[-1])
+            except ValueError:
+                return int(line.split('objectId": ')[-1])
+
+def discard_to_seven(num_of_cards_to_discard: int):
+    new_hand = []
+    object_id = 0
+    num_of_cards_discarded = 0
+    num_of_cards_identified = 0
+    current_hand_size = num_of_cards_to_discard + 7
+    mouse_position = None
+    print(f"number of cards to discard: {num_of_cards_to_discard}")
+    while num_of_cards_identified <= current_hand_size:
+        print(f"number of cards discarded: {num_of_cards_discarded}")
+        if mouse_position:
+            mouse_position = mouse_controller.move_across_hand(mouse_position)
+        else:
+            mouse_position = mouse_controller.move_across_hand()
+        new_object_id = get_object_id_from_newest_log()
+        if new_object_id != object_id:
+            object_id = new_object_id
+            num_of_cards_identified += 1
+            card_name = mouse_controller.read_card_name_during_discard(mouse_position)
+            if num_of_cards_discarded <= num_of_cards_to_discard and card_name == BASIC_ISLAND:
+                mouse_controller.select_card_for_discard(mouse_position)
+                num_of_cards_discarded += 1
+            else:
+                new_hand.append(card_name)
+    mouse_controller.click_submit()
+    return new_hand
+
+def play_card(position: int):
+    print(f"playing card at position {position}")
+    current_card = -1
+    object_id = 0
+    mouse_position = mouse_controller.move_across_hand()
+    while current_card < position:
+        mouse_position = mouse_controller.move_across_hand(mouse_position)
+        new_object_id = get_object_id_from_newest_log()
+        if new_object_id is not None and new_object_id != object_id:
+            object_id = new_object_id
+            current_card += 1
+    mouse_controller.play_card()
+

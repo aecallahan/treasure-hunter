@@ -7,7 +7,6 @@ LONELY_SANDBAR = "Lonely Sandbar"
 TREASURE_HUNT = "Treasure Hunt"
 MYSTIC_SANCTUARY = "Mystic Sanctuary"
 THASSAS_ORACLE = "Thassa's Oracle"
-RAUGRIN_TRIOME = "Raugrin Triome"
 
 cardIdNames = {
     652: BASIC_ISLAND,
@@ -15,7 +14,6 @@ cardIdNames = {
     24877: TREASURE_HUNT,
     414466: MYSTIC_SANCTUARY,
     419870: THASSAS_ORACLE,
-    428659: RAUGRIN_TRIOME
 }
 
 
@@ -26,9 +24,12 @@ class GameStateObject:
         self.yard = []
         self.lands = 0
         self.mulligan_count = 0
+        self.treasure_hunts_played = 0
         self.turn = 0
         self.concede = False
         self.mulligan = False
+        self.mystic_sanctuary_action = False
+        self.will_discard = False
 
     def reset_game(self):
         '''Reset game state'''
@@ -40,7 +41,8 @@ class GameStateObject:
         it's not Treasure Hunt.
         '''
         self.mulligan = TREASURE_HUNT not in self.hand
-        self.concede = len(self.hand) == 1 and self.mulligan
+        print(f"self.mulligan_count: {self.mulligan_count}")
+        self.concede =self.mulligan_count >= 6 and self.mulligan
 
     def main_phase_actions(self):
         '''
@@ -49,13 +51,36 @@ class GameStateObject:
         hand as we go to maintain correct card index for mouse_controller as
         cards get played sequentially.
         '''
+        self.will_discard = False
         indices_of_cards_to_play = []
-        if BASIC_ISLAND in self.hand:
-            indices_of_cards_to_play.append(self._play_land(BASIC_ISLAND))
-        elif MYSTIC_SANCTUARY in self.hand:
-            indices_of_cards_to_play.append(self._play_land(MYSTIC_SANCTUARY))
-        if TREASURE_HUNT in self.hand and self.lands >= 2:
-            indices_of_cards_to_play.append(self._play_spell(TREASURE_HUNT))
+        if self.lands == 0:
+            if BASIC_ISLAND in self.hand:
+                indices_of_cards_to_play.append(self._play_land(BASIC_ISLAND))
+            elif MYSTIC_SANCTUARY in self.hand:
+                indices_of_cards_to_play.append(self._play_land(MYSTIC_SANCTUARY))
+        elif self.lands == 1:
+            if BASIC_ISLAND in self.hand:
+                indices_of_cards_to_play.append(self._play_land(BASIC_ISLAND))
+                if TREASURE_HUNT in self.hand:
+                    indices_of_cards_to_play.append(self._play_spell(TREASURE_HUNT))
+            elif MYSTIC_SANCTUARY in self.hand:
+                indices_of_cards_to_play.append(self._play_land(MYSTIC_SANCTUARY))
+        elif self.lands == 2:
+            if TREASURE_HUNT in self.hand:
+                indices_of_cards_to_play.append(self._play_spell(TREASURE_HUNT))
+            if BASIC_ISLAND in self.hand:
+                indices_of_cards_to_play.append(self._play_land(BASIC_ISLAND))
+            elif MYSTIC_SANCTUARY in self.hand:
+                indices_of_cards_to_play.append(self._play_land(MYSTIC_SANCTUARY))
+        elif self.lands == 3:
+            if MYSTIC_SANCTUARY in self.hand and TREASURE_HUNT in self.yard:
+                indices_of_cards_to_play.append(self._play_land(MYSTIC_SANCTUARY))
+                self.mystic_sanctuary_action = True
+                self.yard.remove(TREASURE_HUNT)
+            elif BASIC_ISLAND in self.hand:
+                indices_of_cards_to_play.append(self._play_land(BASIC_ISLAND))
+            elif MYSTIC_SANCTUARY in self.hand:
+                indices_of_cards_to_play.append(self._play_land(MYSTIC_SANCTUARY))
         return indices_of_cards_to_play
 
     def _play_land(self, land_type: str) -> int:
@@ -67,4 +92,7 @@ class GameStateObject:
     def _play_spell(self, spell_type: str) -> int:
         card_index = self.hand.index(spell_type)
         self.yard.append(self.hand.pop(card_index))
+        if spell_type == TREASURE_HUNT:
+            self.treasure_hunts_played += 1
+            self.will_discard = True
         return card_index

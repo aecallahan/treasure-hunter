@@ -6,8 +6,6 @@ import pyautogui
 from PIL import ImageEnhance, ImageGrab
 import pytesseract
 
-from log_crawler import get_newest_log
-
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
 
 BASIC_ISLAND = "Basic Island"
@@ -15,113 +13,38 @@ LONELY_SANDBAR = "Lonely Sandbar"
 TREASURE_HUNT = "Treasure Hunt"
 MYSTIC_SANCTUARY = "Mystic Sanctuary"
 THASSAS_ORACLE = "Thassa's Oracle"
-RAUGRIN_TRIOME = "Raugrin Triome"
-
-LEFTMOST_CARD_WITH_THIRTY_FIVE_CARDS = (392, 1397)
-RIGHTMOST_CARD_WITH_THIRTY_FIVE_CARDS = (2136, 1383)
-
-LEFTMOST_CARD_WITH_SIXTEEN_CARDS = (490, 1418)
-RIGHTMOST_CARD_WITH_SIXTEEN_CARDS = (2040, 1434)
-
-LEFTMOST_CARD_WITH_EIGHT_CARDS = (385, 1439)
-RIGHTMOST_CARD_WITH_EIGHT_CARDS = (2130, 1439)
-
-LEFTMOST_CARD_WITH_SEVEN_CARDS = (470, 1419)
-RIGHTMOST_CARD_WITH_SEVEN_CARDS = (2096, 1423)
-
-LEFTMOST_CARD_WITH_SIX_CARDS = (553, 1355)
-RIGHTMOST_CARD_WITH_SIX_CARDS = (1987, 1376)
-
-LEFTMOST_CARD_WITH_FIVE_CARDS = (698, 1409)
-RIGHTMOST_CARD_WITH_FIVE_CARDS = (1865, 1413)
-
-LEFTMOST_CARD_WITH_FOUR_CARDS = (807, 1392)
-RIGHTMOST_CARD_WITH_FOUR_CARDS = (1748, 1413)
-
-# The rest of these coordinates are just estimates
-LEFTMOST_CARD_WITH_THREE_CARDS = (920, 1392)
-RIGHTMOST_CARD_WITH_THREE_CARDS = (1610, 1413)
-
-LEFTMOST_CARD_WITH_TWO_CARDS = (1100, 1392)
-RIGHTMOST_CARD_WITH_TWO_CARDS = (1480, 1413)
-
-LEFTMOST_CARD_WITH_ONE_CARDS = (1250, 1392)
-RIGHTMOST_CARD_WITH_ONE_CARDS = (1310, 1413)
-
-COORDINATES_LIST = [
-[],
-[LEFTMOST_CARD_WITH_ONE_CARDS,
-RIGHTMOST_CARD_WITH_ONE_CARDS],
-[LEFTMOST_CARD_WITH_TWO_CARDS,
-RIGHTMOST_CARD_WITH_TWO_CARDS],
-[LEFTMOST_CARD_WITH_THREE_CARDS,
-RIGHTMOST_CARD_WITH_THREE_CARDS],
-[LEFTMOST_CARD_WITH_FOUR_CARDS,
-RIGHTMOST_CARD_WITH_FOUR_CARDS],
-[LEFTMOST_CARD_WITH_FIVE_CARDS,
-RIGHTMOST_CARD_WITH_FIVE_CARDS],
-[LEFTMOST_CARD_WITH_SIX_CARDS,
-RIGHTMOST_CARD_WITH_SIX_CARDS],
-[LEFTMOST_CARD_WITH_SEVEN_CARDS,
-RIGHTMOST_CARD_WITH_SEVEN_CARDS],
-[LEFTMOST_CARD_WITH_EIGHT_CARDS,
-RIGHTMOST_CARD_WITH_EIGHT_CARDS],
-# TODO: delete this
-[LEFTMOST_CARD_WITH_EIGHT_CARDS,
-RIGHTMOST_CARD_WITH_EIGHT_CARDS],
-[LEFTMOST_CARD_WITH_EIGHT_CARDS,
-RIGHTMOST_CARD_WITH_EIGHT_CARDS],
-]
 
 NEXT_BUTTON_POSITION = (2367, 1266)
 
-def discardToSeven(numberToDiscard: int, game):
-    print(f"discarding {numberToDiscard} cards...")
-    if numberToDiscard > 18:
-        leftmostXCoordinate = LEFTMOST_CARD_WITH_THIRTY_FIVE_CARDS[0]
-        rightmostXCoordinate = RIGHTMOST_CARD_WITH_THIRTY_FIVE_CARDS[0]
-    else:
-        leftmostXCoordinate = LEFTMOST_CARD_WITH_SIXTEEN_CARDS[0]
-        rightmostXCoordinate = RIGHTMOST_CARD_WITH_SIXTEEN_CARDS[0]
-    handSize = numberToDiscard + 7
+MOVE_ACROSS_HAND_STARTING_POSITION = (180, 1428)
+
+DECK_POSITION = (300, 1301)
+
+def read_card_name_during_discard(mouse_position) -> str:
     subtractXStart = 150
     addXEnd = 150
-    newHand = []
-    for position in range(handSize):
-        print(f"hover card {position}")
-        leftBoundaryOfCard = ((rightmostXCoordinate - leftmostXCoordinate) / handSize * position) + leftmostXCoordinate
-        rightBoundaryOfCard = ((rightmostXCoordinate - leftmostXCoordinate) / handSize * (position + 1)) + leftmostXCoordinate
-        centerOfCard = (leftBoundaryOfCard + rightBoundaryOfCard) / 2
-        centerOfCardPosition = (centerOfCard, 1400)
-        pyautogui.moveTo(centerOfCardPosition)
-        time.sleep(0.2)
-        image = ImageGrab.grab(bbox=(centerOfCard - subtractXStart, 874, centerOfCard + addXEnd, 910))
-        image = ImageEnhance.Contrast(image).enhance(10)
-        image.save(f'test{position}.png')
-        cardName = pytesseract.image_to_string(image)
-        print(f"read card name: {cardName}")
-        if "Mystic" in cardName or "Sanctuary" in cardName:
-            newHand.append(MYSTIC_SANCTUARY)
-        elif "Treasure" in cardName or "Hunt" in cardName:
-            newHand.append(TREASURE_HUNT)
-        elif "Thassa" in cardName or "Oracle" in cardName:
-            newHand.append(THASSAS_ORACLE)
-        else:
-            pyautogui.click(centerOfCardPosition)
-            numberToDiscard -= 1
-            if numberToDiscard == 0:
-                while len(newHand) < 7:
-                    newHand.append(BASIC_ISLAND)
-                game.hand = newHand
-                # Click submit
-                pyautogui.click(x=2372, y=1267)
-                return
+    card_name = read_message_from_screen((mouse_position[0] - subtractXStart, \
+        874, mouse_position[0] + addXEnd, 910))
+    print(card_name)
+    if "Mystic" in card_name or "Sanctuary" in card_name:
+        return MYSTIC_SANCTUARY
+    if "Treasure" in card_name or "Hunt" in card_name:
+        return TREASURE_HUNT
+    if "Thassa" in card_name or "Oracle" in card_name:
+        return THASSAS_ORACLE
+    return BASIC_ISLAND
 
 
 def concede():
     print("conceding")
     pyautogui.click(x=2515, y=45)
     pyautogui.moveTo(x=1280, y=854, duration=0.5)
+    time.sleep(1)
+    pyautogui.click(x=1280, y=854)
+    pyautogui.click(x=1280, y=854)
+    pyautogui.click(x=1280, y=854)
+    pyautogui.click(x=1280, y=854)
+    pyautogui.click(x=1280, y=854)
     time.sleep(1)
     pyautogui.click(x=1280, y=854)
     pyautogui.click(x=1280, y=854)
@@ -139,9 +62,15 @@ def wait_for_main_phase_priority():
     while waiting_for_priority:
         waiting_for_priority = not lookForNextButton()
 
+def wait_for_discard_message():
+    waiting_for_discard = True
+    while waiting_for_discard:
+        waiting_for_discard = not look_for_discard_message() or lookForNextButton()
+
 def playLonelySandbarSecondPrompt():
     time.sleep(0.5)
     pyautogui.click(x=951, y=652)
+    pyautogui.moveTo(DECK_POSITION)
 
 def mousePickCardsAfterMulligan(mullCount: int, game):
     BOTTOM_OF_LIBRARY_POS = (346, 750)
@@ -170,6 +99,7 @@ def mousePickCardsAfterMulligan(mullCount: int, game):
     print(f"hand after mulligan: {game.hand}")
     time.sleep(0.1)
     pyautogui.click(x=1286, y=1158)
+    pyautogui.moveTo(DECK_POSITION)
 
 def mulligan():
     wait_for_mulligan_priority()
@@ -181,71 +111,74 @@ def keepHand(mullCount: int, game):
     pyautogui.click(x=1518, y=1166)
     mousePickCardsAfterMulligan(mullCount, game)
 
-
-def playCard(position: int, hand_size: int):
-    # Play card at 0-indexed position, left to right
-
+def play_card():
     # Do not play card until p1 has priority
     wait_for_main_phase_priority()
-    # time.sleep(4)
-
-    leftmostXCoordinate = COORDINATES_LIST[hand_size][0][0]
-    rightmostXCoordinate = COORDINATES_LIST[hand_size][1][0]
-    leftBoundaryOfCard = ((rightmostXCoordinate - leftmostXCoordinate) / hand_size * position) + leftmostXCoordinate
-    rightBoundaryOfCard = ((rightmostXCoordinate - leftmostXCoordinate) / hand_size * (position + 1)) + leftmostXCoordinate
-    centerOfCard = (leftBoundaryOfCard + rightBoundaryOfCard) / 2
-    centerOfCardPosition = (centerOfCard, 1400)
-    centerOfScreen = (1280, 720)
-    # import pdb; pdb.set_trace()
-    pyautogui.moveTo(centerOfCardPosition, duration=0.1)
-    pyautogui.dragTo(centerOfScreen, duration=0.3)
-
+    pyautogui.dragTo((1280, 720), duration=0.3)
+    pyautogui.moveTo(DECK_POSITION)
 
 def lookForNextButton() -> bool:
-    image = ImageGrab.grab(bbox=(2313, 1242, 2426, 1289))
-    image = ImageEnhance.Contrast(image).enhance(10)
-    message = pytesseract.image_to_string(image)
+    message = read_message_from_screen((2313, 1242, 2426, 1289))
     print(message)
     return "Next" in message
+
+def look_for_discard_message() -> bool:
+    message = read_message_from_screen((1099, 577, 1430, 635))
+    return "Discard" in message
 
 def read_number_of_cards_to_discard() -> int:
     '''Read message in center of screen instructing player to discard to hand size'''
     # TODO: doesn't handle message "Discard a card"
-    # TODO: set tesseract config to only read alphanumeric characters
-    image = ImageGrab.grab(bbox=(1099, 577, 1430, 635))
-    # Increase contrast 10x for better OCR results
-    image = ImageEnhance.Contrast(image).enhance(10)
-    image.save('output.png')
-    message = pytesseract.image_to_string(image)
+    message = read_message_from_screen((1099, 577, 1430, 635))
     print(message)
     if "Discard" in message:
         # Splitting on "Discard" results in an array like ['', '5 cards.\n\x0c'].
         # By getting the number this way, extra characters identified before
         # "Discard" will not break the result.
-        return int(message.split("Discard ")[-1][:2])
+        try:
+            return int(message.split("Discard ")[-1][:2])
+        except ValueError:
+            # '11' read as 'll'
+            if message.split("Discard ")[-1][:2] == "ll":
+                return 11
+            return 1
     return 0
 
 def look_for_mulligan_button() -> bool:
     '''Check if mulligan button is present on screen'''
-    image = ImageGrab.grab(bbox=(946, 1142, 1151, 1197))
-    image = ImageEnhance.Contrast(image).enhance(10)
-    message = pytesseract.image_to_string(image)
+    message = read_message_from_screen((946, 1142, 1151, 1197))
     print(message)
     return "Mulligan" in message
 
-def move_across_hand():
-    mouse_position = (98, 1428)
+def move_across_hand(mouse_position=MOVE_ACROSS_HAND_STARTING_POSITION) -> tuple:
     pyautogui.moveTo(mouse_position)
-    id = 0
-    handSize =  0
-    while handSize < 5:
-        mouse_position = (mouse_position[0] + 15, mouse_position[1])
-        pyautogui.moveTo(mouse_position)
-        log = get_newest_log()
-        for line in log:
-            if "objectId" in line:
-                new_id = int(line.split('"objectId": ')[-1])
-                if new_id != id:
-                    print(f"found new id {new_id}")
-                    id = new_id
-                    handSize += 1
+    return (mouse_position[0] + 20, mouse_position[1])
+
+def select_card_for_discard(mouse_position):
+    pyautogui.click(mouse_position)
+
+def read_message_from_screen(bbox: tuple) -> str:
+    image = ImageGrab.grab(bbox)
+    image = ImageEnhance.Contrast(image).enhance(10)
+    index = 0
+    image.save(f'viewed_image_{index}.png')
+    # TODO: set tesseract config to only read alphanumeric characters
+    return pytesseract.image_to_string(image)
+
+def click_submit():
+    '''Clicks submit button'''
+    pyautogui.click(NEXT_BUTTON_POSITION)
+    pyautogui.moveTo(DECK_POSITION)
+
+def close_revealed_cards():
+    '''Clicks 'x' button to close popup revealing cards drawn with Treasure Hunt'''
+    pyautogui.click(x=470, y=854)
+    pyautogui.moveTo(DECK_POSITION)
+
+def take_mystic_sanctuary_action():
+    print("taking mystic sanctuary action")
+    time.sleep(1)
+    pyautogui.click(x=1794, y=672)
+    time.sleep(1)
+    pyautogui.click(x=2370, y=1269)
+    pyautogui.moveTo(DECK_POSITION)
