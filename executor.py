@@ -1,4 +1,3 @@
-
 from log_crawler import create_game_log_generator
 from log_parser import parse_log
 from game_player import GameStateObject

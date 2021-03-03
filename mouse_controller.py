@@ -1,5 +1,5 @@
 '''
-Module handles all mouse actions requested by game player
+Handles all mouse actions requested by game player
 '''
 import time
 import pyautogui
@@ -16,9 +16,16 @@ THASSAS_ORACLE = "Thassa's Oracle"
 
 NEXT_BUTTON_POSITION = (2367, 1266)
 
-MOVE_ACROSS_HAND_STARTING_POSITION = (180, 1428)
+HAND_START_POSITION = (180, 1428)
 
-DECK_POSITION = (300, 1301)
+CENTER_OF_SCREEN = (1280, 720)
+
+# DECK_POSITION = (300, 1301)
+DECK_POSITION = CENTER_OF_SCREEN
+
+LAND_START_POSITION = (400, 1040)
+
+LAND_END_POSITION = (1000, 1040)
 
 def read_card_name_during_discard(mouse_position) -> str:
     subtractXStart = 150
@@ -26,16 +33,19 @@ def read_card_name_during_discard(mouse_position) -> str:
     card_name = read_message_from_screen((mouse_position[0] - subtractXStart, \
         874, mouse_position[0] + addXEnd, 910))
     print(card_name)
+    if "Lonely" in card_name or "Sandbar" in card_name:
+        return LONELY_SANDBAR
     if "Mystic" in card_name or "Sanctuary" in card_name:
         return MYSTIC_SANCTUARY
-    if "Treasure" in card_name or "Hunt" in card_name:
-        return TREASURE_HUNT
     if "Thassa" in card_name or "Oracle" in card_name:
         return THASSAS_ORACLE
+    if "Treasure" in card_name or "Hunt" in card_name:
+        return TREASURE_HUNT
     return BASIC_ISLAND
 
 
 def concede():
+    '''Concedes the current game'''
     print("conceding")
     pyautogui.click(x=2515, y=45)
     pyautogui.moveTo(x=1280, y=854, duration=0.5)
@@ -62,14 +72,19 @@ def wait_for_main_phase_priority():
     while waiting_for_priority:
         waiting_for_priority = not lookForNextButton()
 
-def wait_for_discard_message():
+def wait_for_discard_message() -> str:
     waiting_for_discard = True
     while waiting_for_discard:
-        waiting_for_discard = not look_for_discard_message() or lookForNextButton()
+        waiting_for_discard = not look_for_discard_message()
 
 def playLonelySandbarSecondPrompt():
     time.sleep(0.5)
     pyautogui.click(x=951, y=652)
+    pyautogui.moveTo(DECK_POSITION)
+
+def cycle_lonely_sandbar():
+    time.sleep(0.5)
+    pyautogui.click(x=1603, y=620)
     pyautogui.moveTo(DECK_POSITION)
 
 def mousePickCardsAfterMulligan(mullCount: int, game):
@@ -114,13 +129,13 @@ def keepHand(mullCount: int, game):
 def play_card():
     # Do not play card until p1 has priority
     wait_for_main_phase_priority()
-    pyautogui.dragTo((1280, 720), duration=0.3)
+    pyautogui.dragTo(CENTER_OF_SCREEN, duration=0.3)
     pyautogui.moveTo(DECK_POSITION)
 
 def lookForNextButton() -> bool:
-    message = read_message_from_screen((2313, 1242, 2426, 1289))
+    message = read_message_from_screen((2250, 1242, 2500, 1289))
     print(message)
-    return "Next" in message
+    return "Next" in message or "End" in message or "Turn" in message
 
 def look_for_discard_message() -> bool:
     message = read_message_from_screen((1099, 577, 1430, 635))
@@ -150,9 +165,20 @@ def look_for_mulligan_button() -> bool:
     print(message)
     return "Mulligan" in message
 
-def move_across_hand(mouse_position=MOVE_ACROSS_HAND_STARTING_POSITION) -> tuple:
+def move_across_hand(mouse_position=HAND_START_POSITION) -> tuple:
     pyautogui.moveTo(mouse_position)
     return (mouse_position[0] + 20, mouse_position[1])
+
+def tap_all_land():
+    '''Incrementally move mouse across lands to tap them all.'''
+    time.sleep(1)
+    close_revealed_cards()
+    mouse_position=LAND_START_POSITION
+    pyautogui.moveTo(mouse_position)
+    while mouse_position[0] < LAND_END_POSITION[0]:
+        pyautogui.click(mouse_position)
+        mouse_position = (mouse_position[0] + 20, mouse_position[1])
+    click_submit()
 
 def select_card_for_discard(mouse_position):
     pyautogui.click(mouse_position)
@@ -166,19 +192,19 @@ def read_message_from_screen(bbox: tuple) -> str:
     return pytesseract.image_to_string(image)
 
 def click_submit():
-    '''Clicks submit button'''
+    '''Clicks submit/next button'''
     pyautogui.click(NEXT_BUTTON_POSITION)
     pyautogui.moveTo(DECK_POSITION)
 
 def close_revealed_cards():
     '''Clicks 'x' button to close popup revealing cards drawn with Treasure Hunt'''
     pyautogui.click(x=470, y=854)
-    pyautogui.moveTo(DECK_POSITION)
+    # pyautogui.moveTo(DECK_POSITION)
 
 def take_mystic_sanctuary_action():
     print("taking mystic sanctuary action")
     time.sleep(1)
     pyautogui.click(x=1794, y=672)
-    time.sleep(1)
+    time.sleep(1.5)
     pyautogui.click(x=2370, y=1269)
     pyautogui.moveTo(DECK_POSITION)

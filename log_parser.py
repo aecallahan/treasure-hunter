@@ -36,22 +36,26 @@ def parse_log(log: dict, game: GameStateObject):
         game.hand.append(new_card)
     if is_player_phase("Phase_Main1", log, game):
         print(f"entering main phase with hand {game.hand}")
-        # import pdb; pdb.set_trace()
         cards_to_play = game.main_phase_actions()
         print(f"playing cards at indices {cards_to_play}")
-        for index in cards_to_play:
+        if game.concede:
+            mouse_controller.concede()
+        for index, action in cards_to_play:
             play_card(index)
-            if game.mystic_sanctuary_action:
+            if action == MYSTIC_SANCTUARY:
                 mouse_controller.take_mystic_sanctuary_action()
-                game.mystic_sanctuary_action = False
-        # TODO: maybe see if there's a way to do discard from a separate log rather than this one
+            elif action == LONELY_SANDBAR:
+                mouse_controller.playLonelySandbarSecondPrompt()
+            elif action == "CYCLE":
+                mouse_controller.cycle_lonely_sandbar()
+        if game.tap_out:
+            mouse_controller.tap_all_land()
         if game.will_discard:
             print("waiting for discard message...")
             mouse_controller.wait_for_discard_message()
             num_of_cards_to_discard = mouse_controller.read_number_of_cards_to_discard()
             if num_of_cards_to_discard > 0:
                 mouse_controller.close_revealed_cards()
-                # mouse_controller.discardToSeven(num_of_cards_to_discard, game)
                 game.hand = discard_to_seven(num_of_cards_to_discard)
                 return
     mouse_controller.click_submit()
@@ -125,6 +129,7 @@ def get_object_id_from_newest_log() -> int:
                 return int(line.split('objectId": ')[-1])
 
 def discard_to_seven(num_of_cards_to_discard: int):
+    # TODO: fails if can't discard only islands to get there
     new_hand = []
     object_id = 0
     num_of_cards_discarded = 0
@@ -163,4 +168,3 @@ def play_card(position: int):
             object_id = new_object_id
             current_card += 1
     mouse_controller.play_card()
-
