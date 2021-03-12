@@ -1,0 +1,4 @@
+tailer
+Pillow
+pyautogui
+pytesseract
