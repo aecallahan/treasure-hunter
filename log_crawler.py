@@ -6,6 +6,7 @@ import os
 import tailer
 
 def create_game_log_generator():
+    '''Log generator to yield subsequent logs from MTGA'''
     # works for windows
     file_path = os.path.join("..", "..", "..", "AppData", "LocalLow", "Wizards Of The Coast", \
         "MTGA", "Player.log")
@@ -19,4 +20,3 @@ def get_newest_log() -> list:
     file_path = os.path.join("..", "..", "..", "AppData", "LocalLow", "Wizards Of The Coast", \
         "MTGA", "Player.log")
     return tailer.tail(open(file_path), 10)
-

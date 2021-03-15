@@ -17,6 +17,7 @@ THASSAS_ORACLE = "Thassa's Oracle"
 NEXT_BUTTON_POSITION = (2367, 1266)
 
 HAND_START_POSITION = (180, 1428)
+HAND_START_POSITION_FAST = (280, 1428)
 
 CENTER_OF_SCREEN = (1280, 720)
 
@@ -27,7 +28,7 @@ LAND_START_POSITION = (400, 1040)
 
 LAND_END_POSITION = (1000, 1040)
 
-def read_card_name_during_discard(mouse_position) -> str:
+def read_card_name_at_location(mouse_position) -> str:
     subtractXStart = 150
     addXEnd = 150
     card_name = read_message_from_screen((mouse_position[0] - subtractXStart, \
@@ -39,7 +40,7 @@ def read_card_name_during_discard(mouse_position) -> str:
         return MYSTIC_SANCTUARY
     if "Thassa" in card_name or "Oracle" in card_name:
         return THASSAS_ORACLE
-    if "Treasure" in card_name or "Hunt" in card_name:
+    if "easure" in card_name or "Hunt" in card_name:
         return TREASURE_HUNT
     return BASIC_ISLAND
 
@@ -48,19 +49,9 @@ def concede():
     '''Concedes the current game'''
     print("conceding")
     pyautogui.click(x=2515, y=45)
-    pyautogui.moveTo(x=1280, y=854, duration=0.5)
-    time.sleep(1)
+    pyautogui.moveTo(x=1280, y=854, duration=4)
     pyautogui.click(x=1280, y=854)
-    pyautogui.click(x=1280, y=854)
-    pyautogui.click(x=1280, y=854)
-    pyautogui.click(x=1280, y=854)
-    pyautogui.click(x=1280, y=854)
-    time.sleep(1)
-    pyautogui.click(x=1280, y=854)
-    pyautogui.click(x=1280, y=854)
-    pyautogui.click(x=1280, y=854)
-    pyautogui.click(x=1280, y=854)
-    pyautogui.click(x=1280, y=854)
+
 
 def wait_for_mulligan_priority():
     waiting_for_priority = True
@@ -68,11 +59,15 @@ def wait_for_mulligan_priority():
         waiting_for_priority = not look_for_mulligan_button()
 
 def wait_for_main_phase_priority():
-    waiting_for_priority = True
-    while waiting_for_priority:
-        waiting_for_priority = not lookForNextButton()
+    '''Wait until player has priority in main phase 1'''
+    while True:
+        if look_for_next_button():
+            return
+        if look_for_end_turn_button():
+            return
 
 def wait_for_discard_message() -> str:
+    '''Wait until player sees discard message on screen'''
     waiting_for_discard = True
     while waiting_for_discard:
         waiting_for_discard = not look_for_discard_message()
@@ -83,9 +78,11 @@ def playLonelySandbarSecondPrompt():
     pyautogui.moveTo(DECK_POSITION)
 
 def cycle_lonely_sandbar():
+    '''Select the 'cycle' option in lonely sandbar's second prompt'''
     time.sleep(0.5)
     pyautogui.click(x=1603, y=620)
     pyautogui.moveTo(DECK_POSITION)
+    time.sleep(2)
 
 def mousePickCardsAfterMulligan(mullCount: int, game):
     BOTTOM_OF_LIBRARY_POS = (346, 750)
@@ -104,10 +101,10 @@ def mousePickCardsAfterMulligan(mullCount: int, game):
         SECOND_CARD_POS,
     ]
 
-    for i in range(mullCount):
+    for _ in range(mullCount):
         position = positions.pop(0)
-        pyautogui.moveTo(position, duration=0.1)
-        pyautogui.dragTo(BOTTOM_OF_LIBRARY_POS, duration=0.3)
+        pyautogui.moveTo(position, duration=0.2)
+        pyautogui.dragTo(BOTTOM_OF_LIBRARY_POS, duration=0.5)
         puttingOnBottom = game.hand.pop(0)
 
         print(f"putting {puttingOnBottom} on bottom")
@@ -118,6 +115,7 @@ def mousePickCardsAfterMulligan(mullCount: int, game):
 
 def mulligan():
     wait_for_mulligan_priority()
+    print("mulligan button identified, clicking it now")
     pyautogui.click(x=1055, y=1166)
     pyautogui.moveTo(x=286, y=1286)
 
@@ -132,32 +130,22 @@ def play_card():
     pyautogui.dragTo(CENTER_OF_SCREEN, duration=0.3)
     pyautogui.moveTo(DECK_POSITION)
 
-def lookForNextButton() -> bool:
+def look_for_next_button() -> bool:
+    message = read_message_from_screen((2313, 1242, 2426, 1289))
+    print(message)
+    return "Next" in message
+
+def look_for_end_turn_button() -> bool:
     message = read_message_from_screen((2250, 1242, 2500, 1289))
     print(message)
-    return "Next" in message or "End" in message or "Turn" in message
+    # Don't read 'Opponent's Turn'
+    if "pponen" in message:
+        return False
+    return "End" in message or "Turn" in message
 
 def look_for_discard_message() -> bool:
     message = read_message_from_screen((1099, 577, 1430, 635))
     return "Discard" in message
-
-def read_number_of_cards_to_discard() -> int:
-    '''Read message in center of screen instructing player to discard to hand size'''
-    # TODO: doesn't handle message "Discard a card"
-    message = read_message_from_screen((1099, 577, 1430, 635))
-    print(message)
-    if "Discard" in message:
-        # Splitting on "Discard" results in an array like ['', '5 cards.\n\x0c'].
-        # By getting the number this way, extra characters identified before
-        # "Discard" will not break the result.
-        try:
-            return int(message.split("Discard ")[-1][:2])
-        except ValueError:
-            # '11' read as 'll'
-            if message.split("Discard ")[-1][:2] == "ll":
-                return 11
-            return 1
-    return 0
 
 def look_for_mulligan_button() -> bool:
     '''Check if mulligan button is present on screen'''
