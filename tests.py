@@ -4,7 +4,9 @@ import os
 import unittest
 from unittest.mock import MagicMock, mock_open, patch
 
+from executor import play_game
 from game_player import GameStateObject
+import log_crawler
 import log_parser
 import mouse_controller
 
@@ -56,6 +58,7 @@ class TestGamePlayer(unittest.TestCase):
 class TestLogParser(unittest.TestCase):
     '''Test cases for log_parser.py'''
     def setUp(self):
+        # TODO: make this mock logging actually work
         mock_writer = MagicMock()
         # open = MagicMock(return_value=mock_writer)
         patch("builtins.open", mock_open(mock=mock_writer, read_data=None))
@@ -86,6 +89,28 @@ class TestLogParser(unittest.TestCase):
 
         self.assertEqual([BASIC_ISLAND], game.hand, \
             "game hand should've been updated with card drawn")
+
+
+class TestExecutor(unittest.TestCase):
+    '''Test cases that combine the logger and player'''
+
+    def test_turn_one_mystic_sanctuary(self):
+        '''
+        Mock log_generator to read logs corresponding to mystic sanctuary turn one, island turn two
+        '''
+        logs_to_read = []
+        for i in range(1, 11):
+            logs_to_read.append(read_log_from_file(f'mystic{i}'))
+        log_crawler.create_game_log_generator = MagicMock(return_value=logs_to_read)
+        mouse_controller.mulligan = MagicMock()
+        mouse_controller.keepHand = MagicMock()
+        log_parser.play_card = MagicMock()
+        mouse_controller.close_revealed_cards = MagicMock()
+        log_parser.update_hand_after_playing_treasure_hunt = MagicMock(return_value=[])
+
+        play_game()
+
+        log_parser.update_hand_after_playing_treasure_hunt.assert_called()
 
 
 def read_log_from_file(filename: str) -> dict:

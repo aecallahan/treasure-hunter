@@ -1,0 +1,210 @@
+{
+    "transactionId": "9fa08e0f-18b6-467b-b157-daf1101f16d2",
+    "timestamp": "637518701658396622",
+    "greToClientEvent": {
+        "greToClientMessages": [
+            {
+                "type": "GREMessageType_GameStateMessage",
+                "systemSeatIds": [
+                    1
+                ],
+                "msgId": 25,
+                "gameStateId": 8,
+                "gameStateMessage": {
+                    "type": "GameStateType_Diff",
+                    "gameStateId": 8,
+                    "players": [
+                        {
+                            "lifeTotal": 20,
+                            "systemSeatNumber": 1,
+                            "maxHandSize": 7,
+                            "mulliganCount": 4,
+                            "teamId": 1,
+                            "timerIds": [
+                                1
+                            ],
+                            "controllerSeatId": 1,
+                            "controllerType": "ControllerType_Player",
+                            "startingLifeTotal": 20
+                        }
+                    ],
+                    "pendingMessageCount": 2,
+                    "prevGameStateId": 7,
+                    "timers": [
+                        {
+                            "timerId": 1,
+                            "type": "TimerType_Inactivity",
+                            "durationSec": 1020,
+                            "running": true,
+                            "behavior": "TimerBehavior_Timeout",
+                            "warningThresholdSec": 990,
+                            "elapsedMs": 1
+                        }
+                    ],
+                    "update": "GameStateUpdate_Send",
+                    "actions": [
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Cast",
+                                "instanceId": 462,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 1
+                                    },
+                                    {
+                                        "color": [
+                                            "ManaColor_Blue"
+                                        ],
+                                        "count": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 464
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 461
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 463
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 465
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 460
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 459
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 8676,
+                                "sourceId": 459,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Blue"
+                                        ],
+                                        "count": 1,
+                                        "abilityGrpId": 8676
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "GREMessageType_PromptReq",
+                "systemSeatIds": [
+                    1,
+                    2
+                ],
+                "msgId": 26,
+                "gameStateId": 8,
+                "prompt": {
+                    "promptId": 37,
+                    "parameters": [
+                        {
+                            "parameterName": "PlayerId",
+                            "type": "ParameterType_Reference",
+                            "reference": {
+                                "type": "ReferenceType_PlayerSeatId",
+                                "id": 1
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "GREMessageType_GroupReq",
+                "systemSeatIds": [
+                    1
+                ],
+                "msgId": 27,
+                "gameStateId": 8,
+                "prompt": {
+                    "promptId": 92,
+                    "parameters": [
+                        {
+                            "parameterName": "CardId",
+                            "type": "ParameterType_Number"
+                        }
+                    ]
+                },
+                "groupReq": {
+                    "instanceIds": [
+                        465,
+                        464,
+                        463,
+                        462,
+                        461,
+                        460,
+                        459
+                    ],
+                    "groupSpecs": [
+                        {
+                            "lowerBound": 3,
+                            "upperBound": 3,
+                            "zoneType": "ZoneType_Hand",
+                            "subZoneType": "SubZoneType_Top"
+                        },
+                        {
+                            "lowerBound": 4,
+                            "upperBound": 4,
+                            "zoneType": "ZoneType_Library",
+                            "subZoneType": "SubZoneType_Bottom"
+                        }
+                    ],
+                    "totalSelected": 7,
+                    "groupType": "GroupType_Ordered",
+                    "context": "GroupingContext_LondonMulligan",
+                    "sourceId": 1
+                },
+                "nonDecisionPlayerPrompt": {
+                    "promptId": 93,
+                    "parameters": [
+                        {
+                            "parameterName": "PlayerId",
+                            "type": "ParameterType_Number",
+                            "numberValue": 1
+                        }
+                    ]
+                },
+                "allowCancel": "AllowCancel_No"
+            }
+        ]
+    }
+}

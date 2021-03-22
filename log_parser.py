@@ -20,46 +20,36 @@ def parse_log(log: dict, game: GameStateObject):
     if "greToClientEvent" not in log:
         return
 
-    # Append to log_parser_logs
-    current_path = os.getcwd()
-    file_writer = open(os.path.join(current_path, 'logs', 'log_parser_logs.log'), 'a')
+    # import pdb; pdb.set_trace()
 
     mull_message = identify_mulligan_message(log)
     if mull_message:
         game.hand = get_cards_in_hand_for_mulligan(mull_message)
-        file_writer.write("deciding mulligan...\n")
-        print("deciding mulligan...")
+        print_and_write_log("deciding mulligan...")
         game.decide_mulligan()
         if game.concede:
-            file_writer.write("decided to concede\n")
-            file_writer.close()
-            print('decided to concede')
+            print_and_write_log("decided to concede")
             mouse_controller.concede()
             return
         if game.mulligan:
-            file_writer.write("decided to mulligan\n")
-            print('decided to mulligan')
+            print_and_write_log("decided to mulligan")
             game.mulligan_count += 1
             mouse_controller.mulligan()
         else:
-            file_writer.write("decided to keep hand\n")
-            print('decided to keep')
-            mouse_controller.keepHand(game.mulligan_count, game)
-        file_writer.close()
+            print_and_write_log("decided to keep hand")
+            game.hand = game.hand[game.mulligan_count:]
+            mouse_controller.keepHand(game.mulligan_count)
         return
 
     if is_player_step("Step_Draw", log):
         new_card = get_drawn_card_from_log(log)
-        file_writer.write(f"drawing card {new_card}\n")
-        print(f"drawing card {new_card}")
+        print_and_write_log(f"drawing card {new_card}")
         game.hand.append(new_card)
     if is_player_phase("Phase_Main1", log, game):
-        file_writer.write(f"entering main phase with hand {game.hand}\n")
-        print(f"entering main phase with hand {game.hand}")
+        print_and_write_log(f"entering main phase with hand {game.hand}")
         game.decide_main_phase_actions()
-        file_writer.write(f"playing cards at indices {game.indices_of_cards_to_play}\n")
+        print_and_write_log(f"playing cards at indices {game.indices_of_cards_to_play}")
         if game.concede:
-            file_writer.close()
             mouse_controller.concede()
         time.sleep(1)
         # TODO: Crashes if beginning turn one on the play with just treasure hunt in hand.
@@ -77,20 +67,19 @@ def parse_log(log: dict, game: GameStateObject):
         # TODO: update hand immediately after playing treasure hunt and use drawn cards
         # to decide remainder of main phase actions
         if any(TREASURE_HUNT in sublist for sublist in game.indices_of_cards_to_play):
-            file_writer.write("updating hand after playing treasure hunt\n")
+            print_and_write_log("updating hand after playing treasure hunt")
             mouse_controller.close_revealed_cards()
             game.hand = update_hand_after_playing_treasure_hunt(game.hand)
-            file_writer.write(f"hand after treasure hunt: {game.hand}\n")
+            print_and_write_log(f"hand after treasure hunt: {game.hand}")
             game.decide_discard()
 
         if game.tap_out:
             mouse_controller.tap_all_land()
         if game.indices_of_cards_to_discard:
-            file_writer.write("waiting for discard message...\n")
+            print_and_write_log("waiting for discard message...")
             mouse_controller.wait_for_discard_message()
             discard_to_seven(game.indices_of_cards_to_discard)
-            file_writer.write(f"hand after discard: {game.hand}\n")
-        file_writer.close()
+            print_and_write_log(f"hand after discard: {game.hand}")
 
     # mouse_controller.click_submit()
 
@@ -113,7 +102,7 @@ def get_cards_in_hand_for_mulligan(game_state: dict) -> list:
     player = game_state["gameStateMessage"]["players"][0]
     mulligan_count = player.get("mulligan_count", 0)
     current_hand_size = player["maxHandSize"] - mulligan_count
-    print(f"currently mulliganing to {current_hand_size} cards")
+    print_and_write_log(f"currently mulliganing to {current_hand_size} cards")
     hand_zone = game_state["gameStateMessage"]["zones"][0]
 
     ids_of_cards_in_hand = set(hand_zone["objectInstanceIds"])
@@ -125,7 +114,7 @@ def get_cards_in_hand_for_mulligan(game_state: dict) -> list:
                 player_hand.append(cardIdNames[game_object["name"]])
         return sorted(player_hand)
     except KeyError:
-        print('key error while looking for hand during mulligan. conceding...')
+        print_and_write_log('key error while looking for hand during mulligan. conceding...')
         mouse_controller.concede()
 
 def is_player_step(step: str, log: dict) -> bool:
@@ -134,7 +123,7 @@ def is_player_step(step: str, log: dict) -> bool:
         if client_message.get("gameStateMessage", {}).get("turnInfo", {}).get("step") == step \
           and client_message["gameStateMessage"]["turnInfo"]["activePlayer"] == 1:
             turn = client_message["gameStateMessage"]["turnInfo"]["activePlayer"]
-            print(f"draw step identified on turn {turn}")
+            print_and_write_log(f"draw step identified on turn {turn}")
             return True
     return False
 
@@ -145,18 +134,18 @@ def is_player_phase(phase: str, log: dict, game: GameStateObject) -> bool:
           and client_message["gameStateMessage"]["turnInfo"]["activePlayer"] == 1 \
           and client_message["gameStateMessage"]["turnInfo"]["turnNumber"] > game.turn:
             turn = client_message["gameStateMessage"]["turnInfo"]["turnNumber"]
-            print(f"main phase identified on turn {turn}")
+            print_and_write_log(f"main phase identified on turn {turn}")
             game.turn = client_message["gameStateMessage"]["turnInfo"]["turnNumber"]
             return True
     return False
 
 def get_drawn_card_from_log(log: dict):
     '''Checks log for card drawn and updates game state accordingly'''
-    for client_message in log["greToClientEvent"]["greToClientMessages"]:
+    for client_message in reversed(log["greToClientEvent"]["greToClientMessages"]):
         if "gameObjects" in client_message.get("gameStateMessage", {}) and \
           client_message["gameStateMessage"]["gameObjects"][0]["ownerSeatId"] == 1:
             turn = client_message["gameStateMessage"]["turnInfo"]["turnNumber"]
-            print(f"drawing card on turn {turn}")
+            print_and_write_log(f"drawing card on turn {turn}")
             return cardIdNames[client_message["gameStateMessage"]["gameObjects"][0]["name"]]
     return None
 
@@ -175,7 +164,7 @@ def get_object_id_from_newest_log() -> int:
 
 def update_hand_after_playing_treasure_hunt(hand: list) -> list:
     '''Read through hand and append cards drawn from treasure hunt'''
-    print("updating hand after playing treasure hunt")
+    print_and_write_log("updating hand after playing treasure hunt")
     mouse_position = None
     seen_entire_hand = False
     object_id = 0
@@ -206,8 +195,8 @@ def update_hand_after_playing_treasure_hunt(hand: list) -> list:
 
 def discard_to_seven(discard_indices: list):
     # import pdb; pdb.set_trace()
-    print("indices of cards to discard:")
-    print(discard_indices)
+    print_and_write_log("indices of cards to discard:")
+    print_and_write_log(discard_indices)
     object_id = 0
     card_index = -2
     mouse_position = None
@@ -227,7 +216,7 @@ def discard_to_seven(discard_indices: list):
 
 
 def play_card(position: int):
-    print(f"playing card at position {position}")
+    print_and_write_log(f"playing card at position {position}")
     current_card = -1
     object_id = 0
     mouse_position = mouse_controller.move_across_hand()
@@ -238,3 +227,12 @@ def play_card(position: int):
             object_id = new_object_id
             current_card += 1
     mouse_controller.play_card()
+
+
+def print_and_write_log(message: str):
+    '''Print to console and write to log'''
+    current_path = os.getcwd()
+    file_writer = open(os.path.join(current_path, 'logs', 'log_parser_logs.log'), 'a')
+    file_writer.write(f"{message}\n")
+    print(message)
+    file_writer.close()

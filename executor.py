@@ -4,8 +4,8 @@ import os
 import pathlib
 import shutil
 
-from log_crawler import create_game_log_generator
-from log_parser import parse_log
+import log_crawler
+from log_parser import parse_log, print_and_write_log
 from game_player import GameStateObject
 
 LOGGING = True
@@ -16,17 +16,12 @@ def play_game():
     create_subdirectory()
     number_of_logs = 0
     game = GameStateObject()
-    log_generator = create_game_log_generator()
+    log_generator = log_crawler.create_game_log_generator()
     for log in log_generator:
         number_of_logs += 1
-        file_writer = open(os.path.join(current_path, 'logs', 'log_parser_logs.log'), 'a')
-        file_writer.write(
-            f"\n\n---------------------parsing log: {number_of_logs}---------------------\n\n"
+        print_and_write_log(
+            f"\n\n---------------------parsing log: {number_of_logs}---------------------\n"
             )
-        file_writer.close()
-        # print('\n\n')
-        # print(f"parsing log: {number_of_logs}")
-        # print('\n\n')
         with open(os.path.join(current_path, 'logs', f'log{number_of_logs}.json'), 'w') \
           as output_file:
             json.dump(log, output_file, indent=4)

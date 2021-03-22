@@ -84,7 +84,7 @@ def cycle_lonely_sandbar():
     pyautogui.moveTo(DECK_POSITION)
     time.sleep(2)
 
-def mousePickCardsAfterMulligan(mullCount: int, game):
+def mousePickCardsAfterMulligan(mullCount: int):
     BOTTOM_OF_LIBRARY_POS = (346, 750)
     SEVENTH_CARD_POS = (1199, 655)
     SIXTH_CARD_POS = (1240, 647)
@@ -105,10 +105,7 @@ def mousePickCardsAfterMulligan(mullCount: int, game):
         position = positions.pop(0)
         pyautogui.moveTo(position, duration=0.2)
         pyautogui.dragTo(BOTTOM_OF_LIBRARY_POS, duration=0.5)
-        puttingOnBottom = game.hand.pop(0)
 
-        print(f"putting {puttingOnBottom} on bottom")
-    print(f"hand after mulligan: {game.hand}")
     time.sleep(0.1)
     pyautogui.click(x=1286, y=1158)
     pyautogui.moveTo(DECK_POSITION)
@@ -119,10 +116,10 @@ def mulligan():
     pyautogui.click(x=1055, y=1166)
     pyautogui.moveTo(x=286, y=1286)
 
-def keepHand(mullCount: int, game):
+def keepHand(mullCount: int):
     wait_for_mulligan_priority()
     pyautogui.click(x=1518, y=1166)
-    mousePickCardsAfterMulligan(mullCount, game)
+    mousePickCardsAfterMulligan(mullCount)
 
 def play_card():
     # Do not play card until p1 has priority
