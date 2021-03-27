@@ -151,8 +151,16 @@ def look_for_mulligan_button() -> bool:
     return "Mulligan" in message
 
 def move_across_hand(mouse_position=HAND_START_POSITION) -> tuple:
+    if mouse_position == None:
+        mouse_position = HAND_START_POSITION
     pyautogui.moveTo(mouse_position)
     return (mouse_position[0] + 20, mouse_position[1])
+
+def move_across_hand_fast(mouse_position=HAND_START_POSITION_FAST) -> tuple:
+    if mouse_position == None:
+        mouse_position = HAND_START_POSITION_FAST
+    pyautogui.moveTo(mouse_position)
+    return (mouse_position[0] + 50, mouse_position[1])
 
 def tap_all_land():
     '''Incrementally move mouse across lands to tap them all.'''

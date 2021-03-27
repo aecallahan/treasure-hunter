@@ -20,8 +20,6 @@ def parse_log(log: dict, game: GameStateObject):
     if "greToClientEvent" not in log:
         return
 
-    # import pdb; pdb.set_trace()
-
     mull_message = identify_mulligan_message(log)
     if mull_message:
         game.hand = get_cards_in_hand_for_mulligan(mull_message)
@@ -55,7 +53,7 @@ def parse_log(log: dict, game: GameStateObject):
         # TODO: Crashes if beginning turn one on the play with just treasure hunt in hand.
         # See logs_on_the_play_one_card_in_hand for related logs.
         for index, action in game.indices_of_cards_to_play:
-            play_card(index)
+            play_card(index, len(game.hand))
             if action == MYSTIC_SANCTUARY:
                 mouse_controller.take_mystic_sanctuary_action()
             elif action == LONELY_SANDBAR:
@@ -64,13 +62,12 @@ def parse_log(log: dict, game: GameStateObject):
                 mouse_controller.cycle_lonely_sandbar()
             elif action == TREASURE_HUNT:
                 time.sleep(4)
-        # TODO: update hand immediately after playing treasure hunt and use drawn cards
-        # to decide remainder of main phase actions
-        if any(TREASURE_HUNT in sublist for sublist in game.indices_of_cards_to_play):
-            print_and_write_log("updating hand after playing treasure hunt")
-            mouse_controller.close_revealed_cards()
-            game.hand = update_hand_after_playing_treasure_hunt(game.hand)
-            print_and_write_log(f"hand after treasure hunt: {game.hand}")
+                print_and_write_log("updating hand after playing treasure hunt")
+                mouse_controller.close_revealed_cards()
+                game.hand = update_hand_after_playing_treasure_hunt(game.hand)
+                print_and_write_log(f"hand after treasure hunt: {game.hand}")
+
+        if len(game.hand) > 7:
             game.decide_discard()
 
         if game.tap_out:
@@ -169,13 +166,9 @@ def update_hand_after_playing_treasure_hunt(hand: list) -> list:
     seen_entire_hand = False
     object_id = 0
     num_of_cards_identified = 0
-    # new_hand = []
     iterations_since_new_card_seen = 0
     while not seen_entire_hand:
-        if mouse_position:
-            mouse_position = mouse_controller.move_across_hand(mouse_position)
-        else:
-            mouse_position = mouse_controller.move_across_hand()
+        mouse_position = mouse_controller.move_across_hand(mouse_position)
         new_object_id = get_object_id_from_newest_log()
         if new_object_id is not None and new_object_id != object_id:
             object_id = new_object_id
@@ -183,28 +176,21 @@ def update_hand_after_playing_treasure_hunt(hand: list) -> list:
             iterations_since_new_card_seen = 0
             if num_of_cards_identified > len(hand):
                 hand.append(mouse_controller.read_card_name_at_location(mouse_position))
-            # new_hand.append(mouse_controller.read_card_name_at_location(mouse_position))
         else:
             iterations_since_new_card_seen += 1
             if num_of_cards_identified > 0 and iterations_since_new_card_seen > 20:
-            # if len(new_hand) > len(hand) and iterations_since_new_card_seen > 20:
                 seen_entire_hand = True
-    # return new_hand
     return hand
 
 
 def discard_to_seven(discard_indices: list):
-    # import pdb; pdb.set_trace()
     print_and_write_log("indices of cards to discard:")
     print_and_write_log(discard_indices)
     object_id = 0
     card_index = -2
     mouse_position = None
     while discard_indices:
-        if mouse_position:
-            mouse_position = mouse_controller.move_across_hand(mouse_position)
-        else:
-            mouse_position = mouse_controller.move_across_hand()
+        mouse_position = mouse_controller.move_across_hand(mouse_position)
         new_object_id = get_object_id_from_newest_log()
         if new_object_id != object_id:
             object_id = new_object_id
@@ -215,13 +201,13 @@ def discard_to_seven(discard_indices: list):
     mouse_controller.click_submit()
 
 
-def play_card(position: int):
+def play_card(position: int, hand_size: int):
     print_and_write_log(f"playing card at position {position}")
     current_card = -1
     object_id = 0
-    mouse_position = mouse_controller.move_across_hand()
+    mouse_position = move_across_hand(None, hand_size)
     while current_card < position:
-        mouse_position = mouse_controller.move_across_hand(mouse_position)
+        mouse_position = move_across_hand(mouse_position, hand_size)
         new_object_id = get_object_id_from_newest_log()
         if new_object_id is not None and new_object_id != object_id:
             object_id = new_object_id
@@ -236,3 +222,9 @@ def print_and_write_log(message: str):
     file_writer.write(f"{message}\n")
     print(message)
     file_writer.close()
+
+def move_across_hand(mouse_position: tuple, hand_size: int) -> tuple:
+    '''Decide whether to invoke fast or slow function to move across hand'''
+    if hand_size > 7:
+        return mouse_controller.move_across_hand(mouse_position)
+    return mouse_controller.move_across_hand_fast(mouse_position)
