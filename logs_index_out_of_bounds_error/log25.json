@@ -1,0 +1,566 @@
+{
+    "transactionId": "54e860e1-10d7-4575-bd36-d005151656c5",
+    "timestamp": "637524876003431311",
+    "greToClientEvent": {
+        "greToClientMessages": [
+            {
+                "type": "GREMessageType_GameStateMessage",
+                "systemSeatIds": [
+                    2
+                ],
+                "msgId": 87,
+                "gameStateId": 47,
+                "gameStateMessage": {
+                    "type": "GameStateType_Diff",
+                    "gameStateId": 47,
+                    "zones": [
+                        {
+                            "zoneId": 28,
+                            "type": "ZoneType_Battlefield",
+                            "visibility": "Visibility_Public",
+                            "objectInstanceIds": [
+                                652,
+                                650
+                            ]
+                        },
+                        {
+                            "zoneId": 30,
+                            "type": "ZoneType_Limbo",
+                            "visibility": "Visibility_Public",
+                            "objectInstanceIds": [
+                                651,
+                                590,
+                                168,
+                                170,
+                                589,
+                                587,
+                                584,
+                                583,
+                                585,
+                                588
+                            ]
+                        },
+                        {
+                            "zoneId": 35,
+                            "type": "ZoneType_Hand",
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 2,
+                            "objectInstanceIds": [
+                                586
+                            ],
+                            "viewers": [
+                                2
+                            ]
+                        }
+                    ],
+                    "gameObjects": [
+                        {
+                            "instanceId": 651,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 30,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 2,
+                            "controllerSeatId": 2,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                2
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 652,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 28,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 2,
+                            "controllerSeatId": 2,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA"
+                        }
+                    ],
+                    "annotations": [
+                        {
+                            "id": 74,
+                            "affectedIds": [
+                                651
+                            ],
+                            "type": [
+                                "AnnotationType_ObjectIdChanged"
+                            ],
+                            "details": [
+                                {
+                                    "key": "orig_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        651
+                                    ]
+                                },
+                                {
+                                    "key": "new_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        652
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 75,
+                            "affectedIds": [
+                                652
+                            ],
+                            "type": [
+                                "AnnotationType_ZoneTransfer"
+                            ],
+                            "details": [
+                                {
+                                    "key": "zone_src",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        35
+                                    ]
+                                },
+                                {
+                                    "key": "zone_dest",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        28
+                                    ]
+                                },
+                                {
+                                    "key": "category",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "PlayLand"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 76,
+                            "affectorId": 2,
+                            "affectedIds": [
+                                652
+                            ],
+                            "type": [
+                                "AnnotationType_UserActionTaken"
+                            ],
+                            "details": [
+                                {
+                                    "key": "actionType",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        3
+                                    ]
+                                },
+                                {
+                                    "key": "abilityGrpId",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        0
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "prevGameStateId": 46,
+                    "timers": [
+                        {
+                            "timerId": 9,
+                            "type": "TimerType_ActivePlayer",
+                            "durationSec": 68,
+                            "elapsedSec": 4,
+                            "behavior": "TimerBehavior_TakeControl",
+                            "warningThresholdSec": 30,
+                            "elapsedMs": 4431
+                        },
+                        {
+                            "timerId": 11,
+                            "type": "TimerType_Inactivity",
+                            "durationSec": 150,
+                            "behavior": "TimerBehavior_Timeout",
+                            "warningThresholdSec": 130
+                        }
+                    ],
+                    "update": "GameStateUpdate_SendHiFi",
+                    "actions": [
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Cast",
+                                "instanceId": 586,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 1
+                                    },
+                                    {
+                                        "color": [
+                                            "ManaColor_Blue"
+                                        ],
+                                        "count": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1002,
+                                "sourceId": 652
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 136225,
+                                "sourceId": 650
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Special",
+                                "instanceId": 162,
+                                "abilityGrpId": 202,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 3,
+                                        "abilityGrpId": 202
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "persistentAnnotations": [
+                        {
+                            "id": 5,
+                            "affectorId": 28,
+                            "affectedIds": [
+                                652
+                            ],
+                            "type": [
+                                "AnnotationType_EnteredZoneThisTurn"
+                            ]
+                        }
+                    ],
+                    "diffDeletedPersistentAnnotationIds": [
+                        14
+                    ]
+                }
+            },
+            {
+                "type": "GREMessageType_GameStateMessage",
+                "systemSeatIds": [
+                    2
+                ],
+                "msgId": 88,
+                "gameStateId": 48,
+                "gameStateMessage": {
+                    "type": "GameStateType_Diff",
+                    "gameStateId": 48,
+                    "turnInfo": {
+                        "phase": "Phase_Main1",
+                        "turnNumber": 3,
+                        "activePlayer": 2,
+                        "priorityPlayer": 1,
+                        "decisionPlayer": 2,
+                        "nextPhase": "Phase_Combat",
+                        "nextStep": "Step_BeginCombat"
+                    },
+                    "prevGameStateId": 47,
+                    "update": "GameStateUpdate_SendHiFi",
+                    "actions": [
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Cast",
+                                "instanceId": 586,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 1
+                                    },
+                                    {
+                                        "color": [
+                                            "ManaColor_Blue"
+                                        ],
+                                        "count": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1002,
+                                "sourceId": 652
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 136225,
+                                "sourceId": 650
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Special",
+                                "instanceId": 162,
+                                "abilityGrpId": 202,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 3,
+                                        "abilityGrpId": 202
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "GREMessageType_GameStateMessage",
+                "systemSeatIds": [
+                    2
+                ],
+                "msgId": 89,
+                "gameStateId": 49,
+                "gameStateMessage": {
+                    "type": "GameStateType_Diff",
+                    "gameStateId": 49,
+                    "turnInfo": {
+                        "phase": "Phase_Combat",
+                        "step": "Step_BeginCombat",
+                        "turnNumber": 3,
+                        "activePlayer": 2,
+                        "priorityPlayer": 2,
+                        "decisionPlayer": 2,
+                        "nextPhase": "Phase_Combat",
+                        "nextStep": "Step_DeclareAttack"
+                    },
+                    "annotations": [
+                        {
+                            "id": 77,
+                            "affectedIds": [
+                                2
+                            ],
+                            "type": [
+                                "AnnotationType_PhaseOrStepModified"
+                            ],
+                            "details": [
+                                {
+                                    "key": "phase",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        3
+                                    ]
+                                },
+                                {
+                                    "key": "step",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        0
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "prevGameStateId": 48,
+                    "update": "GameStateUpdate_SendHiFi",
+                    "actions": [
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Cast",
+                                "instanceId": 586,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 1
+                                    },
+                                    {
+                                        "color": [
+                                            "ManaColor_Blue"
+                                        ],
+                                        "count": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1002,
+                                "sourceId": 652
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 136225,
+                                "sourceId": 650
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Special",
+                                "instanceId": 162,
+                                "abilityGrpId": 202,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 3,
+                                        "abilityGrpId": 202
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "GREMessageType_GameStateMessage",
+                "systemSeatIds": [
+                    2
+                ],
+                "msgId": 90,
+                "gameStateId": 50,
+                "gameStateMessage": {
+                    "type": "GameStateType_Diff",
+                    "gameStateId": 50,
+                    "turnInfo": {
+                        "phase": "Phase_Combat",
+                        "step": "Step_BeginCombat",
+                        "turnNumber": 3,
+                        "activePlayer": 2,
+                        "priorityPlayer": 1,
+                        "decisionPlayer": 1,
+                        "nextPhase": "Phase_Combat",
+                        "nextStep": "Step_DeclareAttack"
+                    },
+                    "prevGameStateId": 49,
+                    "timers": [
+                        {
+                            "timerId": 6,
+                            "type": "TimerType_Delay",
+                            "durationSec": 2,
+                            "running": true,
+                            "behavior": "TimerBehavior_StartDelayedTimer",
+                            "elapsedMs": 3
+                        }
+                    ],
+                    "update": "GameStateUpdate_SendAndRecord",
+                    "actions": [
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Cast",
+                                "instanceId": 586,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 1
+                                    },
+                                    {
+                                        "color": [
+                                            "ManaColor_Blue"
+                                        ],
+                                        "count": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1002,
+                                "sourceId": 652
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 136225,
+                                "sourceId": 650
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Special",
+                                "instanceId": 162,
+                                "abilityGrpId": 202,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 3,
+                                        "abilityGrpId": 202
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

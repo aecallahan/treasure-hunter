@@ -1,0 +1,3279 @@
+{
+    "transactionId": "3185423f-236c-43a7-9ee4-cd2393775c57",
+    "timestamp": "637524891633132235",
+    "greToClientEvent": {
+        "greToClientMessages": [
+            {
+                "type": "GREMessageType_GameStateMessage",
+                "systemSeatIds": [
+                    1
+                ],
+                "msgId": 146,
+                "gameStateId": 106,
+                "gameStateMessage": {
+                    "type": "GameStateType_Diff",
+                    "gameStateId": 106,
+                    "zones": [
+                        {
+                            "zoneId": 18,
+                            "type": "ZoneType_Revealed",
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "objectInstanceIds": [
+                                380,
+                                381,
+                                382,
+                                383
+                            ]
+                        },
+                        {
+                            "zoneId": 27,
+                            "type": "ZoneType_Stack",
+                            "visibility": "Visibility_Public",
+                            "objectInstanceIds": [
+                                419
+                            ]
+                        },
+                        {
+                            "zoneId": 30,
+                            "type": "ZoneType_Limbo",
+                            "visibility": "Visibility_Public",
+                            "objectInstanceIds": [
+                                358,
+                                214,
+                                249,
+                                246,
+                                240,
+                                248,
+                                351,
+                                350,
+                                349,
+                                335,
+                                334,
+                                344,
+                                353,
+                                345,
+                                340,
+                                339,
+                                341,
+                                347,
+                                355,
+                                346,
+                                356,
+                                342,
+                                354,
+                                348,
+                                329,
+                                321,
+                                180,
+                                181,
+                                182,
+                                183,
+                                331,
+                                191,
+                                198,
+                                192,
+                                212,
+                                207,
+                                193,
+                                206,
+                                205,
+                                204,
+                                190,
+                                189,
+                                199,
+                                208,
+                                200,
+                                195,
+                                194,
+                                196,
+                                202,
+                                210,
+                                201,
+                                211,
+                                197,
+                                209,
+                                203,
+                                213,
+                                184,
+                                185,
+                                188,
+                                243,
+                                323,
+                                247,
+                                186,
+                                187,
+                                244
+                            ]
+                        },
+                        {
+                            "zoneId": 31,
+                            "type": "ZoneType_Hand",
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 1,
+                            "objectInstanceIds": [
+                                418,
+                                336,
+                                343,
+                                337,
+                                357,
+                                352,
+                                338
+                            ],
+                            "viewers": [
+                                1
+                            ]
+                        }
+                    ],
+                    "gameObjects": [
+                        {
+                            "instanceId": 322,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 28,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "isTapped": true,
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA"
+                        },
+                        {
+                            "instanceId": 330,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 28,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "isTapped": true,
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA"
+                        },
+                        {
+                            "instanceId": 358,
+                            "grpId": 35611,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 30,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "cardTypes": [
+                                "CardType_Sorcery"
+                            ],
+                            "color": [
+                                "CardColor_Blue"
+                            ],
+                            "viewers": [
+                                1
+                            ],
+                            "name": 24877,
+                            "abilities": [
+                                6489
+                            ],
+                            "overlayGrpId": 35611
+                        },
+                        {
+                            "instanceId": 419,
+                            "grpId": 35611,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 27,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "cardTypes": [
+                                "CardType_Sorcery"
+                            ],
+                            "color": [
+                                "CardColor_Blue"
+                            ],
+                            "name": 24877,
+                            "abilities": [
+                                6489
+                            ],
+                            "overlayGrpId": 35611
+                        }
+                    ],
+                    "annotations": [
+                        {
+                            "id": 400,
+                            "affectedIds": [
+                                358
+                            ],
+                            "type": [
+                                "AnnotationType_ObjectIdChanged"
+                            ],
+                            "details": [
+                                {
+                                    "key": "orig_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        358
+                                    ]
+                                },
+                                {
+                                    "key": "new_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        419
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 401,
+                            "affectorId": 359,
+                            "affectedIds": [
+                                359
+                            ],
+                            "type": [
+                                "AnnotationType_RevealedCardDeleted"
+                            ]
+                        },
+                        {
+                            "id": 402,
+                            "affectedIds": [
+                                419
+                            ],
+                            "type": [
+                                "AnnotationType_ZoneTransfer"
+                            ],
+                            "details": [
+                                {
+                                    "key": "zone_src",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                },
+                                {
+                                    "key": "zone_dest",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        27
+                                    ]
+                                },
+                                {
+                                    "key": "category",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "CastSpell"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 403,
+                            "affectorId": 322,
+                            "affectedIds": [
+                                420
+                            ],
+                            "type": [
+                                "AnnotationType_AbilityInstanceCreated"
+                            ],
+                            "details": [
+                                {
+                                    "key": "source_zone",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        28
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 404,
+                            "affectorId": 420,
+                            "affectedIds": [
+                                322
+                            ],
+                            "type": [
+                                "AnnotationType_TappedUntappedPermanent"
+                            ],
+                            "details": [
+                                {
+                                    "key": "tapped",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        1
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 405,
+                            "affectorId": 322,
+                            "affectedIds": [
+                                420
+                            ],
+                            "type": [
+                                "AnnotationType_AbilityInstanceDeleted"
+                            ]
+                        },
+                        {
+                            "id": 406,
+                            "affectorId": 1,
+                            "affectedIds": [
+                                420
+                            ],
+                            "type": [
+                                "AnnotationType_UserActionTaken"
+                            ],
+                            "details": [
+                                {
+                                    "key": "actionType",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        4
+                                    ]
+                                },
+                                {
+                                    "key": "abilityGrpId",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        1002
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 407,
+                            "affectorId": 322,
+                            "affectedIds": [
+                                419
+                            ],
+                            "type": [
+                                "AnnotationType_ManaPaid"
+                            ],
+                            "details": [
+                                {
+                                    "key": "id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        122
+                                    ]
+                                },
+                                {
+                                    "key": "color",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        2
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 408,
+                            "affectorId": 330,
+                            "affectedIds": [
+                                421
+                            ],
+                            "type": [
+                                "AnnotationType_AbilityInstanceCreated"
+                            ],
+                            "details": [
+                                {
+                                    "key": "source_zone",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        28
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 409,
+                            "affectorId": 421,
+                            "affectedIds": [
+                                330
+                            ],
+                            "type": [
+                                "AnnotationType_TappedUntappedPermanent"
+                            ],
+                            "details": [
+                                {
+                                    "key": "tapped",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        1
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 410,
+                            "affectorId": 330,
+                            "affectedIds": [
+                                421
+                            ],
+                            "type": [
+                                "AnnotationType_AbilityInstanceDeleted"
+                            ]
+                        },
+                        {
+                            "id": 411,
+                            "affectorId": 1,
+                            "affectedIds": [
+                                421
+                            ],
+                            "type": [
+                                "AnnotationType_UserActionTaken"
+                            ],
+                            "details": [
+                                {
+                                    "key": "actionType",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        4
+                                    ]
+                                },
+                                {
+                                    "key": "abilityGrpId",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        1002
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 412,
+                            "affectorId": 330,
+                            "affectedIds": [
+                                419
+                            ],
+                            "type": [
+                                "AnnotationType_ManaPaid"
+                            ],
+                            "details": [
+                                {
+                                    "key": "id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        123
+                                    ]
+                                },
+                                {
+                                    "key": "color",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        2
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 413,
+                            "affectorId": 1,
+                            "affectedIds": [
+                                419
+                            ],
+                            "type": [
+                                "AnnotationType_UserActionTaken"
+                            ],
+                            "details": [
+                                {
+                                    "key": "actionType",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        1
+                                    ]
+                                },
+                                {
+                                    "key": "abilityGrpId",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        0
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "diffDeletedInstanceIds": [
+                        359,
+                        420,
+                        421
+                    ],
+                    "prevGameStateId": 105,
+                    "timers": [
+                        {
+                            "timerId": 3,
+                            "type": "TimerType_ActivePlayer",
+                            "durationSec": 68,
+                            "elapsedSec": 5,
+                            "behavior": "TimerBehavior_TakeControl",
+                            "warningThresholdSec": 30,
+                            "elapsedMs": 5472
+                        },
+                        {
+                            "timerId": 5,
+                            "type": "TimerType_Inactivity",
+                            "durationSec": 150,
+                            "behavior": "TimerBehavior_Timeout",
+                            "warningThresholdSec": 130
+                        }
+                    ],
+                    "update": "GameStateUpdate_SendHiFi",
+                    "actions": [
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 336
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 337
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 338
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 343
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 352
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 357
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 418
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1002,
+                                "sourceId": 322
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1002,
+                                "sourceId": 330
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 8676,
+                                "sourceId": 336,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Blue"
+                                        ],
+                                        "count": 1,
+                                        "abilityGrpId": 8676
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 8676,
+                                "sourceId": 343,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Blue"
+                                        ],
+                                        "count": 1,
+                                        "abilityGrpId": 8676
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1152,
+                                "sourceId": 320
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1152,
+                                "sourceId": 324
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1152,
+                                "sourceId": 326
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1152,
+                                "sourceId": 410
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 88188,
+                                "sourceId": 326,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 1,
+                                        "abilityGrpId": 88188
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Special",
+                                "instanceId": 179,
+                                "abilityGrpId": 202,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 3,
+                                        "abilityGrpId": 202
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "persistentAnnotations": [
+                        {
+                            "id": 4,
+                            "affectorId": 27,
+                            "affectedIds": [
+                                419
+                            ],
+                            "type": [
+                                "AnnotationType_EnteredZoneThisTurn"
+                            ]
+                        }
+                    ],
+                    "diffDeletedPersistentAnnotationIds": [
+                        159
+                    ]
+                }
+            },
+            {
+                "type": "GREMessageType_GameStateMessage",
+                "systemSeatIds": [
+                    1
+                ],
+                "msgId": 147,
+                "gameStateId": 107,
+                "gameStateMessage": {
+                    "type": "GameStateType_Diff",
+                    "gameStateId": 107,
+                    "turnInfo": {
+                        "phase": "Phase_Main1",
+                        "turnNumber": 6,
+                        "activePlayer": 1,
+                        "priorityPlayer": 2,
+                        "decisionPlayer": 1,
+                        "nextPhase": "Phase_Combat",
+                        "nextStep": "Step_BeginCombat"
+                    },
+                    "prevGameStateId": 106,
+                    "update": "GameStateUpdate_SendHiFi",
+                    "actions": [
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 336
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 337
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 338
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 343
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 352
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 357
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 418
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1002,
+                                "sourceId": 322
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1002,
+                                "sourceId": 330
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 8676,
+                                "sourceId": 336,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Blue"
+                                        ],
+                                        "count": 1,
+                                        "abilityGrpId": 8676
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 8676,
+                                "sourceId": 343,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Blue"
+                                        ],
+                                        "count": 1,
+                                        "abilityGrpId": 8676
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1152,
+                                "sourceId": 320
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1152,
+                                "sourceId": 324
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1152,
+                                "sourceId": 326
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1152,
+                                "sourceId": 410
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 88188,
+                                "sourceId": 326,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 1,
+                                        "abilityGrpId": 88188
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Special",
+                                "instanceId": 179,
+                                "abilityGrpId": 202,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 3,
+                                        "abilityGrpId": 202
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "GREMessageType_GameStateMessage",
+                "systemSeatIds": [
+                    1
+                ],
+                "msgId": 148,
+                "gameStateId": 108,
+                "gameStateMessage": {
+                    "type": "GameStateType_Diff",
+                    "gameStateId": 108,
+                    "turnInfo": {
+                        "phase": "Phase_Main1",
+                        "turnNumber": 6,
+                        "activePlayer": 1,
+                        "priorityPlayer": 1,
+                        "decisionPlayer": 1,
+                        "nextPhase": "Phase_Combat",
+                        "nextStep": "Step_BeginCombat"
+                    },
+                    "zones": [
+                        {
+                            "zoneId": 18,
+                            "type": "ZoneType_Revealed",
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "objectInstanceIds": [
+                                380,
+                                381,
+                                382,
+                                383,
+                                430,
+                                431,
+                                432,
+                                433,
+                                434,
+                                435,
+                                436,
+                                437
+                            ]
+                        },
+                        {
+                            "zoneId": 27,
+                            "type": "ZoneType_Stack",
+                            "visibility": "Visibility_Public"
+                        },
+                        {
+                            "zoneId": 30,
+                            "type": "ZoneType_Limbo",
+                            "visibility": "Visibility_Public",
+                            "objectInstanceIds": [
+                                419,
+                                216,
+                                222,
+                                221,
+                                219,
+                                217,
+                                215,
+                                220,
+                                218,
+                                358,
+                                214,
+                                249,
+                                246,
+                                240,
+                                248,
+                                351,
+                                350,
+                                349,
+                                335,
+                                334,
+                                344,
+                                353,
+                                345,
+                                340,
+                                339,
+                                341,
+                                347,
+                                355,
+                                346,
+                                356,
+                                342,
+                                354,
+                                348,
+                                329,
+                                321,
+                                180,
+                                181,
+                                182,
+                                183,
+                                331,
+                                191,
+                                198,
+                                192,
+                                212,
+                                207,
+                                193,
+                                206,
+                                205,
+                                204,
+                                190,
+                                189,
+                                199,
+                                208,
+                                200,
+                                195,
+                                194,
+                                196,
+                                202,
+                                210,
+                                201,
+                                211,
+                                197,
+                                209,
+                                203,
+                                213,
+                                184,
+                                185,
+                                188,
+                                243,
+                                323,
+                                247,
+                                186,
+                                187,
+                                244
+                            ]
+                        },
+                        {
+                            "zoneId": 31,
+                            "type": "ZoneType_Hand",
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 1,
+                            "objectInstanceIds": [
+                                423,
+                                429,
+                                428,
+                                426,
+                                424,
+                                422,
+                                427,
+                                425,
+                                418,
+                                336,
+                                343,
+                                337,
+                                357,
+                                352,
+                                338
+                            ],
+                            "viewers": [
+                                1
+                            ]
+                        },
+                        {
+                            "zoneId": 32,
+                            "type": "ZoneType_Library",
+                            "visibility": "Visibility_Hidden",
+                            "ownerSeatId": 1,
+                            "objectInstanceIds": [
+                                223,
+                                224,
+                                225,
+                                226,
+                                227,
+                                228,
+                                229,
+                                230,
+                                231,
+                                232,
+                                233,
+                                234,
+                                235,
+                                236,
+                                237,
+                                238,
+                                239
+                            ]
+                        },
+                        {
+                            "zoneId": 33,
+                            "type": "ZoneType_Graveyard",
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "objectInstanceIds": [
+                                438,
+                                404,
+                                403,
+                                402,
+                                392,
+                                391,
+                                397,
+                                405,
+                                398,
+                                394,
+                                393,
+                                395,
+                                400,
+                                407,
+                                399,
+                                408,
+                                396,
+                                406,
+                                401,
+                                390,
+                                389,
+                                385,
+                                386,
+                                387,
+                                388,
+                                384
+                            ]
+                        }
+                    ],
+                    "gameObjects": [
+                        {
+                            "instanceId": 215,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 30,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 216,
+                            "grpId": 70394,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 30,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 414466,
+                            "abilities": [
+                                136196,
+                                136197,
+                                1002
+                            ],
+                            "overlayGrpId": 70394
+                        },
+                        {
+                            "instanceId": 217,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 30,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 218,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 30,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 219,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 30,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 220,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 30,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 221,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 30,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 222,
+                            "grpId": 70584,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 30,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "cardTypes": [
+                                "CardType_Creature"
+                            ],
+                            "subtypes": [
+                                "SubType_Merfolk",
+                                "SubType_Wizard"
+                            ],
+                            "color": [
+                                "CardColor_Blue"
+                            ],
+                            "power": {
+                                "value": 1
+                            },
+                            "toughness": {
+                                "value": 3
+                            },
+                            "name": 419870,
+                            "abilities": [
+                                136709
+                            ],
+                            "overlayGrpId": 70584
+                        },
+                        {
+                            "instanceId": 419,
+                            "grpId": 35611,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 30,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "cardTypes": [
+                                "CardType_Sorcery"
+                            ],
+                            "color": [
+                                "CardColor_Blue"
+                            ],
+                            "name": 24877,
+                            "abilities": [
+                                6489
+                            ],
+                            "overlayGrpId": 35611
+                        },
+                        {
+                            "instanceId": 422,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                1
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 423,
+                            "grpId": 70394,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                1
+                            ],
+                            "name": 414466,
+                            "abilities": [
+                                136196,
+                                136197,
+                                1002
+                            ],
+                            "overlayGrpId": 70394
+                        },
+                        {
+                            "instanceId": 424,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                1
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 425,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                1
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 426,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                1
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 427,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                1
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 428,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                1
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 429,
+                            "grpId": 70584,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "cardTypes": [
+                                "CardType_Creature"
+                            ],
+                            "subtypes": [
+                                "SubType_Merfolk",
+                                "SubType_Wizard"
+                            ],
+                            "color": [
+                                "CardColor_Blue"
+                            ],
+                            "power": {
+                                "value": 1
+                            },
+                            "toughness": {
+                                "value": 3
+                            },
+                            "viewers": [
+                                1
+                            ],
+                            "name": 419870,
+                            "abilities": [
+                                136709
+                            ],
+                            "overlayGrpId": 70584
+                        },
+                        {
+                            "instanceId": 430,
+                            "grpId": 70762,
+                            "type": "GameObjectType_RevealedCard",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 431,
+                            "grpId": 70762,
+                            "type": "GameObjectType_RevealedCard",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 432,
+                            "grpId": 70762,
+                            "type": "GameObjectType_RevealedCard",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 433,
+                            "grpId": 70762,
+                            "type": "GameObjectType_RevealedCard",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 434,
+                            "grpId": 70762,
+                            "type": "GameObjectType_RevealedCard",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 435,
+                            "grpId": 70762,
+                            "type": "GameObjectType_RevealedCard",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 436,
+                            "grpId": 70584,
+                            "type": "GameObjectType_RevealedCard",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "cardTypes": [
+                                "CardType_Creature"
+                            ],
+                            "subtypes": [
+                                "SubType_Merfolk",
+                                "SubType_Wizard"
+                            ],
+                            "color": [
+                                "CardColor_Blue"
+                            ],
+                            "power": {
+                                "value": 1
+                            },
+                            "toughness": {
+                                "value": 3
+                            },
+                            "name": 419870,
+                            "abilities": [
+                                136709
+                            ],
+                            "overlayGrpId": 70584
+                        },
+                        {
+                            "instanceId": 437,
+                            "grpId": 70394,
+                            "type": "GameObjectType_RevealedCard",
+                            "zoneId": 31,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "name": 414466,
+                            "abilities": [
+                                136196,
+                                136197,
+                                1002
+                            ],
+                            "overlayGrpId": 70394
+                        },
+                        {
+                            "instanceId": 438,
+                            "grpId": 35611,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 33,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "cardTypes": [
+                                "CardType_Sorcery"
+                            ],
+                            "color": [
+                                "CardColor_Blue"
+                            ],
+                            "name": 24877,
+                            "abilities": [
+                                6489
+                            ],
+                            "overlayGrpId": 35611
+                        }
+                    ],
+                    "annotations": [
+                        {
+                            "id": 414,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                419
+                            ],
+                            "type": [
+                                "AnnotationType_ResolutionStart"
+                            ],
+                            "details": [
+                                {
+                                    "key": "grpid",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        35611
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 423,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                218
+                            ],
+                            "type": [
+                                "AnnotationType_ObjectIdChanged"
+                            ],
+                            "details": [
+                                {
+                                    "key": "orig_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        218
+                                    ]
+                                },
+                                {
+                                    "key": "new_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        425
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 424,
+                            "affectorId": 430,
+                            "affectedIds": [
+                                430
+                            ],
+                            "type": [
+                                "AnnotationType_RevealedCardCreated"
+                            ]
+                        },
+                        {
+                            "id": 426,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                425
+                            ],
+                            "type": [
+                                "AnnotationType_ZoneTransfer"
+                            ],
+                            "details": [
+                                {
+                                    "key": "zone_src",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        32
+                                    ]
+                                },
+                                {
+                                    "key": "zone_dest",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                },
+                                {
+                                    "key": "category",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "Put"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 427,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                220
+                            ],
+                            "type": [
+                                "AnnotationType_ObjectIdChanged"
+                            ],
+                            "details": [
+                                {
+                                    "key": "orig_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        220
+                                    ]
+                                },
+                                {
+                                    "key": "new_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        427
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 428,
+                            "affectorId": 431,
+                            "affectedIds": [
+                                431
+                            ],
+                            "type": [
+                                "AnnotationType_RevealedCardCreated"
+                            ]
+                        },
+                        {
+                            "id": 430,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                427
+                            ],
+                            "type": [
+                                "AnnotationType_ZoneTransfer"
+                            ],
+                            "details": [
+                                {
+                                    "key": "zone_src",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        32
+                                    ]
+                                },
+                                {
+                                    "key": "zone_dest",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                },
+                                {
+                                    "key": "category",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "Put"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 431,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                215
+                            ],
+                            "type": [
+                                "AnnotationType_ObjectIdChanged"
+                            ],
+                            "details": [
+                                {
+                                    "key": "orig_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        215
+                                    ]
+                                },
+                                {
+                                    "key": "new_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        422
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 432,
+                            "affectorId": 432,
+                            "affectedIds": [
+                                432
+                            ],
+                            "type": [
+                                "AnnotationType_RevealedCardCreated"
+                            ]
+                        },
+                        {
+                            "id": 434,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                422
+                            ],
+                            "type": [
+                                "AnnotationType_ZoneTransfer"
+                            ],
+                            "details": [
+                                {
+                                    "key": "zone_src",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        32
+                                    ]
+                                },
+                                {
+                                    "key": "zone_dest",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                },
+                                {
+                                    "key": "category",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "Put"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 435,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                217
+                            ],
+                            "type": [
+                                "AnnotationType_ObjectIdChanged"
+                            ],
+                            "details": [
+                                {
+                                    "key": "orig_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        217
+                                    ]
+                                },
+                                {
+                                    "key": "new_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        424
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 436,
+                            "affectorId": 433,
+                            "affectedIds": [
+                                433
+                            ],
+                            "type": [
+                                "AnnotationType_RevealedCardCreated"
+                            ]
+                        },
+                        {
+                            "id": 438,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                424
+                            ],
+                            "type": [
+                                "AnnotationType_ZoneTransfer"
+                            ],
+                            "details": [
+                                {
+                                    "key": "zone_src",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        32
+                                    ]
+                                },
+                                {
+                                    "key": "zone_dest",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                },
+                                {
+                                    "key": "category",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "Put"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 439,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                219
+                            ],
+                            "type": [
+                                "AnnotationType_ObjectIdChanged"
+                            ],
+                            "details": [
+                                {
+                                    "key": "orig_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        219
+                                    ]
+                                },
+                                {
+                                    "key": "new_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        426
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 440,
+                            "affectorId": 434,
+                            "affectedIds": [
+                                434
+                            ],
+                            "type": [
+                                "AnnotationType_RevealedCardCreated"
+                            ]
+                        },
+                        {
+                            "id": 442,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                426
+                            ],
+                            "type": [
+                                "AnnotationType_ZoneTransfer"
+                            ],
+                            "details": [
+                                {
+                                    "key": "zone_src",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        32
+                                    ]
+                                },
+                                {
+                                    "key": "zone_dest",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                },
+                                {
+                                    "key": "category",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "Put"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 443,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                221
+                            ],
+                            "type": [
+                                "AnnotationType_ObjectIdChanged"
+                            ],
+                            "details": [
+                                {
+                                    "key": "orig_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        221
+                                    ]
+                                },
+                                {
+                                    "key": "new_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        428
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 444,
+                            "affectorId": 435,
+                            "affectedIds": [
+                                435
+                            ],
+                            "type": [
+                                "AnnotationType_RevealedCardCreated"
+                            ]
+                        },
+                        {
+                            "id": 446,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                428
+                            ],
+                            "type": [
+                                "AnnotationType_ZoneTransfer"
+                            ],
+                            "details": [
+                                {
+                                    "key": "zone_src",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        32
+                                    ]
+                                },
+                                {
+                                    "key": "zone_dest",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                },
+                                {
+                                    "key": "category",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "Put"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 447,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                222
+                            ],
+                            "type": [
+                                "AnnotationType_ObjectIdChanged"
+                            ],
+                            "details": [
+                                {
+                                    "key": "orig_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        222
+                                    ]
+                                },
+                                {
+                                    "key": "new_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        429
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 448,
+                            "affectorId": 436,
+                            "affectedIds": [
+                                436
+                            ],
+                            "type": [
+                                "AnnotationType_RevealedCardCreated"
+                            ]
+                        },
+                        {
+                            "id": 450,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                429
+                            ],
+                            "type": [
+                                "AnnotationType_ZoneTransfer"
+                            ],
+                            "details": [
+                                {
+                                    "key": "zone_src",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        32
+                                    ]
+                                },
+                                {
+                                    "key": "zone_dest",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                },
+                                {
+                                    "key": "category",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "Put"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 451,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                216
+                            ],
+                            "type": [
+                                "AnnotationType_ObjectIdChanged"
+                            ],
+                            "details": [
+                                {
+                                    "key": "orig_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        216
+                                    ]
+                                },
+                                {
+                                    "key": "new_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        423
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 452,
+                            "affectorId": 437,
+                            "affectedIds": [
+                                437
+                            ],
+                            "type": [
+                                "AnnotationType_RevealedCardCreated"
+                            ]
+                        },
+                        {
+                            "id": 454,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                423
+                            ],
+                            "type": [
+                                "AnnotationType_ZoneTransfer"
+                            ],
+                            "details": [
+                                {
+                                    "key": "zone_src",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        32
+                                    ]
+                                },
+                                {
+                                    "key": "zone_dest",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                },
+                                {
+                                    "key": "category",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "Put"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 455,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                419
+                            ],
+                            "type": [
+                                "AnnotationType_ResolutionComplete"
+                            ],
+                            "details": [
+                                {
+                                    "key": "grpid",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        35611
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 456,
+                            "affectorId": 1,
+                            "affectedIds": [
+                                419
+                            ],
+                            "type": [
+                                "AnnotationType_ObjectIdChanged"
+                            ],
+                            "details": [
+                                {
+                                    "key": "orig_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        419
+                                    ]
+                                },
+                                {
+                                    "key": "new_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        438
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 457,
+                            "affectorId": 1,
+                            "affectedIds": [
+                                438
+                            ],
+                            "type": [
+                                "AnnotationType_ZoneTransfer"
+                            ],
+                            "details": [
+                                {
+                                    "key": "zone_src",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        27
+                                    ]
+                                },
+                                {
+                                    "key": "zone_dest",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        33
+                                    ]
+                                },
+                                {
+                                    "key": "category",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "Resolve"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 458,
+                            "affectorId": 337,
+                            "affectedIds": [
+                                337
+                            ],
+                            "type": [
+                                "AnnotationType_ShouldntPlay"
+                            ],
+                            "details": [
+                                {
+                                    "key": "Reason",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "EntersTapped"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 459,
+                            "affectorId": 357,
+                            "affectedIds": [
+                                357
+                            ],
+                            "type": [
+                                "AnnotationType_ShouldntPlay"
+                            ],
+                            "details": [
+                                {
+                                    "key": "Reason",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "EntersTapped"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 460,
+                            "affectorId": 418,
+                            "affectedIds": [
+                                418
+                            ],
+                            "type": [
+                                "AnnotationType_ShouldntPlay"
+                            ],
+                            "details": [
+                                {
+                                    "key": "Reason",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "EntersTapped"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 461,
+                            "affectorId": 423,
+                            "affectedIds": [
+                                423
+                            ],
+                            "type": [
+                                "AnnotationType_ShouldntPlay"
+                            ],
+                            "details": [
+                                {
+                                    "key": "Reason",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "EntersTapped"
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "pendingMessageCount": 1,
+                    "prevGameStateId": 107,
+                    "timers": [
+                        {
+                            "timerId": 6,
+                            "type": "TimerType_Delay",
+                            "durationSec": 2,
+                            "running": true,
+                            "behavior": "TimerBehavior_StartDelayedTimer",
+                            "elapsedMs": 5
+                        }
+                    ],
+                    "update": "GameStateUpdate_SendAndRecord",
+                    "actions": [
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Cast",
+                                "instanceId": 429,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Blue"
+                                        ],
+                                        "count": 2
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 336
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 337
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 338
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 343
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 352
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 357
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 418
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 422
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 423
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 424
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 425
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 426
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 427
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 428
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1002,
+                                "sourceId": 322
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1002,
+                                "sourceId": 330
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 8676,
+                                "sourceId": 336,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Blue"
+                                        ],
+                                        "count": 1,
+                                        "abilityGrpId": 8676
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 8676,
+                                "sourceId": 343,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Blue"
+                                        ],
+                                        "count": 1,
+                                        "abilityGrpId": 8676
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1152,
+                                "sourceId": 320
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1152,
+                                "sourceId": 324
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1152,
+                                "sourceId": 326
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 1152,
+                                "sourceId": 410
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 88188,
+                                "sourceId": 326,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 1,
+                                        "abilityGrpId": 88188
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Special",
+                                "instanceId": 179,
+                                "abilityGrpId": 202,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 3,
+                                        "abilityGrpId": 202
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "persistentAnnotations": [
+                        {
+                            "id": 9,
+                            "affectorId": 31,
+                            "affectedIds": [
+                                423,
+                                429,
+                                428,
+                                426,
+                                424,
+                                422,
+                                427,
+                                425,
+                                418
+                            ],
+                            "type": [
+                                "AnnotationType_EnteredZoneThisTurn"
+                            ]
+                        },
+                        {
+                            "id": 11,
+                            "affectorId": 33,
+                            "affectedIds": [
+                                438
+                            ],
+                            "type": [
+                                "AnnotationType_EnteredZoneThisTurn"
+                            ]
+                        },
+                        {
+                            "id": 415,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                70762
+                            ],
+                            "type": [
+                                "AnnotationType_CardRevealed"
+                            ],
+                            "details": [
+                                {
+                                    "key": "skin_code",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "DA"
+                                    ]
+                                },
+                                {
+                                    "key": "source_zone",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 416,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                70394
+                            ],
+                            "type": [
+                                "AnnotationType_CardRevealed"
+                            ],
+                            "details": [
+                                {
+                                    "key": "source_zone",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 417,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                70762
+                            ],
+                            "type": [
+                                "AnnotationType_CardRevealed"
+                            ],
+                            "details": [
+                                {
+                                    "key": "skin_code",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "DA"
+                                    ]
+                                },
+                                {
+                                    "key": "source_zone",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 418,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                70762
+                            ],
+                            "type": [
+                                "AnnotationType_CardRevealed"
+                            ],
+                            "details": [
+                                {
+                                    "key": "skin_code",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "DA"
+                                    ]
+                                },
+                                {
+                                    "key": "source_zone",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 419,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                70762
+                            ],
+                            "type": [
+                                "AnnotationType_CardRevealed"
+                            ],
+                            "details": [
+                                {
+                                    "key": "skin_code",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "DA"
+                                    ]
+                                },
+                                {
+                                    "key": "source_zone",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 420,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                70762
+                            ],
+                            "type": [
+                                "AnnotationType_CardRevealed"
+                            ],
+                            "details": [
+                                {
+                                    "key": "skin_code",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "DA"
+                                    ]
+                                },
+                                {
+                                    "key": "source_zone",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 421,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                70762
+                            ],
+                            "type": [
+                                "AnnotationType_CardRevealed"
+                            ],
+                            "details": [
+                                {
+                                    "key": "skin_code",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "DA"
+                                    ]
+                                },
+                                {
+                                    "key": "source_zone",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 422,
+                            "affectorId": 419,
+                            "affectedIds": [
+                                70584
+                            ],
+                            "type": [
+                                "AnnotationType_CardRevealed"
+                            ],
+                            "details": [
+                                {
+                                    "key": "source_zone",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 425,
+                            "affectorId": 425,
+                            "affectedIds": [
+                                425
+                            ],
+                            "type": [
+                                "AnnotationType_InstanceRevealedToOpponent"
+                            ]
+                        },
+                        {
+                            "id": 429,
+                            "affectorId": 427,
+                            "affectedIds": [
+                                427
+                            ],
+                            "type": [
+                                "AnnotationType_InstanceRevealedToOpponent"
+                            ]
+                        },
+                        {
+                            "id": 433,
+                            "affectorId": 422,
+                            "affectedIds": [
+                                422
+                            ],
+                            "type": [
+                                "AnnotationType_InstanceRevealedToOpponent"
+                            ]
+                        },
+                        {
+                            "id": 437,
+                            "affectorId": 424,
+                            "affectedIds": [
+                                424
+                            ],
+                            "type": [
+                                "AnnotationType_InstanceRevealedToOpponent"
+                            ]
+                        },
+                        {
+                            "id": 441,
+                            "affectorId": 426,
+                            "affectedIds": [
+                                426
+                            ],
+                            "type": [
+                                "AnnotationType_InstanceRevealedToOpponent"
+                            ]
+                        },
+                        {
+                            "id": 445,
+                            "affectorId": 428,
+                            "affectedIds": [
+                                428
+                            ],
+                            "type": [
+                                "AnnotationType_InstanceRevealedToOpponent"
+                            ]
+                        },
+                        {
+                            "id": 449,
+                            "affectorId": 429,
+                            "affectedIds": [
+                                429
+                            ],
+                            "type": [
+                                "AnnotationType_InstanceRevealedToOpponent"
+                            ]
+                        },
+                        {
+                            "id": 453,
+                            "affectorId": 423,
+                            "affectedIds": [
+                                423
+                            ],
+                            "type": [
+                                "AnnotationType_InstanceRevealedToOpponent"
+                            ]
+                        },
+                        {
+                            "id": 462,
+                            "affectorId": 429,
+                            "affectedIds": [
+                                429
+                            ],
+                            "type": [
+                                "AnnotationType_AbilityWordActive"
+                            ],
+                            "details": [
+                                {
+                                    "key": "value",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        0
+                                    ]
+                                },
+                                {
+                                    "key": "AbilityGrpId",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        136709
+                                    ]
+                                },
+                                {
+                                    "key": "AbilityWordName",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "Devotion"
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "diffDeletedPersistentAnnotationIds": [
+                        35,
+                        4
+                    ]
+                }
+            },
+            {
+                "type": "GREMessageType_ActionsAvailableReq",
+                "systemSeatIds": [
+                    1
+                ],
+                "msgId": 149,
+                "gameStateId": 108,
+                "prompt": {
+                    "promptId": 2
+                },
+                "actionsAvailableReq": {
+                    "actions": [
+                        {
+                            "actionType": "ActionType_Cast",
+                            "grpId": 70584,
+                            "instanceId": 429,
+                            "manaCost": [
+                                {
+                                    "color": [
+                                        "ManaColor_Blue"
+                                    ],
+                                    "count": 2
+                                }
+                            ],
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Activate",
+                            "grpId": 18237,
+                            "instanceId": 336,
+                            "abilityGrpId": 8676,
+                            "manaCost": [
+                                {
+                                    "color": [
+                                        "ManaColor_Blue"
+                                    ],
+                                    "count": 1,
+                                    "abilityGrpId": 8676
+                                }
+                            ],
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Activate",
+                            "grpId": 18237,
+                            "instanceId": 343,
+                            "abilityGrpId": 8676,
+                            "manaCost": [
+                                {
+                                    "color": [
+                                        "ManaColor_Blue"
+                                    ],
+                                    "count": 1,
+                                    "abilityGrpId": 8676
+                                }
+                            ],
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Play",
+                            "grpId": 18237,
+                            "instanceId": 336,
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Play",
+                            "grpId": 70394,
+                            "instanceId": 337,
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Play",
+                            "grpId": 70762,
+                            "instanceId": 338,
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Play",
+                            "grpId": 18237,
+                            "instanceId": 343,
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Play",
+                            "grpId": 70762,
+                            "instanceId": 352,
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Play",
+                            "grpId": 70394,
+                            "instanceId": 357,
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Play",
+                            "grpId": 70394,
+                            "instanceId": 418,
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Play",
+                            "grpId": 70762,
+                            "instanceId": 422,
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Play",
+                            "grpId": 70394,
+                            "instanceId": 423,
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Play",
+                            "grpId": 70762,
+                            "instanceId": 424,
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Play",
+                            "grpId": 70762,
+                            "instanceId": 425,
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Play",
+                            "grpId": 70762,
+                            "instanceId": 426,
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Play",
+                            "grpId": 70762,
+                            "instanceId": 427,
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Play",
+                            "grpId": 70762,
+                            "instanceId": 428,
+                            "shouldStop": true
+                        },
+                        {
+                            "actionType": "ActionType_Pass"
+                        }
+                    ],
+                    "inactiveActions": [
+                        {
+                            "actionType": "ActionType_Activate_Mana",
+                            "grpId": 70762,
+                            "instanceId": 322,
+                            "abilityGrpId": 1002
+                        },
+                        {
+                            "actionType": "ActionType_Activate_Mana",
+                            "grpId": 70762,
+                            "instanceId": 330,
+                            "abilityGrpId": 1002
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

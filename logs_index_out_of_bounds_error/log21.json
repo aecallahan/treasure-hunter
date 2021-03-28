@@ -1,0 +1,250 @@
+{
+    "transactionId": "cb83b4e5-4f5c-4f00-8291-be0022443405",
+    "timestamp": "637524875916236677",
+    "greToClientEvent": {
+        "greToClientMessages": [
+            {
+                "type": "GREMessageType_GameStateMessage",
+                "systemSeatIds": [
+                    2
+                ],
+                "msgId": 63,
+                "gameStateId": 30,
+                "gameStateMessage": {
+                    "type": "GameStateType_Diff",
+                    "gameStateId": 30,
+                    "zones": [
+                        {
+                            "zoneId": 28,
+                            "type": "ZoneType_Battlefield",
+                            "visibility": "Visibility_Public",
+                            "objectInstanceIds": [
+                                650
+                            ]
+                        },
+                        {
+                            "zoneId": 30,
+                            "type": "ZoneType_Limbo",
+                            "visibility": "Visibility_Public",
+                            "objectInstanceIds": [
+                                168,
+                                170,
+                                589,
+                                587,
+                                584,
+                                583,
+                                585,
+                                588
+                            ]
+                        },
+                        {
+                            "zoneId": 31,
+                            "type": "ZoneType_Hand",
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 1,
+                            "objectInstanceIds": [
+                                649,
+                                169,
+                                167,
+                                166,
+                                165,
+                                164,
+                                163
+                            ],
+                            "viewers": [
+                                1
+                            ]
+                        }
+                    ],
+                    "gameObjects": [
+                        {
+                            "instanceId": 650,
+                            "grpId": 70391,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 28,
+                            "visibility": "Visibility_Public",
+                            "ownerSeatId": 1,
+                            "controllerSeatId": 1,
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "name": 414451,
+                            "abilities": [
+                                136225
+                            ],
+                            "overlayGrpId": 70391
+                        }
+                    ],
+                    "annotations": [
+                        {
+                            "id": 57,
+                            "affectedIds": [
+                                168
+                            ],
+                            "type": [
+                                "AnnotationType_ObjectIdChanged"
+                            ],
+                            "details": [
+                                {
+                                    "key": "orig_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        168
+                                    ]
+                                },
+                                {
+                                    "key": "new_id",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        650
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 58,
+                            "affectedIds": [
+                                650
+                            ],
+                            "type": [
+                                "AnnotationType_ZoneTransfer"
+                            ],
+                            "details": [
+                                {
+                                    "key": "zone_src",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        31
+                                    ]
+                                },
+                                {
+                                    "key": "zone_dest",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        28
+                                    ]
+                                },
+                                {
+                                    "key": "category",
+                                    "type": "KeyValuePairValueType_string",
+                                    "valueString": [
+                                        "PlayLand"
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "id": 59,
+                            "affectorId": 1,
+                            "affectedIds": [
+                                650
+                            ],
+                            "type": [
+                                "AnnotationType_UserActionTaken"
+                            ],
+                            "details": [
+                                {
+                                    "key": "actionType",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        3
+                                    ]
+                                },
+                                {
+                                    "key": "abilityGrpId",
+                                    "type": "KeyValuePairValueType_int32",
+                                    "valueInt32": [
+                                        0
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "prevGameStateId": 29,
+                    "timers": [
+                        {
+                            "timerId": 3,
+                            "type": "TimerType_ActivePlayer",
+                            "durationSec": 68,
+                            "elapsedSec": 2,
+                            "running": true,
+                            "behavior": "TimerBehavior_TakeControl",
+                            "warningThresholdSec": 30,
+                            "elapsedMs": 2629
+                        },
+                        {
+                            "timerId": 5,
+                            "type": "TimerType_Inactivity",
+                            "durationSec": 150,
+                            "running": true,
+                            "behavior": "TimerBehavior_Timeout",
+                            "warningThresholdSec": 130,
+                            "elapsedMs": 3
+                        }
+                    ],
+                    "update": "GameStateUpdate_SendAndRecord",
+                    "actions": [
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Cast",
+                                "instanceId": 586,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 1
+                                    },
+                                    {
+                                        "color": [
+                                            "ManaColor_Blue"
+                                        ],
+                                        "count": 1
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Activate",
+                                "abilityGrpId": 136225,
+                                "sourceId": 650
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Special",
+                                "instanceId": 162,
+                                "abilityGrpId": 202,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 3,
+                                        "abilityGrpId": 202
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "persistentAnnotations": [
+                        {
+                            "id": 5,
+                            "affectorId": 28,
+                            "affectedIds": [
+                                650
+                            ],
+                            "type": [
+                                "AnnotationType_EnteredZoneThisTurn"
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

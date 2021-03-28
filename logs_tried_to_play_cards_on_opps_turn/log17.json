@@ -1,0 +1,20 @@
+{
+    "transactionId": "f9ec4e29-ff3b-4ea9-a9de-b6f495236089",
+    "timestamp": "637524866654400493",
+    "greToClientEvent": {
+        "greToClientMessages": [
+            {
+                "type": "GREMessageType_UIMessage",
+                "systemSeatIds": [
+                    2
+                ],
+                "uiMessage": {
+                    "seatIds": [
+                        1
+                    ],
+                    "onHover": {}
+                }
+            }
+        ]
+    }
+}

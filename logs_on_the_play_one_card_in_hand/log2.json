@@ -1,0 +1,57 @@
+{
+    "transactionId": "81430972-b3f2-4ce2-8219-465856c5db13",
+    "timestamp": "637518708299913610",
+    "matchGameRoomStateChangedEvent": {
+        "gameRoomInfo": {
+            "gameRoomConfig": {
+                "eventId": "AIBotMatch",
+                "reservedPlayers": [
+                    {
+                        "userId": "CD46A8D0510A92D9",
+                        "playerName": "MaskOff#56466",
+                        "systemSeatId": 1,
+                        "teamId": 1,
+                        "connectionInfo": {
+                            "connectionState": "ConnectionState_Open"
+                        },
+                        "courseId": "00000000-0000-0000-0000-000000000000"
+                    },
+                    {
+                        "userId": "CD46A8D0510A92D9_Familiar",
+                        "playerName": "Sparky",
+                        "systemSeatId": 2,
+                        "teamId": 2,
+                        "connectionInfo": {
+                            "connectionState": "ConnectionState_Open"
+                        },
+                        "courseId": "00000000-0000-0000-0000-000000000000"
+                    }
+                ],
+                "matchId": "397000ee-c84a-4b91-91e0-a345ed5690c3",
+                "matchConfig": {},
+                "greConfig": {
+                    "gameStateRedactorConfiguration": {
+                        "enableRedaction": true,
+                        "enableForceDiff": true
+                    },
+                    "clipsConfiguration": {},
+                    "checkpointConfiguration": {}
+                },
+                "greHostLoggerLevel": "Info",
+                "joinRoomTimeoutSecs": 30,
+                "playerDisconnectTimeoutSecs": 30
+            },
+            "stateType": "MatchGameRoomStateType_Playing",
+            "players": [
+                {
+                    "userId": "CD46A8D0510A92D9",
+                    "systemSeatId": 1
+                },
+                {
+                    "userId": "CD46A8D0510A92D9_Familiar",
+                    "systemSeatId": 2
+                }
+            ]
+        }
+    }
+}

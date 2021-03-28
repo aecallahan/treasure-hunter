@@ -1,0 +1,22 @@
+{
+    "transactionId": "2ac6e681-6a34-4e9c-8215-dcbcce843826",
+    "timestamp": "637524885554433560",
+    "greToClientEvent": {
+        "greToClientMessages": [
+            {
+                "type": "GREMessageType_UIMessage",
+                "systemSeatIds": [
+                    2
+                ],
+                "uiMessage": {
+                    "seatIds": [
+                        1
+                    ],
+                    "onChat": {
+                        "text": "{\"Id\":\"Phrase_Basic_Nice_Thanks\",\"LocalizationKey\":\"DuelScene/Emotes/Nice\",\"Category\":\"Kudos\"}"
+                    }
+                }
+            }
+        ]
+    }
+}

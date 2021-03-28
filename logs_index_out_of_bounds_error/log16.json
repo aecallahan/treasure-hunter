@@ -1,0 +1,65 @@
+{
+    "transactionId": "00000000-0000-0000-0000-000000000000",
+    "timestamp": "637524875808569912",
+    "greToClientEvent": {
+        "greToClientMessages": [
+            {
+                "type": "GREMessageType_TimerStateMessage",
+                "systemSeatIds": [
+                    1,
+                    2
+                ],
+                "msgId": 42,
+                "gameStateId": 13,
+                "timerStateMessage": {
+                    "seatId": 2,
+                    "timers": [
+                        {
+                            "timerId": 7,
+                            "type": "TimerType_Prologue",
+                            "durationSec": 120,
+                            "behavior": "TimerBehavior_TakeControl",
+                            "warningThresholdSec": 30
+                        },
+                        {
+                            "timerId": 8,
+                            "type": "TimerType_Epilogue",
+                            "durationSec": 145,
+                            "behavior": "TimerBehavior_TakeControl",
+                            "warningThresholdSec": 30
+                        },
+                        {
+                            "timerId": 9,
+                            "type": "TimerType_ActivePlayer",
+                            "durationSec": 61,
+                            "running": true,
+                            "behavior": "TimerBehavior_TakeControl",
+                            "warningThresholdSec": 30
+                        },
+                        {
+                            "timerId": 10,
+                            "type": "TimerType_NonActivePlayer",
+                            "durationSec": 45,
+                            "behavior": "TimerBehavior_TakeControl",
+                            "warningThresholdSec": 30
+                        },
+                        {
+                            "timerId": 11,
+                            "type": "TimerType_Inactivity",
+                            "durationSec": 150,
+                            "running": true,
+                            "behavior": "TimerBehavior_Timeout",
+                            "warningThresholdSec": 130
+                        },
+                        {
+                            "timerId": 12,
+                            "type": "TimerType_Delay",
+                            "durationSec": 2,
+                            "behavior": "TimerBehavior_StartDelayedTimer"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

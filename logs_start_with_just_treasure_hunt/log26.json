@@ -1,0 +1,22 @@
+{
+    "transactionId": "e9f00c4d-0ded-4bc8-b615-05ca1bfe070e",
+    "timestamp": "637524885604279390",
+    "greToClientEvent": {
+        "greToClientMessages": [
+            {
+                "type": "GREMessageType_UIMessage",
+                "systemSeatIds": [
+                    2
+                ],
+                "uiMessage": {
+                    "seatIds": [
+                        1
+                    ],
+                    "onChat": {
+                        "text": "{\"Id\":\"Phrase_Basic_GoodGame\",\"LocalizationKey\":\"DuelScene/Emotes/GoodGame\",\"Category\":\"GoodGame\"}"
+                    }
+                }
+            }
+        ]
+    }
+}

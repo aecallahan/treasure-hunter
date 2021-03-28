@@ -1,0 +1,57 @@
+{
+    "transactionId": "fa80e6d1-babc-4e41-a599-8df9aaf173aa",
+    "timestamp": "637524890693740056",
+    "matchGameRoomStateChangedEvent": {
+        "gameRoomInfo": {
+            "gameRoomConfig": {
+                "eventId": "Historic_Play",
+                "reservedPlayers": [
+                    {
+                        "userId": "CD46A8D0510A92D9",
+                        "playerName": "MaskOff#56466",
+                        "systemSeatId": 1,
+                        "teamId": 1,
+                        "connectionInfo": {
+                            "connectionState": "ConnectionState_Open"
+                        },
+                        "courseId": "00000000-0000-0000-0000-000000000000"
+                    },
+                    {
+                        "userId": "XLI63DJ5BRBUHFBHZIJ6PO6K4E",
+                        "playerName": "Talamis#37719",
+                        "systemSeatId": 2,
+                        "teamId": 2,
+                        "connectionInfo": {
+                            "connectionState": "ConnectionState_Open"
+                        },
+                        "courseId": "00000000-0000-0000-0000-000000000000"
+                    }
+                ],
+                "matchId": "1143669c-fc08-43de-8a03-40f7f2418fd2",
+                "matchConfig": {},
+                "greConfig": {
+                    "gameStateRedactorConfiguration": {
+                        "enableRedaction": true,
+                        "enableForceDiff": true
+                    },
+                    "clipsConfiguration": {},
+                    "checkpointConfiguration": {}
+                },
+                "greHostLoggerLevel": "Info",
+                "joinRoomTimeoutSecs": 30,
+                "playerDisconnectTimeoutSecs": 30
+            },
+            "stateType": "MatchGameRoomStateType_Playing",
+            "players": [
+                {
+                    "userId": "CD46A8D0510A92D9",
+                    "systemSeatId": 1
+                },
+                {
+                    "userId": "XLI63DJ5BRBUHFBHZIJ6PO6K4E",
+                    "systemSeatId": 2
+                }
+            ]
+        }
+    }
+}

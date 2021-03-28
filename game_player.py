@@ -32,6 +32,7 @@ class GameStateObject:
         self.turn = 0
         self.concede = False
         self.mulligan = False
+        self.played_cards_for_turn = False
         self.tap_out = False
         self.will_discard = False
 
@@ -88,14 +89,12 @@ class GameStateObject:
         these cards having been played. Pop cards from hand as we go to maintain
         correct card index for mouse_controller as cards get played sequentially.
         '''
-        # TODO: playing mystic sanctuary turn 1, island turn 2 doesn't identify playing treasure
-        # hunt turn 2. See logs_for_mystic_sanctuary_turn_1 to investigate
-
         self.mana_spent = 0
         self.tap_out = False
         self.will_discard = False
         self.indices_of_cards_to_discard = []
         self.indices_of_cards_to_play = []
+        self.played_cards_for_turn = True
         ioctp = self.indices_of_cards_to_play
         if self.treasure_hunts_played == 0 and TREASURE_HUNT not in self.hand:
             self.concede = True
@@ -166,7 +165,6 @@ class GameStateObject:
 
     def _cycle(self):
         card_index = self.hand.index(LONELY_SANDBAR)
-        self.hand.pop(card_index)
         action = "CYCLE"
         self.mana_spent += 1
         return [card_index, action]
@@ -187,13 +185,12 @@ class GameStateObject:
         self.lands += 1
         if land_type != LONELY_SANDBAR:
             self.islands += 1
-        self.hand.pop(card_index)
         return [card_index, action]
 
     def _play_spell(self, spell_type: str) -> list:
         if spell_type in self.hand:
             card_index = self.hand.index(spell_type)
-            self.yard.append(self.hand.pop(card_index))
+            self.yard.append(self.hand[card_index])
         else:
             # If card isn't in hand, it's a treasure hunt that'll be fetched from yard
             card_index = len(self.hand)

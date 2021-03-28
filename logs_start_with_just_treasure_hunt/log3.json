@@ -1,0 +1,57 @@
+{
+    "transactionId": "147dfb72-3c63-4920-97a5-9b273c66bd4c",
+    "timestamp": "637524885292837429",
+    "matchGameRoomStateChangedEvent": {
+        "gameRoomInfo": {
+            "gameRoomConfig": {
+                "eventId": "Historic_Play",
+                "reservedPlayers": [
+                    {
+                        "userId": "QRWF77JHKZCRTG4VVJGTHJ5UXA",
+                        "playerName": "NanLinvocadorDeCoses#25582",
+                        "systemSeatId": 1,
+                        "teamId": 1,
+                        "connectionInfo": {
+                            "connectionState": "ConnectionState_Open"
+                        },
+                        "courseId": "00000000-0000-0000-0000-000000000000"
+                    },
+                    {
+                        "userId": "CD46A8D0510A92D9",
+                        "playerName": "MaskOff#56466",
+                        "systemSeatId": 2,
+                        "teamId": 2,
+                        "connectionInfo": {
+                            "connectionState": "ConnectionState_Open"
+                        },
+                        "courseId": "00000000-0000-0000-0000-000000000000"
+                    }
+                ],
+                "matchId": "3ab892ef-743c-40f8-9b8c-3b2664c8a05c",
+                "matchConfig": {},
+                "greConfig": {
+                    "gameStateRedactorConfiguration": {
+                        "enableRedaction": true,
+                        "enableForceDiff": true
+                    },
+                    "clipsConfiguration": {},
+                    "checkpointConfiguration": {}
+                },
+                "greHostLoggerLevel": "Info",
+                "joinRoomTimeoutSecs": 30,
+                "playerDisconnectTimeoutSecs": 30
+            },
+            "stateType": "MatchGameRoomStateType_Playing",
+            "players": [
+                {
+                    "userId": "QRWF77JHKZCRTG4VVJGTHJ5UXA",
+                    "systemSeatId": 1
+                },
+                {
+                    "userId": "CD46A8D0510A92D9",
+                    "systemSeatId": 2
+                }
+            ]
+        }
+    }
+}

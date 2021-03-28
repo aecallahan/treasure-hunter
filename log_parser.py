@@ -17,6 +17,12 @@ THASSAS_ORACLE = "Thassa's Oracle"
 
 def parse_log(log: dict, game: GameStateObject):
     '''Read latest log and decide what to do'''
+    if is_game_over(log):
+        print_and_write_log("Finished game, starting new one")
+        game.reset_game()
+        mouse_controller.start_new_game()
+        return
+
     if "greToClientEvent" not in log:
         return
 
@@ -41,44 +47,66 @@ def parse_log(log: dict, game: GameStateObject):
 
     if is_player_step("Step_Draw", log):
         new_card = get_drawn_card_from_log(log)
+        game.played_cards_for_turn = False
         print_and_write_log(f"drawing card {new_card}")
-        game.hand.append(new_card)
-    if is_player_phase("Phase_Main1", log, game):
+        if new_card:
+            game.hand.append(new_card)
+    if not game.played_cards_for_turn and is_player_phase("Phase_Main1", log, game):
         print_and_write_log(f"entering main phase with hand {game.hand}")
         game.decide_main_phase_actions()
         print_and_write_log(f"playing cards at indices {game.indices_of_cards_to_play}")
         if game.concede:
             mouse_controller.concede()
-        time.sleep(1)
-        # TODO: Crashes if beginning turn one on the play with just treasure hunt in hand.
-        # See logs_on_the_play_one_card_in_hand for related logs.
-        for index, action in game.indices_of_cards_to_play:
+        time.sleep(1.5)
+        for i in range(len(game.indices_of_cards_to_play)):
+            index, action = game.indices_of_cards_to_play[i]
+            print(f"playing card at position {index}")
             play_card(index, len(game.hand))
+            game.hand.pop(index)
+            # for remaining indices of cards to play, decrement to account for pop
+            for j in range(i + 1, len(game.indices_of_cards_to_play)):
+                if game.indices_of_cards_to_play[j][0] > index:
+                    game.indices_of_cards_to_play[j][0] -= 1
             if action == MYSTIC_SANCTUARY:
                 mouse_controller.take_mystic_sanctuary_action()
             elif action == LONELY_SANDBAR:
                 mouse_controller.playLonelySandbarSecondPrompt()
             elif action == "CYCLE":
                 mouse_controller.cycle_lonely_sandbar()
+                game.hand.append(TREASURE_HUNT)
             elif action == TREASURE_HUNT:
-                time.sleep(4)
-                print_and_write_log("updating hand after playing treasure hunt")
+                mouse_controller.wait_for_priority_after_casting_treasure_hunt()
                 mouse_controller.close_revealed_cards()
                 game.hand = update_hand_after_playing_treasure_hunt(game.hand)
                 print_and_write_log(f"hand after treasure hunt: {game.hand}")
 
+        if len(game.indices_of_cards_to_play) <= 1:
+            time.sleep(1)
+            mouse_controller.click_submit()
+
         if len(game.hand) > 7:
             game.decide_discard()
 
-        if game.tap_out:
-            mouse_controller.tap_all_land()
         if game.indices_of_cards_to_discard:
-            print_and_write_log("waiting for discard message...")
-            mouse_controller.wait_for_discard_message()
+            if cycling_available(log):
+                print_and_write_log("identified cycling is available, " \
+                    + "clicking next before discarding")
+                time.sleep(1)
+                mouse_controller.click_submit()
+                time.sleep(1)
+                mouse_controller.click_submit()
             discard_to_seven(game.indices_of_cards_to_discard)
             print_and_write_log(f"hand after discard: {game.hand}")
-
-    # mouse_controller.click_submit()
+    elif cycling_available(log):
+        if current_player_turn(log) == 1:
+            print_and_write_log("identified cycling is available, clicking next")
+            time.sleep(1)
+            mouse_controller.click_submit()
+        else:
+            # TODO: seems this identifies priority in opponent's upkeep even though there's no prompt
+            # This gets the logs out of sync
+            print_and_write_log("identified cycling is available on opponent's turn")
+            mouse_controller.pass_priority()
 
 
 def identify_mulligan_message(log: dict) -> dict:
@@ -93,34 +121,33 @@ def identify_mulligan_message(log: dict) -> dict:
             return client_message
     return None
 
-
 def get_cards_in_hand_for_mulligan(game_state: dict) -> list:
     '''Parse log and populate game object with hand during mulligan decision.'''
-    player = game_state["gameStateMessage"]["players"][0]
-    mulligan_count = player.get("mulligan_count", 0)
-    current_hand_size = player["maxHandSize"] - mulligan_count
-    print_and_write_log(f"currently mulliganing to {current_hand_size} cards")
-    hand_zone = game_state["gameStateMessage"]["zones"][0]
-
-    ids_of_cards_in_hand = set(hand_zone["objectInstanceIds"])
+    hand_zone1 = game_state["gameStateMessage"]["zones"][0]
+    ids_of_cards_in_hand1 = set(hand_zone1["objectInstanceIds"])
+    ids_of_cards_in_hand2 = set()
+    if len(game_state["gameStateMessage"]["zones"]) > 2:
+        hand_zone2 = game_state["gameStateMessage"]["zones"][2]
+        ids_of_cards_in_hand2 = set(hand_zone2["objectInstanceIds"])
     player_hand = []
-    # TODO: this can throw a KeyError for 'gameObjects'
-    try:
-        for game_object in game_state["gameStateMessage"]["gameObjects"]:
-            if game_object["instanceId"] in ids_of_cards_in_hand:
-                player_hand.append(cardIdNames[game_object["name"]])
-        return sorted(player_hand)
-    except KeyError:
-        print_and_write_log('key error while looking for hand during mulligan. conceding...')
-        mouse_controller.concede()
+
+    for game_object in game_state["gameStateMessage"].get("gameObjects", []):
+        if game_object["instanceId"] in ids_of_cards_in_hand1.union(ids_of_cards_in_hand2):
+            player_hand.append(cardIdNames[game_object["name"]])
+
+    print_and_write_log(f"identified hand of {player_hand}")
+    return sorted(player_hand)
+
+
+def is_game_over(log: dict) -> bool:
+    return "finalMatchResult" in log.get( \
+        "matchGameRoomStateChangedEvent", {}).get("gameRoomInfo", {})
 
 def is_player_step(step: str, log: dict) -> bool:
     '''Checks current log to see if it is the requested step'''
     for client_message in log["greToClientEvent"]["greToClientMessages"]:
         if client_message.get("gameStateMessage", {}).get("turnInfo", {}).get("step") == step \
           and client_message["gameStateMessage"]["turnInfo"]["activePlayer"] == 1:
-            turn = client_message["gameStateMessage"]["turnInfo"]["activePlayer"]
-            print_and_write_log(f"draw step identified on turn {turn}")
             return True
     return False
 
@@ -136,6 +163,13 @@ def is_player_phase(phase: str, log: dict, game: GameStateObject) -> bool:
             return True
     return False
 
+def current_player_turn(log: dict) -> int:
+    '''Checks current log to see who's turn it is'''
+    for client_message in log["greToClientEvent"]["greToClientMessages"]:
+        if client_message.get("gameStateMessage", {}).get("turnInfo", {}).get("activePlayer"):
+            return client_message["gameStateMessage"]["turnInfo"]["activePlayer"]
+
+
 def get_drawn_card_from_log(log: dict):
     '''Checks log for card drawn and updates game state accordingly'''
     for client_message in reversed(log["greToClientEvent"]["greToClientMessages"]):
@@ -143,8 +177,28 @@ def get_drawn_card_from_log(log: dict):
           client_message["gameStateMessage"]["gameObjects"][0]["ownerSeatId"] == 1:
             turn = client_message["gameStateMessage"]["turnInfo"]["turnNumber"]
             print_and_write_log(f"drawing card on turn {turn}")
-            return cardIdNames[client_message["gameStateMessage"]["gameObjects"][0]["name"]]
+            try:
+                return cardIdNames[client_message["gameStateMessage"]["gameObjects"][0]["name"]]
+            except KeyError:
+                continue
     return None
+
+def cycling_available(log: dict) -> bool:
+    '''Read log and check if user has priority for cycling'''
+    if not log.get("greToClientEvent", {}).get("greToClientMessages", {}):
+        return False
+    if "actionsAvailableReq" not in log["greToClientEvent"]["greToClientMessages"][-1]:
+        return False
+    # TODO: this if doesn't give up priority in opponent's main phase
+    # Need to find a way to give up priority in upkeep instead
+    # if log["greToClientEvent"]["greToClientMessages"][0].get("gameStateMessage", \
+    #   {}).get("turnInfo", {}).get("phase") == "Phase_Main1":
+    #     return False
+    actions = log["greToClientEvent"]["greToClientMessages"][-1]["actionsAvailableReq"]["actions"]
+    for action in actions:
+        if action["actionType"] == "ActionType_Activate" and action["shouldStop"]:
+            return True
+    return False
 
 def get_object_id_from_newest_log() -> int:
     log = get_newest_log()
@@ -225,6 +279,6 @@ def print_and_write_log(message: str):
 
 def move_across_hand(mouse_position: tuple, hand_size: int) -> tuple:
     '''Decide whether to invoke fast or slow function to move across hand'''
-    if hand_size > 7:
+    if hand_size > 8:
         return mouse_controller.move_across_hand(mouse_position)
     return mouse_controller.move_across_hand_fast(mouse_position)

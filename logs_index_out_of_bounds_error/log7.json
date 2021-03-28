@@ -1,0 +1,523 @@
+{
+    "transactionId": "f176699e-eb5a-428a-8b8c-eb782c78265f",
+    "timestamp": "637524875084129471",
+    "greToClientEvent": {
+        "greToClientMessages": [
+            {
+                "type": "GREMessageType_GameStateMessage",
+                "systemSeatIds": [
+                    2
+                ],
+                "msgId": 10,
+                "gameStateId": 3,
+                "gameStateMessage": {
+                    "type": "GameStateType_Diff",
+                    "gameStateId": 3,
+                    "players": [
+                        {
+                            "lifeTotal": 20,
+                            "systemSeatNumber": 2,
+                            "maxHandSize": 7,
+                            "mulliganCount": 1,
+                            "teamId": 2,
+                            "timerIds": [
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12
+                            ],
+                            "controllerSeatId": 2,
+                            "controllerType": "ControllerType_Player",
+                            "pendingMessageType": "ClientMessageType_MulliganResp",
+                            "startingLifeTotal": 20
+                        }
+                    ],
+                    "turnInfo": {
+                        "activePlayer": 2,
+                        "decisionPlayer": 1
+                    },
+                    "zones": [
+                        {
+                            "zoneId": 35,
+                            "type": "ZoneType_Hand",
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 2,
+                            "objectInstanceIds": [
+                                289,
+                                288,
+                                287,
+                                286,
+                                285,
+                                284,
+                                283
+                            ],
+                            "viewers": [
+                                2
+                            ]
+                        },
+                        {
+                            "zoneId": 36,
+                            "type": "ZoneType_Library",
+                            "visibility": "Visibility_Hidden",
+                            "ownerSeatId": 2,
+                            "objectInstanceIds": [
+                                290,
+                                291,
+                                292,
+                                293,
+                                294,
+                                295,
+                                296,
+                                297,
+                                298,
+                                299,
+                                300,
+                                301,
+                                302,
+                                303,
+                                304,
+                                305,
+                                306,
+                                307,
+                                308,
+                                309,
+                                310,
+                                311,
+                                312,
+                                313,
+                                314,
+                                315,
+                                316,
+                                317,
+                                318,
+                                319,
+                                320,
+                                321,
+                                322,
+                                323,
+                                324,
+                                325,
+                                326,
+                                327,
+                                328,
+                                329,
+                                330,
+                                331,
+                                332,
+                                333,
+                                334,
+                                335,
+                                336,
+                                337,
+                                338,
+                                339,
+                                340,
+                                341,
+                                342
+                            ]
+                        }
+                    ],
+                    "gameObjects": [
+                        {
+                            "instanceId": 283,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 35,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 2,
+                            "controllerSeatId": 2,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                2
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 284,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 35,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 2,
+                            "controllerSeatId": 2,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                2
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 285,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 35,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 2,
+                            "controllerSeatId": 2,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                2
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 286,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 35,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 2,
+                            "controllerSeatId": 2,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                2
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 287,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 35,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 2,
+                            "controllerSeatId": 2,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                2
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 288,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 35,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 2,
+                            "controllerSeatId": 2,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                2
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        },
+                        {
+                            "instanceId": 289,
+                            "grpId": 70762,
+                            "type": "GameObjectType_Card",
+                            "zoneId": 35,
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 2,
+                            "controllerSeatId": 2,
+                            "superTypes": [
+                                "SuperType_Basic"
+                            ],
+                            "cardTypes": [
+                                "CardType_Land"
+                            ],
+                            "subtypes": [
+                                "SubType_Island"
+                            ],
+                            "viewers": [
+                                2
+                            ],
+                            "name": 652,
+                            "abilities": [
+                                1002
+                            ],
+                            "overlayGrpId": 70762,
+                            "skinCode": "DA",
+                            "baseSkinCode": "DA"
+                        }
+                    ],
+                    "diffDeletedInstanceIds": [
+                        223,
+                        224,
+                        225,
+                        226,
+                        227,
+                        228,
+                        229,
+                        230,
+                        231,
+                        232,
+                        233,
+                        234,
+                        235,
+                        236,
+                        237,
+                        238,
+                        239,
+                        240,
+                        241,
+                        242,
+                        243,
+                        244,
+                        245,
+                        246,
+                        247,
+                        248,
+                        249,
+                        250,
+                        251,
+                        252,
+                        253,
+                        254,
+                        255,
+                        256,
+                        257,
+                        258,
+                        259,
+                        260,
+                        261,
+                        262,
+                        263,
+                        264,
+                        265,
+                        266,
+                        267,
+                        268,
+                        269,
+                        270,
+                        271,
+                        272,
+                        273,
+                        274,
+                        275,
+                        276,
+                        277,
+                        278,
+                        279,
+                        280,
+                        281,
+                        282
+                    ],
+                    "pendingMessageCount": 1,
+                    "prevGameStateId": 2,
+                    "timers": [
+                        {
+                            "timerId": 1,
+                            "type": "TimerType_Prologue",
+                            "durationSec": 120,
+                            "running": true,
+                            "behavior": "TimerBehavior_TakeControl",
+                            "warningThresholdSec": 30,
+                            "elapsedMs": 4
+                        },
+                        {
+                            "timerId": 5,
+                            "type": "TimerType_Inactivity",
+                            "durationSec": 150,
+                            "running": true,
+                            "behavior": "TimerBehavior_Timeout",
+                            "warningThresholdSec": 130,
+                            "elapsedMs": 4
+                        },
+                        {
+                            "timerId": 7,
+                            "type": "TimerType_Prologue",
+                            "durationSec": 120,
+                            "elapsedSec": 9,
+                            "behavior": "TimerBehavior_TakeControl",
+                            "warningThresholdSec": 30,
+                            "elapsedMs": 9484
+                        },
+                        {
+                            "timerId": 11,
+                            "type": "TimerType_Inactivity",
+                            "durationSec": 150,
+                            "behavior": "TimerBehavior_Timeout",
+                            "warningThresholdSec": 130
+                        }
+                    ],
+                    "update": "GameStateUpdate_SendAndRecord",
+                    "actions": [
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 289
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 285
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 286
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 287
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 288
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 284
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 283
+                            }
+                        },
+                        {
+                            "seatId": 1,
+                            "action": {
+                                "actionType": "ActionType_Special",
+                                "instanceId": 162,
+                                "abilityGrpId": 202,
+                                "manaCost": [
+                                    {
+                                        "color": [
+                                            "ManaColor_Generic"
+                                        ],
+                                        "count": 3,
+                                        "abilityGrpId": 202
+                                    }
+                                ]
+                            }
+                        }
+                    ],
+                    "diffDeletedPersistentAnnotationIds": [
+                        20
+                    ]
+                }
+            },
+            {
+                "type": "GREMessageType_PromptReq",
+                "systemSeatIds": [
+                    1,
+                    2
+                ],
+                "msgId": 11,
+                "gameStateId": 3,
+                "prompt": {
+                    "promptId": 36,
+                    "parameters": [
+                        {
+                            "parameterName": "PlayerId",
+                            "type": "ParameterType_Reference",
+                            "reference": {
+                                "type": "ReferenceType_PlayerSeatId",
+                                "id": 2
+                            }
+                        },
+                        {
+                            "parameterName": "NumberOfCards",
+                            "type": "ParameterType_Number",
+                            "numberValue": 7
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

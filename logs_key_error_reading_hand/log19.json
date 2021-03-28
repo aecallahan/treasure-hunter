@@ -1,0 +1,328 @@
+{
+    "transactionId": "487e1d8e-0587-4a32-af07-1896523b9b6a",
+    "timestamp": "637524914378876191",
+    "greToClientEvent": {
+        "greToClientMessages": [
+            {
+                "type": "GREMessageType_GameStateMessage",
+                "systemSeatIds": [
+                    2
+                ],
+                "msgId": 13,
+                "gameStateId": 4,
+                "gameStateMessage": {
+                    "type": "GameStateType_Diff",
+                    "gameStateId": 4,
+                    "players": [
+                        {
+                            "lifeTotal": 20,
+                            "systemSeatNumber": 1,
+                            "maxHandSize": 7,
+                            "mulliganCount": 1,
+                            "teamId": 1,
+                            "timerIds": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6
+                            ],
+                            "controllerSeatId": 1,
+                            "controllerType": "ControllerType_Player",
+                            "pendingMessageType": "ClientMessageType_MulliganResp",
+                            "startingLifeTotal": 20
+                        }
+                    ],
+                    "turnInfo": {
+                        "activePlayer": 2,
+                        "decisionPlayer": 2
+                    },
+                    "zones": [
+                        {
+                            "zoneId": 31,
+                            "type": "ZoneType_Hand",
+                            "visibility": "Visibility_Private",
+                            "ownerSeatId": 1,
+                            "objectInstanceIds": [
+                                346,
+                                345,
+                                344,
+                                343,
+                                342,
+                                341,
+                                340
+                            ],
+                            "viewers": [
+                                1
+                            ]
+                        },
+                        {
+                            "zoneId": 32,
+                            "type": "ZoneType_Library",
+                            "visibility": "Visibility_Hidden",
+                            "ownerSeatId": 1,
+                            "objectInstanceIds": [
+                                347,
+                                348,
+                                349,
+                                350,
+                                351,
+                                352,
+                                353,
+                                354,
+                                355,
+                                356,
+                                357,
+                                358,
+                                359,
+                                360,
+                                361,
+                                362,
+                                363,
+                                364,
+                                365,
+                                366,
+                                367,
+                                368,
+                                369,
+                                370,
+                                371,
+                                372,
+                                373,
+                                374,
+                                375,
+                                376,
+                                377,
+                                378,
+                                379,
+                                380,
+                                381,
+                                382,
+                                383,
+                                384,
+                                385,
+                                386,
+                                387,
+                                388,
+                                389,
+                                390,
+                                391,
+                                392,
+                                393,
+                                394,
+                                395,
+                                396,
+                                397,
+                                398,
+                                399
+                            ]
+                        }
+                    ],
+                    "diffDeletedInstanceIds": [
+                        160,
+                        161,
+                        162,
+                        163,
+                        164,
+                        165,
+                        166,
+                        167,
+                        168,
+                        169,
+                        170,
+                        171,
+                        172,
+                        173,
+                        174,
+                        175,
+                        176,
+                        177,
+                        178,
+                        179,
+                        180,
+                        181,
+                        182,
+                        183,
+                        184,
+                        185,
+                        186,
+                        187,
+                        188,
+                        189,
+                        190,
+                        191,
+                        192,
+                        193,
+                        194,
+                        195,
+                        196,
+                        197,
+                        198,
+                        199,
+                        200,
+                        201,
+                        202,
+                        203,
+                        204,
+                        205,
+                        206,
+                        207,
+                        208,
+                        209,
+                        210,
+                        211,
+                        212,
+                        213,
+                        214,
+                        215,
+                        216,
+                        217,
+                        218,
+                        219
+                    ],
+                    "pendingMessageCount": 2,
+                    "prevGameStateId": 3,
+                    "timers": [
+                        {
+                            "timerId": 1,
+                            "type": "TimerType_Prologue",
+                            "durationSec": 120,
+                            "elapsedSec": 16,
+                            "behavior": "TimerBehavior_TakeControl",
+                            "warningThresholdSec": 30,
+                            "elapsedMs": 16807
+                        },
+                        {
+                            "timerId": 5,
+                            "type": "TimerType_Inactivity",
+                            "durationSec": 150,
+                            "behavior": "TimerBehavior_Timeout",
+                            "warningThresholdSec": 130
+                        },
+                        {
+                            "timerId": 7,
+                            "type": "TimerType_Prologue",
+                            "durationSec": 120,
+                            "elapsedSec": 9,
+                            "running": true,
+                            "behavior": "TimerBehavior_TakeControl",
+                            "warningThresholdSec": 30,
+                            "elapsedMs": 9153
+                        },
+                        {
+                            "timerId": 11,
+                            "type": "TimerType_Inactivity",
+                            "durationSec": 150,
+                            "running": true,
+                            "behavior": "TimerBehavior_Timeout",
+                            "warningThresholdSec": 130,
+                            "elapsedMs": 3
+                        }
+                    ],
+                    "update": "GameStateUpdate_SendAndRecord",
+                    "actions": [
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 280
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 284
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 285
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 283
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 282
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 281
+                            }
+                        },
+                        {
+                            "seatId": 2,
+                            "action": {
+                                "actionType": "ActionType_Play",
+                                "instanceId": 286
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "GREMessageType_PromptReq",
+                "systemSeatIds": [
+                    1,
+                    2
+                ],
+                "msgId": 14,
+                "gameStateId": 4,
+                "prompt": {
+                    "promptId": 36,
+                    "parameters": [
+                        {
+                            "parameterName": "PlayerId",
+                            "type": "ParameterType_Reference",
+                            "reference": {
+                                "type": "ReferenceType_PlayerSeatId",
+                                "id": 1
+                            }
+                        },
+                        {
+                            "parameterName": "NumberOfCards",
+                            "type": "ParameterType_Number",
+                            "numberValue": 7
+                        }
+                    ]
+                }
+            },
+            {
+                "type": "GREMessageType_MulliganReq",
+                "systemSeatIds": [
+                    2
+                ],
+                "msgId": 15,
+                "gameStateId": 4,
+                "prompt": {
+                    "promptId": 34,
+                    "parameters": [
+                        {
+                            "parameterName": "NumberOfCards",
+                            "type": "ParameterType_Number",
+                            "numberValue": 7
+                        }
+                    ]
+                },
+                "mulliganReq": {
+                    "mulliganType": "MulliganType_London",
+                    "mulliganCount": 1
+                }
+            }
+        ]
+    }
+}

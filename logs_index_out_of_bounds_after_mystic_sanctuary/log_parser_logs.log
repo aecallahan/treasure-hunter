@@ -1,0 +1,360 @@
+
+
+---------------------parsing log: 1---------------------
+
+
+
+---------------------parsing log: 2---------------------
+
+
+
+---------------------parsing log: 3---------------------
+
+
+
+---------------------parsing log: 4---------------------
+
+
+
+---------------------parsing log: 5---------------------
+
+
+
+---------------------parsing log: 6---------------------
+
+currently mulliganing to 7 cards
+deciding mulligan...
+decided to keep hand
+
+
+---------------------parsing log: 7---------------------
+
+
+
+---------------------parsing log: 8---------------------
+
+
+
+---------------------parsing log: 9---------------------
+
+
+
+---------------------parsing log: 10---------------------
+
+
+
+---------------------parsing log: 11---------------------
+
+drawing card on turn 2
+drawing card Basic Island
+main phase identified on turn 2
+entering main phase with hand ['Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Treasure Hunt', 'Basic Island']
+playing cards at indices [[0, None]]
+playing card at position 0
+
+
+---------------------parsing log: 12---------------------
+
+
+
+---------------------parsing log: 13---------------------
+
+
+
+---------------------parsing log: 14---------------------
+
+
+
+---------------------parsing log: 15---------------------
+
+
+
+---------------------parsing log: 16---------------------
+
+
+
+---------------------parsing log: 17---------------------
+
+
+
+---------------------parsing log: 18---------------------
+
+
+
+---------------------parsing log: 19---------------------
+
+
+
+---------------------parsing log: 20---------------------
+
+
+
+---------------------parsing log: 21---------------------
+
+drawing card on turn 4
+drawing card Basic Island
+main phase identified on turn 4
+entering main phase with hand ['Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Treasure Hunt', 'Basic Island', 'Basic Island']
+playing cards at indices [[0, None], [5, 'Treasure Hunt']]
+playing card at position 0
+playing card at position 4
+updating hand after playing treasure hunt
+hand after treasure hunt: ['Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Treasure Hunt', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Mystic Sanctuary', 'Mystic Sanctuary', 'Lonely Sandbar', 'Lonely Sandbar']
+indices of cards to discard:
+[0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+hand after discard: ['Treasure Hunt', 'Basic Island', 'Basic Island', 'Mystic Sanctuary', 'Mystic Sanctuary', 'Lonely Sandbar', 'Lonely Sandbar']
+
+
+---------------------parsing log: 22---------------------
+
+
+
+---------------------parsing log: 23---------------------
+
+
+
+---------------------parsing log: 24---------------------
+
+
+
+---------------------parsing log: 25---------------------
+
+
+
+---------------------parsing log: 26---------------------
+
+
+
+---------------------parsing log: 27---------------------
+
+
+
+---------------------parsing log: 28---------------------
+
+
+
+---------------------parsing log: 29---------------------
+
+
+
+---------------------parsing log: 30---------------------
+
+
+
+---------------------parsing log: 31---------------------
+
+
+
+---------------------parsing log: 32---------------------
+
+drawing card on turn 6
+drawing card Mystic Sanctuary
+main phase identified on turn 6
+entering main phase with hand ['Treasure Hunt', 'Basic Island', 'Basic Island', 'Mystic Sanctuary', 'Mystic Sanctuary', 'Lonely Sandbar', 'Lonely Sandbar', 'Mystic Sanctuary']
+playing cards at indices [[0, 'Treasure Hunt'], [1, None]]
+playing card at position 0
+updating hand after playing treasure hunt
+hand after treasure hunt: ['Basic Island', 'Basic Island', 'Mystic Sanctuary', 'Mystic Sanctuary', 'Lonely Sandbar', 'Lonely Sandbar', 'Mystic Sanctuary', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', "Thassa's Oracle", 'Mystic Sanctuary']
+playing card at position 0
+identified cycling is available, clicking next before discarding
+indices of cards to discard:
+[0, 5, 6, 7, 8, 9, 10]
+hand after discard: ['Mystic Sanctuary', 'Mystic Sanctuary', 'Lonely Sandbar', 'Lonely Sandbar', 'Basic Island', "Thassa's Oracle", 'Mystic Sanctuary']
+
+
+---------------------parsing log: 33---------------------
+
+
+
+---------------------parsing log: 34---------------------
+
+
+
+---------------------parsing log: 35---------------------
+
+identified cycling is available, clicking next
+
+
+---------------------parsing log: 36---------------------
+
+
+
+---------------------parsing log: 37---------------------
+
+
+
+---------------------parsing log: 38---------------------
+
+
+
+---------------------parsing log: 39---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 40---------------------
+
+identified cycling is available, clicking next
+
+
+---------------------parsing log: 41---------------------
+
+
+
+---------------------parsing log: 42---------------------
+
+
+
+---------------------parsing log: 43---------------------
+
+
+
+---------------------parsing log: 44---------------------
+
+
+
+---------------------parsing log: 45---------------------
+
+
+
+---------------------parsing log: 46---------------------
+
+
+
+---------------------parsing log: 47---------------------
+
+
+
+---------------------parsing log: 48---------------------
+
+
+
+---------------------parsing log: 49---------------------
+
+
+
+---------------------parsing log: 50---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 51---------------------
+
+
+
+---------------------parsing log: 52---------------------
+
+
+
+---------------------parsing log: 53---------------------
+
+
+
+---------------------parsing log: 54---------------------
+
+
+
+---------------------parsing log: 55---------------------
+
+
+
+---------------------parsing log: 56---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 57---------------------
+
+
+
+---------------------parsing log: 58---------------------
+
+
+
+---------------------parsing log: 59---------------------
+
+
+
+---------------------parsing log: 60---------------------
+
+
+
+---------------------parsing log: 61---------------------
+
+
+
+---------------------parsing log: 62---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 63---------------------
+
+
+
+---------------------parsing log: 64---------------------
+
+
+
+---------------------parsing log: 65---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 66---------------------
+
+
+
+---------------------parsing log: 67---------------------
+
+
+
+---------------------parsing log: 68---------------------
+
+
+
+---------------------parsing log: 69---------------------
+
+
+
+---------------------parsing log: 70---------------------
+
+
+
+---------------------parsing log: 71---------------------
+
+
+
+---------------------parsing log: 72---------------------
+
+
+
+---------------------parsing log: 73---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 74---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 75---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 76---------------------
+
+
+
+---------------------parsing log: 77---------------------
+
+drawing card on turn 8
+drawing card Lonely Sandbar
+main phase identified on turn 8
+entering main phase with hand ['Mystic Sanctuary', 'Mystic Sanctuary', 'Lonely Sandbar', 'Lonely Sandbar', 'Basic Island', "Thassa's Oracle", 'Mystic Sanctuary', 'Lonely Sandbar']
+playing cards at indices [[0, 'Mystic Sanctuary'], [2, 'CYCLE'], [8, 'Treasure Hunt']]
+playing card at position 0
+playing card at position 1
+playing card at position 6

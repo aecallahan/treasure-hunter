@@ -1,0 +1,22 @@
+{
+    "transactionId": "6f4a2f1c-a018-4f47-8972-533cc5f7ef7f",
+    "timestamp": "637524864392873504",
+    "greToClientEvent": {
+        "greToClientMessages": [
+            {
+                "type": "GREMessageType_UIMessage",
+                "systemSeatIds": [
+                    2
+                ],
+                "uiMessage": {
+                    "seatIds": [
+                        1
+                    ],
+                    "onChat": {
+                        "text": "{\"Id\":\"Phrase_Basic_Hello\",\"LocalizationKey\":\"DuelScene/Emotes/Hello\",\"Category\":\"Greeting\"}"
+                    }
+                }
+            }
+        ]
+    }
+}

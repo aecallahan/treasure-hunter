@@ -1,6 +1,7 @@
 '''unit tests'''
 import json
 import os
+import time
 import unittest
 from unittest.mock import MagicMock, mock_open, patch
 
@@ -90,28 +91,111 @@ class TestLogParser(unittest.TestCase):
         self.assertEqual([BASIC_ISLAND], game.hand, \
             "game hand should've been updated with card drawn")
 
+    def test_identify_cycling_available(self):
+        '''
+        Identify log which indicates cycling is available and ensure that Next/Pass
+        button is clicked in this case.
+        '''
+        mouse_controller.click_submit = MagicMock()
+        log = read_log_from_file('log_with_cycling_available_during_main')
+        game = GameStateObject()
+        game.played_cards_for_turn = True
+
+        log_parser.parse_log(log, game)
+
+        self.assertEqual([], game.indices_of_cards_to_play)
+        mouse_controller.click_submit.assert_called()
+
+    def test_identify_cycling_available2(self):
+        '''
+        Identify log which indicates cycling is available and ensure that Next/Pass
+        button is clicked in this case.
+        '''
+        mouse_controller.click_submit = MagicMock()
+        log = read_log_from_file('log_with_cycling_available_during_main2')
+        game = GameStateObject()
+        game.played_cards_for_turn = True
+
+        log_parser.parse_log(log, game)
+
+        self.assertEqual([], game.indices_of_cards_to_play)
+        mouse_controller.click_submit.assert_called()
+
 
 class TestExecutor(unittest.TestCase):
     '''Test cases that combine the logger and player'''
+    def setUp(self):
+        mouse_controller.close_revealed_cards = MagicMock()
+        mouse_controller.click_submit = MagicMock()
+        mouse_controller.mulligan = MagicMock()
+        mouse_controller.keepHand = MagicMock()
+        mouse_controller.pass_priority = MagicMock()
+        mouse_controller.wait_for_discard_message = MagicMock()
+        time.sleep = MagicMock()
+        log_parser.play_card = MagicMock()
 
     def test_turn_one_mystic_sanctuary(self):
         '''
-        Mock log_generator to read logs corresponding to mystic sanctuary turn one, island turn two
+        Mock log_generator to read logs corresponding to mystic sanctuary turn one,island turn two
         '''
         logs_to_read = []
         for i in range(1, 11):
             logs_to_read.append(read_log_from_file(f'mystic{i}'))
         log_crawler.create_game_log_generator = MagicMock(return_value=logs_to_read)
-        mouse_controller.mulligan = MagicMock()
-        mouse_controller.keepHand = MagicMock()
-        log_parser.play_card = MagicMock()
-        mouse_controller.close_revealed_cards = MagicMock()
         log_parser.update_hand_after_playing_treasure_hunt = MagicMock(return_value=[])
 
         play_game()
 
         log_parser.update_hand_after_playing_treasure_hunt.assert_called()
 
+    def test_key_error_on_card_draw(self):
+        '''Run through logs that produced key error on get_drawn_card_from_log'''
+        logs_to_read = retrieve_logs_from_directory('logs_index_out_of_bounds_error')
+        log_crawler.create_game_log_generator = MagicMock(return_value=logs_to_read)
+
+        play_game()
+
+    def test_index_out_of_bounds_mystic_sanctuary(self):
+        '''
+        Run through logs that produced index out of bounds error while popping
+        treasure hunt after retrieving it with mystic sanctuary
+        '''
+        logs_to_read = retrieve_logs_from_directory( \
+            'logs_index_out_of_bounds_after_mystic_sanctuary')
+        log_crawler.create_game_log_generator = MagicMock(return_value=logs_to_read)
+        log_parser.update_hand_after_playing_treasure_hunt = MagicMock( \
+            return_value=[BASIC_ISLAND, LONELY_SANDBAR, THASSAS_ORACLE, MYSTIC_SANCTUARY])
+
+        play_game()
+
+    def test_end_turn_when_starting_with_just_treasure_hunt(self):
+        '''Start turn one with just treasure hunt and ensure player clicks end turn'''
+        logs_to_read = retrieve_logs_from_directory('logs_on_the_play_one_card_in_hand')
+        log_crawler.create_game_log_generator = MagicMock(return_value=logs_to_read)
+
+        play_game()
+
+        mouse_controller.click_submit.assert_called()
+
+    def test_key_error_reading_initial_hand(self):
+        '''Key error reading a hand while deciding to mulligan'''
+        mouse_controller.concede = MagicMock()
+        logs_to_read = retrieve_logs_from_directory('logs_key_error_reading_hand')
+        log_crawler.create_game_log_generator = MagicMock(return_value=logs_to_read)
+
+        play_game()
+
+        mouse_controller.concede.assert_not_called()
+
+    def test_play_card_at_position_outside_hand(self):
+        '''Player tried to play card at position 5 with only 5 cards in hand'''
+        mouse_controller.concede = MagicMock()
+        logs_to_read = retrieve_logs_from_directory('logs_playing_card_out_of_bounds')
+        log_crawler.create_game_log_generator = MagicMock(return_value=logs_to_read)
+
+        play_game()
+
+        mouse_controller.concede.assert_not_called()
 
 def read_log_from_file(filename: str) -> dict:
     '''Given name of test log file, retrieve it as a dict'''
@@ -120,6 +204,24 @@ def read_log_from_file(filename: str) -> dict:
     with open(os.path.join(test_logs_subdirectory_path, f'{filename}.json')) as log_file:
         log = json.load(log_file)
         return log
+
+def retrieve_logs_from_directory(folder_name: str) -> list:
+    '''Given name of directory, create list of dicts from the logs there'''
+    current_path = os.getcwd()
+    test_logs_subdirectory_path = os.path.join(current_path, folder_name)
+    logs = []
+    log_number = 0
+    read_all_logs = False
+    while not read_all_logs:
+        log_number += 1
+        file_name = f'log{log_number}.json'
+        try:
+            with open(os.path.join(test_logs_subdirectory_path, file_name)) as log_file:
+                print(f'reading log {file_name}')
+                logs.append(json.load(log_file))
+        except FileNotFoundError:
+            read_all_logs = True
+    return logs
 
 
 if __name__ == '__main__':

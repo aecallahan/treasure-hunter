@@ -1,0 +1,103 @@
+
+
+---------------------parsing log: 1---------------------
+
+
+
+---------------------parsing log: 2---------------------
+
+
+
+---------------------parsing log: 3---------------------
+
+
+
+---------------------parsing log: 4---------------------
+
+
+
+---------------------parsing log: 5---------------------
+
+
+
+---------------------parsing log: 6---------------------
+
+currently mulliganing to 7 cards
+deciding mulligan...
+decided to mulligan
+
+
+---------------------parsing log: 7---------------------
+
+
+
+---------------------parsing log: 8---------------------
+
+currently mulliganing to 7 cards
+deciding mulligan...
+decided to keep hand
+
+
+---------------------parsing log: 9---------------------
+
+
+
+---------------------parsing log: 10---------------------
+
+main phase identified on turn 1
+entering main phase with hand ['Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Lonely Sandbar', 'Treasure Hunt']
+playing cards at indices [[0, None]]
+playing card at position 0
+
+
+---------------------parsing log: 11---------------------
+
+
+
+---------------------parsing log: 12---------------------
+
+
+
+---------------------parsing log: 13---------------------
+
+
+
+---------------------parsing log: 14---------------------
+
+
+
+---------------------parsing log: 15---------------------
+
+
+
+---------------------parsing log: 16---------------------
+
+identified cycling is available, clicking next
+
+
+---------------------parsing log: 17---------------------
+
+
+
+---------------------parsing log: 18---------------------
+
+
+
+---------------------parsing log: 19---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 20---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 21---------------------
+
+drawing card on turn 3
+drawing card Basic Island
+main phase identified on turn 3
+entering main phase with hand ['Basic Island', 'Basic Island', 'Basic Island', 'Lonely Sandbar', 'Treasure Hunt', 'Basic Island']
+playing cards at indices [[0, None], [4, 'Treasure Hunt']]
+playing card at position 0

@@ -14,15 +14,16 @@ TREASURE_HUNT = "Treasure Hunt"
 MYSTIC_SANCTUARY = "Mystic Sanctuary"
 THASSAS_ORACLE = "Thassa's Oracle"
 
+PLAY_BUTTON_POSITION = (2332, 1348)
 NEXT_BUTTON_POSITION = (2367, 1266)
 
 HAND_START_POSITION = (180, 1428)
-HAND_START_POSITION_FAST = (280, 1428)
+HAND_START_POSITION_FAST = (380, 1428)
 
 CENTER_OF_SCREEN = (1280, 720)
 
-# DECK_POSITION = (300, 1301)
-DECK_POSITION = CENTER_OF_SCREEN
+DECK_POSITION = (300, 1301)
+# DECK_POSITION = CENTER_OF_SCREEN
 
 LAND_START_POSITION = (400, 1040)
 
@@ -49,9 +50,10 @@ def concede():
     '''Concedes the current game'''
     print("conceding")
     pyautogui.click(x=2515, y=45)
-    pyautogui.moveTo(x=1280, y=854, duration=4)
-    pyautogui.click(x=1280, y=854)
-
+    pyautogui.moveTo(x=1280, y=854, duration=1)
+    pyautogui.mouseDown(x=1280, y=854)
+    time.sleep(0.25)
+    pyautogui.mouseUp()
 
 def wait_for_mulligan_priority():
     waiting_for_priority = True
@@ -60,11 +62,46 @@ def wait_for_mulligan_priority():
 
 def wait_for_main_phase_priority():
     '''Wait until player has priority in main phase 1'''
+    timeout = time.time() + 30
     while True:
+        if time.time() > timeout:
+            return
         if look_for_next_button():
             return
         if look_for_end_turn_button():
             return
+        if look_for_next_button():
+            return
+
+def wait_for_resolve_priority():
+    '''Wait until Resolve button appears on screen'''
+    # Timeout after 30 seconds
+    timeout = time.time() + 30
+    while True:
+        if time.time() > timeout:
+            return
+        if look_for_resolve_button():
+            return
+        if look_for_pass_button():
+            return
+        if look_for_next_button():
+            return
+        if look_for_my_turn_button():
+            return
+
+def wait_for_priority_after_casting_treasure_hunt():
+    '''Wait for discard message or next button'''
+    timeout = time.time() + 30
+    while True:
+        if time.time() > timeout:
+            return
+        if look_for_next_button():
+            return
+        if look_for_end_turn_button():
+            return
+        if look_for_discard_message():
+            return
+
 
 def wait_for_discard_message() -> str:
     '''Wait until player sees discard message on screen'''
@@ -114,7 +151,7 @@ def mulligan():
     wait_for_mulligan_priority()
     print("mulligan button identified, clicking it now")
     pyautogui.click(x=1055, y=1166)
-    pyautogui.moveTo(x=286, y=1286)
+    pyautogui.moveTo(DECK_POSITION)
 
 def keepHand(mullCount: int):
     wait_for_mulligan_priority()
@@ -127,10 +164,19 @@ def play_card():
     pyautogui.dragTo(CENTER_OF_SCREEN, duration=0.3)
     pyautogui.moveTo(DECK_POSITION)
 
+def pass_priority():
+    wait_for_resolve_priority()
+    click_submit()
+
 def look_for_next_button() -> bool:
     message = read_message_from_screen((2313, 1242, 2426, 1289))
     print(message)
     return "Next" in message
+
+def look_for_pass_button() -> bool:
+    message = read_message_from_screen((2313, 1242, 2426, 1289))
+    print(message)
+    return "Pass" in message
 
 def look_for_end_turn_button() -> bool:
     message = read_message_from_screen((2250, 1242, 2500, 1289))
@@ -139,6 +185,19 @@ def look_for_end_turn_button() -> bool:
     if "pponen" in message:
         return False
     return "End" in message or "Turn" in message
+
+def look_for_resolve_button() -> bool:
+    message = read_message_from_screen((2250, 1242, 2500, 1289))
+    print(message)
+    return "esolve" in message
+
+def look_for_my_turn_button() -> bool:
+    message = read_message_from_screen((2250, 1242, 2500, 1289))
+    print(message)
+    # Don't read 'Opponent's Turn'
+    if "pponen" in message:
+        return False
+    return "My" in message or "Turn" in message
 
 def look_for_discard_message() -> bool:
     message = read_message_from_screen((1099, 577, 1430, 635))
@@ -160,7 +219,7 @@ def move_across_hand_fast(mouse_position=HAND_START_POSITION_FAST) -> tuple:
     if mouse_position == None:
         mouse_position = HAND_START_POSITION_FAST
     pyautogui.moveTo(mouse_position)
-    return (mouse_position[0] + 50, mouse_position[1])
+    return (mouse_position[0] + 80, mouse_position[1])
 
 def tap_all_land():
     '''Incrementally move mouse across lands to tap them all.'''
@@ -189,6 +248,10 @@ def click_submit():
     pyautogui.click(NEXT_BUTTON_POSITION)
     pyautogui.moveTo(DECK_POSITION)
 
+def click_play():
+    '''Clicks the play button'''
+    pyautogui.click(PLAY_BUTTON_POSITION)
+
 def close_revealed_cards():
     '''Clicks 'x' button to close popup revealing cards drawn with Treasure Hunt'''
     pyautogui.click(x=470, y=854)
@@ -201,3 +264,9 @@ def take_mystic_sanctuary_action():
     time.sleep(1.5)
     pyautogui.click(x=2370, y=1269)
     pyautogui.moveTo(DECK_POSITION)
+
+def start_new_game():
+    '''Click through end of game messages and start new one'''
+    for i in range(7):
+        time.sleep(5)
+        click_play()

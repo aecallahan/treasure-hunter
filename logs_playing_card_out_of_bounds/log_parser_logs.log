@@ -1,0 +1,199 @@
+
+
+---------------------parsing log: 1---------------------
+
+
+
+---------------------parsing log: 2---------------------
+
+
+
+---------------------parsing log: 3---------------------
+
+
+
+---------------------parsing log: 4---------------------
+
+
+
+---------------------parsing log: 5---------------------
+
+identified hand of ['Basic Island', 'Basic Island', 'Basic Island', 'Lonely Sandbar', 'Basic Island', 'Basic Island', "Thassa's Oracle"]
+deciding mulligan...
+decided to mulligan
+
+
+---------------------parsing log: 6---------------------
+
+
+
+---------------------parsing log: 7---------------------
+
+identified hand of ['Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island']
+deciding mulligan...
+decided to mulligan
+
+
+---------------------parsing log: 8---------------------
+
+identified hand of ['Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Basic Island', 'Treasure Hunt', 'Lonely Sandbar']
+deciding mulligan...
+decided to keep hand
+
+
+---------------------parsing log: 9---------------------
+
+
+
+---------------------parsing log: 10---------------------
+
+
+
+---------------------parsing log: 11---------------------
+
+drawing card on turn 2
+drawing card Basic Island
+main phase identified on turn 2
+entering main phase with hand ['Basic Island', 'Basic Island', 'Basic Island', 'Lonely Sandbar', 'Treasure Hunt', 'Basic Island']
+playing cards at indices [[0, None]]
+playing card at position 0
+
+
+---------------------parsing log: 12---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 13---------------------
+
+identified cycling is available, clicking next
+
+
+---------------------parsing log: 14---------------------
+
+
+
+---------------------parsing log: 15---------------------
+
+
+
+---------------------parsing log: 16---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 17---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 18---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 19---------------------
+
+drawing card on turn 4
+drawing card Mystic Sanctuary
+main phase identified on turn 4
+entering main phase with hand ['Basic Island', 'Basic Island', 'Lonely Sandbar', 'Treasure Hunt', 'Basic Island', 'Mystic Sanctuary']
+playing cards at indices [[0, None], [3, 'Treasure Hunt']]
+playing card at position 0
+playing card at position 2
+updating hand after playing treasure hunt
+hand after treasure hunt: ['Basic Island', 'Lonely Sandbar', 'Basic Island', 'Mystic Sanctuary', "Thassa's Oracle", 'Basic Island']
+
+
+---------------------parsing log: 20---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 21---------------------
+
+
+
+---------------------parsing log: 22---------------------
+
+
+
+---------------------parsing log: 23---------------------
+
+
+
+---------------------parsing log: 24---------------------
+
+
+
+---------------------parsing log: 25---------------------
+
+drawing card on turn 6
+drawing card Basic Island
+main phase identified on turn 6
+entering main phase with hand ['Basic Island', 'Lonely Sandbar', 'Basic Island', 'Mystic Sanctuary', "Thassa's Oracle", 'Basic Island', 'Basic Island']
+playing cards at indices [[0, None]]
+playing card at position 0
+
+
+---------------------parsing log: 26---------------------
+
+identified cycling is available, clicking next
+
+
+---------------------parsing log: 27---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 28---------------------
+
+
+
+---------------------parsing log: 29---------------------
+
+
+
+---------------------parsing log: 30---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 31---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 32---------------------
+
+
+
+---------------------parsing log: 33---------------------
+
+
+
+---------------------parsing log: 34---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 35---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 36---------------------
+
+identified cycling is available on opponent's turn
+
+
+---------------------parsing log: 37---------------------
+
+drawing card on turn 8
+drawing card Basic Island
+main phase identified on turn 8
+entering main phase with hand ['Lonely Sandbar', 'Basic Island', 'Mystic Sanctuary', "Thassa's Oracle", 'Basic Island', 'Basic Island', 'Basic Island']
+playing cards at indices [[2, 'Mystic Sanctuary'], [0, 'CYCLE'], [7, 'Treasure Hunt']]
+playing card at position 2
+playing card at position 0
+playing card at position 5

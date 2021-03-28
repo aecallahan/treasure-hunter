@@ -1,0 +1,10 @@
+{
+    "transactionId": "dca53e9e-3644-4d4a-b8e2-91c66293ce61",
+    "requestId": 1,
+    "authenticateResponse": {
+        "clientId": "CD46A8D0510A92D9",
+        "sessionId": "c402de59-1e3d-47f9-b400-91b2fffe1b35",
+        "inactivityTimeoutMs": 60000,
+        "screenName": "MaskOff#56466"
+    }
+}
