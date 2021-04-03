@@ -60,7 +60,6 @@ def parse_log(log: dict, game: GameStateObject):
         time.sleep(1.5)
         for i in range(len(game.indices_of_cards_to_play)):
             index, action = game.indices_of_cards_to_play[i]
-            print(f"playing card at position {index}")
             play_card(index, len(game.hand))
             game.hand.pop(index)
             # for remaining indices of cards to play, decrement to account for pop
@@ -68,6 +67,7 @@ def parse_log(log: dict, game: GameStateObject):
                 if game.indices_of_cards_to_play[j][0] > index:
                     game.indices_of_cards_to_play[j][0] -= 1
             if action == MYSTIC_SANCTUARY:
+                # TODO: doesn't work when opponent plays blood sun
                 mouse_controller.take_mystic_sanctuary_action()
             elif action == LONELY_SANDBAR:
                 mouse_controller.playLonelySandbarSecondPrompt()
@@ -77,36 +77,30 @@ def parse_log(log: dict, game: GameStateObject):
             elif action == TREASURE_HUNT:
                 mouse_controller.wait_for_priority_after_casting_treasure_hunt()
                 mouse_controller.close_revealed_cards()
-                game.hand = update_hand_after_playing_treasure_hunt(game.hand)
-                print_and_write_log(f"hand after treasure hunt: {game.hand}")
+                # if thassa's oracle is in list then game is over
+                if any(THASSAS_ORACLE in sublist for sublist in game.indices_of_cards_to_play):
+                    game.hand += [None] * 8
+                else:
+                    game.hand = update_hand_after_playing_treasure_hunt(game.hand)
+                    print_and_write_log(f"hand after treasure hunt: {game.hand}")
+            elif action == THASSAS_ORACLE:
+                return
+
+        print_and_write_log("tapping all lands")
+        mouse_controller.tap_all_lands()
+        time.sleep(0.5)
+        mouse_controller.click_submit()
+        time.sleep(1)
 
         if len(game.indices_of_cards_to_play) <= 1:
-            time.sleep(1)
             mouse_controller.click_submit()
 
         if len(game.hand) > 7:
             game.decide_discard()
 
         if game.indices_of_cards_to_discard:
-            if cycling_available(log):
-                print_and_write_log("identified cycling is available, " \
-                    + "clicking next before discarding")
-                time.sleep(1)
-                mouse_controller.click_submit()
-                time.sleep(1)
-                mouse_controller.click_submit()
             discard_to_seven(game.indices_of_cards_to_discard)
             print_and_write_log(f"hand after discard: {game.hand}")
-    elif cycling_available(log):
-        if current_player_turn(log) == 1:
-            print_and_write_log("identified cycling is available, clicking next")
-            time.sleep(1)
-            mouse_controller.click_submit()
-        else:
-            # TODO: seems this identifies priority in opponent's upkeep even though there's no prompt
-            # This gets the logs out of sync
-            print_and_write_log("identified cycling is available on opponent's turn")
-            mouse_controller.pass_priority()
 
 
 def identify_mulligan_message(log: dict) -> dict:
@@ -215,6 +209,8 @@ def get_object_id_from_newest_log() -> int:
 
 def update_hand_after_playing_treasure_hunt(hand: list) -> list:
     '''Read through hand and append cards drawn from treasure hunt'''
+    # TODO: if opponent concedes during hand update, this method will
+    # go forever without noticing concession
     print_and_write_log("updating hand after playing treasure hunt")
     mouse_position = None
     seen_entire_hand = False

@@ -56,6 +56,14 @@ class TestGamePlayer(unittest.TestCase):
         self.assertEqual(expected_actions, ioctp, \
             "game player should've played island then treasure hunt")
 
+    def test_thassas_oracle_and_mystic_sanctuary_in_hand(self):
+        '''
+        If hand doesn't contain lonely sandbar or treasure hunt but has thassa's oracle
+        and mystic sanctuary and there are three islands in play, should play mystic
+        santuary to retrieve a treasure hunt from yard
+        '''
+        pass
+
 class TestLogParser(unittest.TestCase):
     '''Test cases for log_parser.py'''
     def setUp(self):
