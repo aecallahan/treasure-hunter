@@ -28,8 +28,10 @@ class GameStateObject:
         self.lands = 0
         self.mana_spent = 0
         self.mulligan_count = 0
+        self.system_seat_id = 0
         self.treasure_hunts_played = 0
         self.turn = 0
+        self.accepted_hand = False
         self.concede = False
         self.mulligan = False
         self.played_cards_for_turn = False
@@ -96,6 +98,7 @@ class GameStateObject:
         self.indices_of_cards_to_play = []
         self.played_cards_for_turn = True
         ioctp = self.indices_of_cards_to_play
+
         if self.treasure_hunts_played == 0 and TREASURE_HUNT not in self.hand:
             self.concede = True
         elif self.lands == 0:
@@ -132,10 +135,10 @@ class GameStateObject:
             elif BASIC_ISLAND in self.hand and TREASURE_HUNT in self.hand:
                 ioctp.append(self._play_land(BASIC_ISLAND))
                 ioctp.append(self._play_spell(TREASURE_HUNT))
-            elif BASIC_ISLAND in self.hand:
-                ioctp.append(self._play_land(BASIC_ISLAND))
             elif MYSTIC_SANCTUARY in self.hand:
                 ioctp.append(self._play_land(MYSTIC_SANCTUARY))
+            elif BASIC_ISLAND in self.hand:
+                ioctp.append(self._play_land(BASIC_ISLAND))
         elif self.lands >= 4:
             if self.treasure_hunts_played == 3:
                 if TREASURE_HUNT in self.hand and THASSAS_ORACLE in self.hand:

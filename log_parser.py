@@ -26,8 +26,11 @@ def parse_log(log: dict, game: GameStateObject):
     if "greToClientEvent" not in log:
         return
 
+    if not game.system_seat_id:
+        set_system_seat_id(log, game)
+
     mull_message = identify_mulligan_message(log)
-    if mull_message:
+    if mull_message and not game.accepted_hand:
         game.hand = get_cards_in_hand_for_mulligan(mull_message)
         print_and_write_log("deciding mulligan...")
         game.decide_mulligan()
@@ -41,12 +44,13 @@ def parse_log(log: dict, game: GameStateObject):
             mouse_controller.mulligan()
         else:
             print_and_write_log("decided to keep hand")
+            game.accepted_hand = True
             game.hand = game.hand[game.mulligan_count:]
             mouse_controller.keepHand(game.mulligan_count)
         return
 
-    if is_player_step("Step_Draw", log):
-        new_card = get_drawn_card_from_log(log)
+    if is_player_step("Step_Draw", log, game.system_seat_id):
+        new_card = get_drawn_card_from_log(log, game.system_seat_id)
         game.played_cards_for_turn = False
         print_and_write_log(f"drawing card {new_card}")
         if new_card:
@@ -54,6 +58,7 @@ def parse_log(log: dict, game: GameStateObject):
     if not game.played_cards_for_turn and is_player_phase("Phase_Main1", log, game):
         print_and_write_log(f"entering main phase with hand {game.hand}")
         game.decide_main_phase_actions()
+        print_and_write_log(f"treasure hunts played: {game.treasure_hunts_played}")
         print_and_write_log(f"playing cards at indices {game.indices_of_cards_to_play}")
         if game.concede:
             mouse_controller.concede()
@@ -102,6 +107,12 @@ def parse_log(log: dict, game: GameStateObject):
             discard_to_seven(game.indices_of_cards_to_discard)
             print_and_write_log(f"hand after discard: {game.hand}")
 
+def set_system_seat_id(log: dict, game: GameStateObject) -> None:
+    '''Identify if we are player 1 or player 2'''
+    if "greToClientMessages" in log["greToClientEvent"] and \
+      "systemSeatIds" in log["greToClientEvent"]["greToClientMessages"][0]:
+        game.system_seat_id = log["greToClientEvent"]["greToClientMessages"][0]["systemSeatIds"][0]
+        print_and_write_log(f"identified player as player {game.system_seat_id}")
 
 def identify_mulligan_message(log: dict) -> dict:
     '''Look for a portion of the log specific to mulliganing and return it if found'''
@@ -137,11 +148,11 @@ def is_game_over(log: dict) -> bool:
     return "finalMatchResult" in log.get( \
         "matchGameRoomStateChangedEvent", {}).get("gameRoomInfo", {})
 
-def is_player_step(step: str, log: dict) -> bool:
+def is_player_step(step: str, log: dict, player: int) -> bool:
     '''Checks current log to see if it is the requested step'''
     for client_message in log["greToClientEvent"]["greToClientMessages"]:
         if client_message.get("gameStateMessage", {}).get("turnInfo", {}).get("step") == step \
-          and client_message["gameStateMessage"]["turnInfo"]["activePlayer"] == 1:
+          and client_message["gameStateMessage"]["turnInfo"]["activePlayer"] == player:
             return True
     return False
 
@@ -149,7 +160,7 @@ def is_player_phase(phase: str, log: dict, game: GameStateObject) -> bool:
     '''Checks current log to see if it is the requested phase'''
     for client_message in log["greToClientEvent"]["greToClientMessages"]:
         if client_message.get("gameStateMessage", {}).get("turnInfo", {}).get("phase") == phase \
-          and client_message["gameStateMessage"]["turnInfo"]["activePlayer"] == 1 \
+            and client_message["gameStateMessage"]["turnInfo"]["activePlayer"] == game.system_seat_id \
           and client_message["gameStateMessage"]["turnInfo"]["turnNumber"] > game.turn:
             turn = client_message["gameStateMessage"]["turnInfo"]["turnNumber"]
             print_and_write_log(f"main phase identified on turn {turn}")
@@ -157,18 +168,11 @@ def is_player_phase(phase: str, log: dict, game: GameStateObject) -> bool:
             return True
     return False
 
-def current_player_turn(log: dict) -> int:
-    '''Checks current log to see who's turn it is'''
-    for client_message in log["greToClientEvent"]["greToClientMessages"]:
-        if client_message.get("gameStateMessage", {}).get("turnInfo", {}).get("activePlayer"):
-            return client_message["gameStateMessage"]["turnInfo"]["activePlayer"]
-
-
-def get_drawn_card_from_log(log: dict):
+def get_drawn_card_from_log(log: dict, player: int):
     '''Checks log for card drawn and updates game state accordingly'''
     for client_message in reversed(log["greToClientEvent"]["greToClientMessages"]):
         if "gameObjects" in client_message.get("gameStateMessage", {}) and \
-          client_message["gameStateMessage"]["gameObjects"][0]["ownerSeatId"] == 1:
+          client_message["gameStateMessage"]["gameObjects"][0]["ownerSeatId"] == player:
             turn = client_message["gameStateMessage"]["turnInfo"]["turnNumber"]
             print_and_write_log(f"drawing card on turn {turn}")
             try:
@@ -176,23 +180,6 @@ def get_drawn_card_from_log(log: dict):
             except KeyError:
                 continue
     return None
-
-def cycling_available(log: dict) -> bool:
-    '''Read log and check if user has priority for cycling'''
-    if not log.get("greToClientEvent", {}).get("greToClientMessages", {}):
-        return False
-    if "actionsAvailableReq" not in log["greToClientEvent"]["greToClientMessages"][-1]:
-        return False
-    # TODO: this if doesn't give up priority in opponent's main phase
-    # Need to find a way to give up priority in upkeep instead
-    # if log["greToClientEvent"]["greToClientMessages"][0].get("gameStateMessage", \
-    #   {}).get("turnInfo", {}).get("phase") == "Phase_Main1":
-    #     return False
-    actions = log["greToClientEvent"]["greToClientMessages"][-1]["actionsAvailableReq"]["actions"]
-    for action in actions:
-        if action["actionType"] == "ActionType_Activate" and action["shouldStop"]:
-            return True
-    return False
 
 def get_object_id_from_newest_log() -> int:
     log = get_newest_log()

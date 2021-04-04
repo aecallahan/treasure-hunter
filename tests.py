@@ -53,7 +53,7 @@ class TestGamePlayer(unittest.TestCase):
         ioctp = game.indices_of_cards_to_play
 
         expected_actions = [[1, None], [0, TREASURE_HUNT]]
-        self.assertEqual(expected_actions, ioctp, \
+        self.assertEqual(expected_actions, ioctp,
             "game player should've played island then treasure hunt")
 
     def test_thassas_oracle_and_mystic_sanctuary_in_hand(self):
@@ -62,7 +62,18 @@ class TestGamePlayer(unittest.TestCase):
         and mystic sanctuary and there are three islands in play, should play mystic
         santuary to retrieve a treasure hunt from yard
         '''
-        pass
+        game = GameStateObject()
+        game.islands = 3
+        game.lands = 3
+        game.treasure_hunts_played = 1
+        game.yard = [TREASURE_HUNT]
+        game.hand = [THASSAS_ORACLE, MYSTIC_SANCTUARY, BASIC_ISLAND]
+
+        game.decide_main_phase_actions()
+        ioctp = game.indices_of_cards_to_play
+
+        expected_actions = [[1, MYSTIC_SANCTUARY]]
+        self.assertEqual(expected_actions, ioctp)
 
 class TestLogParser(unittest.TestCase):
     '''Test cases for log_parser.py'''
@@ -138,7 +149,10 @@ class TestExecutor(unittest.TestCase):
         mouse_controller.mulligan = MagicMock()
         mouse_controller.keepHand = MagicMock()
         mouse_controller.pass_priority = MagicMock()
+        mouse_controller.play_card = MagicMock()
+        mouse_controller.tap_all_lands = MagicMock()
         mouse_controller.wait_for_discard_message = MagicMock()
+        mouse_controller.wait_for_priority_after_casting_treasure_hunt = MagicMock()
         time.sleep = MagicMock()
         log_parser.play_card = MagicMock()
 
@@ -198,12 +212,22 @@ class TestExecutor(unittest.TestCase):
     def test_play_card_at_position_outside_hand(self):
         '''Player tried to play card at position 5 with only 5 cards in hand'''
         mouse_controller.concede = MagicMock()
-        logs_to_read = retrieve_logs_from_directory('logs_playing_card_out_of_bounds')
+        logs_to_read = retrieve_logs_from_directory('logs_didnt_play_turn_one')
         log_crawler.create_game_log_generator = MagicMock(return_value=logs_to_read)
 
         play_game()
 
         mouse_controller.concede.assert_not_called()
+
+    def test_doesnt_play_on_turn_one(self):
+        '''On the play with 2x island, 2x lonely sandbar, treasure hunt but did nothing'''
+        logs_to_read = retrieve_logs_from_directory('logs_didnt_play_turn_one')
+        log_crawler.create_game_log_generator = MagicMock(return_value=logs_to_read)
+
+        play_game()
+
+        log_parser.play_card.assert_called()
+
 
 def read_log_from_file(filename: str) -> dict:
     '''Given name of test log file, retrieve it as a dict'''
