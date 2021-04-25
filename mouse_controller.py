@@ -31,6 +31,7 @@ LAND_END_POSITION = (0.391 * screenWidth, 0.722 * screenHeight)
 def read_card_name_at_location(mouse_position) -> str:
     subtract_x_start = 0.0586 * screenWidth
     add_x_end = 0.0586 * screenWidth
+    time.sleep(0.1)
     card_name = read_message_from_screen((mouse_position[0] - subtract_x_start, \
         0.607 * screenHeight, mouse_position[0] + add_x_end, 0.632 * screenHeight))
     print(card_name)
@@ -61,10 +62,12 @@ def wait_for_mulligan_priority():
 
 def wait_for_main_phase_priority():
     '''Wait until player has priority in main phase 1'''
-    # timeout = time.time() + 30
+    timeout = time.time() + 45
     while True:
-        # if time.time() > timeout:
-        #     return
+        if time.time() > timeout:
+            print("timed out waiting for priority. conceding...")
+            concede()
+            return
         if look_for_next_button():
             return
         if look_for_end_turn_button():
@@ -74,10 +77,10 @@ def wait_for_main_phase_priority():
 
 def wait_for_priority_after_casting_treasure_hunt():
     '''Wait for discard message or next button'''
-    # timeout = time.time() + 30
+    timeout = time.time() + 45
     while True:
-        # if time.time() > timeout:
-        #     return
+        if time.time() > timeout:
+            return
         if look_for_next_button():
             return
         if look_for_end_turn_button():
@@ -87,7 +90,10 @@ def wait_for_priority_after_casting_treasure_hunt():
 
 def wait_for_take_action_button():
     '''Wait until "Take Action" appears'''
+    timeout = time.time() + 45
     while True:
+        if time.time() > timeout:
+            return
         if look_for_take_action_button():
             return
 
@@ -150,6 +156,7 @@ def keepHand(mullCount: int):
 
 def play_card():
     # Do not play card until p1 has priority
+    # TODO: if button says 'cancel', concede game
     wait_for_main_phase_priority()
     pyautogui.dragTo(CENTER_OF_SCREEN, duration=0.3)
     pyautogui.moveTo(DECK_POSITION)
@@ -212,7 +219,7 @@ def move_across_hand(mouse_position=HAND_START_POSITION) -> tuple:
     if mouse_position is None:
         mouse_position = HAND_START_POSITION
     pyautogui.moveTo(mouse_position)
-    return (mouse_position[0] + (0.007 * screenWidth), mouse_position[1])
+    return (mouse_position[0] + (0.006 * screenWidth), mouse_position[1])
 
 def move_across_hand_fast(mouse_position=HAND_START_POSITION_FAST) -> tuple:
     if mouse_position is None:
@@ -221,6 +228,7 @@ def move_across_hand_fast(mouse_position=HAND_START_POSITION_FAST) -> tuple:
     return (mouse_position[0] + (0.031 * screenWidth), mouse_position[1])
 
 def select_card_for_discard(mouse_position):
+    time.sleep(0.1)
     pyautogui.click(mouse_position)
 
 def read_message_from_screen(bbox: tuple) -> str:
@@ -261,6 +269,13 @@ def tap_all_lands():
     pyautogui.keyDown("q")
     time.sleep(0.1)
     pyautogui.keyUp("q")
+
+def press_spacebar():
+    '''Press the space bar'''
+    time.sleep(0.1)
+    pyautogui.keyDown(" ")
+    time.sleep(0.1)
+    pyautogui.keyUp(" ")
 
 def start_new_game():
     '''Click through end of game messages and start new one'''

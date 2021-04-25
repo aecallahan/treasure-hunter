@@ -8,12 +8,22 @@ TREASURE_HUNT = "Treasure Hunt"
 MYSTIC_SANCTUARY = "Mystic Sanctuary"
 THASSAS_ORACLE = "Thassa's Oracle"
 
+KROXA = "Kroxa"
+HEARTLESS_REMORSE = "Heartless Remorse"
+INQUISITION_OF_KOZILEK = "Inquisition of Kozilek"
+THOUGHTSEIZE = "Thought Seize"
+
 cardIdNames = {
     652: BASIC_ISLAND,
     10826: LONELY_SANDBAR,
     24877: TREASURE_HUNT,
     414466: MYSTIC_SANCTUARY,
     419870: THASSAS_ORACLE,
+    # Interactive spells from opponent
+    76953: KROXA, # TODO: handle kroxa
+    419902: HEARTLESS_REMORSE,
+    30212: INQUISITION_OF_KOZILEK,
+    17643: THOUGHTSEIZE
 }
 
 
@@ -99,6 +109,7 @@ class GameStateObject:
         self.played_cards_for_turn = True
         ioctp = self.indices_of_cards_to_play
 
+        # TODO: add ability to play more than one treasure hunt per turn
         if self.treasure_hunts_played == 0 and TREASURE_HUNT not in self.hand:
             self.concede = True
         elif self.lands == 0:
@@ -159,12 +170,22 @@ class GameStateObject:
                 elif TREASURE_HUNT in self.hand and BASIC_ISLAND in self.hand:
                     ioctp.append(self._play_land(BASIC_ISLAND))
                     ioctp.append(self._play_spell(TREASURE_HUNT))
+                else:
+                    self.concede = True
             else:
                 self.concede = True
 
-        self.tap_out = (LONELY_SANDBAR in self.hand and self.lands > self.mana_spent) \
-            or self.lands > 1
         self.indices_of_cards_to_play = ioctp
+
+    def decide_card_to_discard(self) -> int:
+        '''
+        When prompted to discard a card by a spell like Kroxa choose which card to discard.
+        '''
+        if BASIC_ISLAND in self.hand:
+            return self.hand.index(BASIC_ISLAND)
+        if LONELY_SANDBAR in self.hand:
+            return self.hand.index(LONELY_SANDBAR)
+        return 0
 
     def _cycle(self):
         card_index = self.hand.index(LONELY_SANDBAR)

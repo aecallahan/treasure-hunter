@@ -15,6 +15,11 @@ TREASURE_HUNT = "Treasure Hunt"
 MYSTIC_SANCTUARY = "Mystic Sanctuary"
 THASSAS_ORACLE = "Thassa's Oracle"
 
+KROXA = "Kroxa"
+HEARTLESS_REMORSE = "Heartless Remorse"
+INQUISITION_OF_KOZILEK = "Inquisition of Kozilek"
+THOUGHTSEIZE = "Thoughtseize"
+
 def parse_log(log: dict, game: GameStateObject):
     '''Read latest log and decide what to do'''
     if is_game_over(log):
@@ -100,12 +105,26 @@ def parse_log(log: dict, game: GameStateObject):
         if len(game.indices_of_cards_to_play) <= 1:
             mouse_controller.click_submit()
 
+        # TODO: doesn't account for hand size below 7 after casting
+        # treasure hunt
         if len(game.hand) > 7:
             game.decide_discard()
 
         if game.indices_of_cards_to_discard:
+            # TODO: this can fail
+            mouse_controller.wait_for_priority_after_casting_treasure_hunt()
+            # time.sleep(3)
             discard_to_seven(game.indices_of_cards_to_discard)
             print_and_write_log(f"hand after discard: {game.hand}")
+
+    elif identify_discard_spell(log):
+        mouse_controller.concede()
+    elif identify_discard_spell_choice(log):
+        index_of_card_to_discard = game.decide_card_to_discard()
+        play_card(index_of_card_to_discard, len(game.hand))
+        game.hand.pop(index_of_card_to_discard)
+        mouse_controller.press_spacebar()
+
 
 def set_system_seat_id(log: dict, game: GameStateObject) -> None:
     '''Identify if we are player 1 or player 2'''
@@ -143,6 +162,32 @@ def get_cards_in_hand_for_mulligan(game_state: dict) -> list:
     print_and_write_log(f"identified hand of {player_hand}")
     return sorted(player_hand)
 
+def identify_discard_spell(log: dict) -> bool:
+    '''
+    Checks if log indicates that player's had a discard spell cast against it
+    '''
+    spell_played_by_opponent = log.get("greToClientEvent", {}).get(
+        "greToClientMessages", [{}])[0].get(
+        "gameStateMessage", {}).get("gameObjects", [{}])[0].get("name", 0)
+    if spell_played_by_opponent not in cardIdNames:
+        return False
+    return cardIdNames[spell_played_by_opponent] in [
+        HEARTLESS_REMORSE, INQUISITION_OF_KOZILEK, THOUGHTSEIZE,
+    ]
+
+def identify_discard_spell_choice(log: dict) -> bool:
+    '''
+    Checks if log indicates that player's been prompted to choose and
+    discard a card from hand.
+    '''
+    spell_played_by_opponent = log.get("greToClientEvent", {}).get(
+        "greToClientMessages", [{}])[0].get(
+        "gameStateMessage", {}).get("gameObjects", [{}])[0].get("name", 0)
+    if spell_played_by_opponent not in cardIdNames:
+        return False
+    return cardIdNames[spell_played_by_opponent] in [
+        KROXA,
+    ]
 
 def is_game_over(log: dict) -> bool:
     return "finalMatchResult" in log.get( \
@@ -242,6 +287,7 @@ def play_card(position: int, hand_size: int):
     print_and_write_log(f"playing card at position {position}")
     current_card = -1
     object_id = 0
+    iterations_since_new_card_seen = 0
     mouse_position = move_across_hand(None, hand_size)
     while current_card < position:
         mouse_position = move_across_hand(mouse_position, hand_size)
@@ -249,6 +295,13 @@ def play_card(position: int, hand_size: int):
         if new_object_id is not None and new_object_id != object_id:
             object_id = new_object_id
             current_card += 1
+            iterations_since_new_card_seen = 0
+        else:
+            iterations_since_new_card_seen += 1
+            if iterations_since_new_card_seen > 200:
+                print_and_write_log("play card function broke. conceding...")
+                mouse_controller.concede()
+                return
     mouse_controller.play_card()
 
 

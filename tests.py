@@ -75,6 +75,30 @@ class TestGamePlayer(unittest.TestCase):
         expected_actions = [[1, MYSTIC_SANCTUARY]]
         self.assertEqual(expected_actions, ioctp)
 
+    def test_concede_after_thoughtseize(self):
+        '''If first treasure hunt is taken from hand, player should concede game'''
+        game = GameStateObject()
+        game.islands = 1
+        game.lands = 1
+        game.treasure_hunts_played = 0
+        game.hand = [BASIC_ISLAND] * 6
+
+        game.decide_main_phase_actions()
+
+        self.assertTrue(game.concede)
+
+    def test_concede_if_no_treasure_hunt(self):
+        '''If hand has no treasure hunt or Mystic Sanctuary to retrieve one, concede'''
+        game = GameStateObject()
+        game.islands = 4
+        game.lands = 4
+        game.treasure_hunts_played = 2
+        game.hand = [BASIC_ISLAND] * 6 + [THASSAS_ORACLE]
+
+        game.decide_main_phase_actions()
+
+        self.assertTrue(game.concede)
+
 class TestLogParser(unittest.TestCase):
     '''Test cases for log_parser.py'''
     def setUp(self):
@@ -227,6 +251,19 @@ class TestExecutor(unittest.TestCase):
         play_game()
 
         log_parser.play_card.assert_called()
+
+    def heartless_remorsed(self):
+        '''Player understands being Heartless Remorse'd and concedes game'''
+        game = GameStateObject()
+        game.system_seat_id = 2
+        game.hand = [BASIC_ISLAND] * 6 + [TREASURE_HUNT]
+        mouse_controller.concede = MagicMock()
+        log_to_read = [read_log_from_file('log_heartless_remorsed')]
+        log_crawler.create_game_log_generator = MagicMock(return_value=log_to_read)
+
+        play_game()
+
+        mouse_controller.concede.assert_called()
 
 
 def read_log_from_file(filename: str) -> dict:
